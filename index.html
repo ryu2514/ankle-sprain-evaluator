@@ -267,14 +267,14 @@
           <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
             <!-- 画像1とマーキングキャンバス -->
             <div class="image-container" style="width: 45%; min-width: 250px; max-width: 100%; box-shadow: 0 4px 8px rgba(0,0,0,0.2); border-radius: 8px; overflow: hidden; padding: 10px; background: white; margin: 0 auto;">
-              <img src="3.png" alt="Ottawa Ankle Rules 1" style="width: 100%; display: block; border-radius: 5px;">
+              <img src="/3.png" alt="Ottawa Ankle Rules 1" style="width: 100%; display: block; border-radius: 5px;">
               <canvas id="markCanvas1" class="image-canvas"></canvas>
               <p style="text-align: center; font-weight: bold; margin-top: 0.5rem;">内側</p>
               <p style="text-align: center; color: #666; font-size: 0.85rem;"><i class="fas fa-pencil-alt"></i> ここをタップ/クリックしてマーキングできます</p>
             </div>
             <!-- 画像2とマーキングキャンバス -->
             <div class="image-container" style="width: 45%; min-width: 250px; max-width: 100%; box-shadow: 0 4px 8px rgba(0,0,0,0.2); border-radius: 8px; overflow: hidden; padding: 10px; background: white; margin: 0 auto;">
-              <img src="4.png" alt="Ottawa Ankle Rules 2" style="width: 100%; display: block; border-radius: 5px;">
+              <img src="/4.png" alt="Ottawa Ankle Rules 2" style="width: 100%; display: block; border-radius: 5px;">
               <canvas id="markCanvas2" class="image-canvas"></canvas>
               <p style="text-align: center; font-weight: bold; margin-top: 0.5rem;">外側</p>
               <p style="text-align: center; color: #666; font-size: 0.85rem;"><i class="fas fa-pencil-alt"></i> ここをタップ/クリックしてマーキングできます</p>
@@ -331,14 +331,14 @@
       <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
         <!-- 画像1とマーキングキャンバス -->
         <div class="image-container" style="width: 45%; min-width: 250px; max-width: 100%; box-shadow: 0 4px 8px rgba(0,0,0,0.2); border-radius: 8px; overflow: hidden; padding: 10px; background: white; margin: 0 auto;">
-          <img src="3.png" alt="Ottawa Ankle Rules 1" style="width: 100%; display: block; border-radius: 5px;">
+          <img src="/3.png" alt="Ottawa Ankle Rules 1" style="width: 100%; display: block; border-radius: 5px;">
           <canvas id="markCanvas3" class="image-canvas"></canvas>
           <p style="text-align: center; font-weight: bold; margin-top: 0.5rem;">内側の圧痛ポイント</p>
           <p style="text-align: center; color: #666; font-size: 0.85rem;"><i class="fas fa-pencil-alt"></i> ここをタップ/クリックしてマーキングできます</p>
         </div>
         <!-- 画像2とマーキングキャンバス -->
         <div class="image-container" style="width: 45%; min-width: 250px; max-width: 100%; box-shadow: 0 4px 8px rgba(0,0,0,0.2); border-radius: 8px; overflow: hidden; padding: 10px; background: white; margin: 0 auto;">
-          <img src="4.png" alt="Ottawa Ankle Rules 2" style="width: 100%; display: block; border-radius: 5px;">
+          <img src="/4.png" alt="Ottawa Ankle Rules 2" style="width: 100%; display: block; border-radius: 5px;">
           <canvas id="markCanvas4" class="image-canvas"></canvas>
           <p style="text-align: center; font-weight: bold; margin-top: 0.5rem;">外側の圧痛ポイント</p>
           <p style="text-align: center; color: #666; font-size: 0.85rem;"><i class="fas fa-pencil-alt"></i> ここをタップ/クリックしてマーキングできます</p>
@@ -452,7 +452,7 @@
           </div>
         </div>
         <div style="min-width: 300px; flex: 1;">
-          <img src="dorsiflexion_wblt.png" alt="背屈可動域 WBLT測定方法" class="reference-image">
+          <img src="/dorsiflexion_wblt.png" alt="背屈可動域 WBLT測定方法" class="reference-image">
           <p style="font-size: 0.9rem; color: #666;">壁に向かって立ち、足の母趾を壁につけた状態で、膝が壁に触れるまで前傾。このとき、踏が浮かない最大距離を測定。</p>
         </div>
       </div>
@@ -511,11 +511,11 @@
             <h4>バランステストの参照画像</h4>
             <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
               <div style="flex: 1; min-width: 150px;">
-                <img src="foot_directions.png" alt="足の方向" style="width: 100%; max-width: 300px; display: block; margin-bottom: 0.5rem;">
+                <img src="/foot_directions.png" alt="足の方向" style="width: 100%; max-width: 300px; display: block; margin-bottom: 0.5rem;">
                 <p style="font-size: 0.9rem; color: #666; margin-top: 0;">足の方向の参照</p>
               </div>
               <div style="flex: 1; min-width: 150px;">
-                <img src="star_balance.png" alt="スターバランステスト" style="width: 100%; max-width: 300px; display: block; margin-bottom: 0.5rem;">
+                <img src="/star_balance.png" alt="スターバランステスト" style="width: 100%; max-width: 300px; display: block; margin-bottom: 0.5rem;">
                 <p style="font-size: 0.9rem; color: #666; margin-top: 0;">スターバランステストの参照</p>
               </div>
             </div>
@@ -1155,6 +1155,11 @@
           }
         }
       }
+      // この部分は以前のシンプルな保存ロジックで、saveAllData()に統合されるべきですが、
+      // 混乱を避けるため、元のロジックも残しておきます。
+      // 通常はloadAllData()で復元し、saveAllData()で保存します。
+      // 以下の部分をコメントアウトまたは削除し、saveAllData() と loadAllData() を主に使うことを推奨します。
+      /*
       const data = {};
       [...form.elements].forEach(el => {
         if (!el.name) return;
@@ -1162,6 +1167,7 @@
       });
       localStorage.setItem('ankleEval', JSON.stringify(data));
       alert('保存しました (ブラウザのローカルストレージ)');
+      */
     });
 
 // --- 画像マーキング機能 ---
@@ -1197,46 +1203,69 @@ function updateCanvasSize(canvasId) {
   const canvas = canvases[canvasId];
   if (!canvas) return;
   
-  const img = canvas.previousElementSibling;
-  if (!img) return;
+  const img = canvas.previousElementSibling; // `img` 要素を取得
+  if (!img || !(img instanceof HTMLImageElement)) {
+    console.error(`Canvas ${canvasId} の前に img 要素が見つかりません。`);
+    return;
+  }
   
-  canvas.width = img.offsetWidth;
-  canvas.height = img.offsetHeight;
-  
-  contexts[canvasId] = canvas.getContext('2d');
-  redrawMarks(canvasId);
+  // 画像の実際の表示サイズを取得
+  const style = window.getComputedStyle(img);
+  const width = parseInt(style.width, 10);
+  const height = parseInt(style.height, 10);
+
+  if (width > 0 && height > 0) {
+    canvas.width = width;
+    canvas.height = height;
+    contexts[canvasId] = canvas.getContext('2d');
+    redrawMarks(canvasId);
+  } else {
+    // 画像がまだ読み込まれていないか、非表示の場合のフォールバック
+    // 画像の naturalWidth/Height を使うか、少し待って再試行する
+    if (img.naturalWidth > 0 && img.naturalHeight > 0) {
+        // naturalWidth/Height を元にアスペクト比を保って調整することも可能
+        // ここでは、offsetWidth/Heightが取得できるまで待つシンプルな実装
+        setTimeout(() => updateCanvasSize(canvasId), 100);
+    }
+  }
 }
+
 
 // 画像サイズ変更時にキャンバスサイズも更新
 window.addEventListener('resize', () => {
-  updateCanvasSize(1);
-  updateCanvasSize(2);
+  for (let i = 1; i <= 4; i++) {
+    if (canvases[i]) updateCanvasSize(i);
+  }
 });
 
 // ページ読み込み時に実行
 window.addEventListener('DOMContentLoaded', () => {
-  // 画像読み込み完了後にキャンバスサイズを設定
-  const imgs = [
-    document.querySelector('.image-container:nth-of-type(1) img'),
-    document.querySelector('.image-container:nth-of-type(2) img')
-  ];
-  
-  imgs.forEach((img, idx) => {
-    if (img) {
-      if (img.complete) {
-        updateCanvasSize(idx + 1);
-      } else {
-        img.onload = () => updateCanvasSize(idx + 1);
+  for (let i = 1; i <= 4; i++) {
+    const canvas = canvases[i];
+    if (canvas) {
+      const img = canvas.previousElementSibling;
+      if (img && img instanceof HTMLImageElement) {
+        if (img.complete) {
+          updateCanvasSize(i);
+        } else {
+          img.onload = () => updateCanvasSize(i);
+          // エラーハンドリングも追加すると良い
+          img.onerror = () => console.error(`画像の読み込みに失敗しました: ${img.src}`);
+        }
       }
-    }
-  });
-  
-  // ローカルストレージからマーク情報を復元
-  for (let i = 1; i <= 2; i++) {
-    const savedMarks = localStorage.getItem(`ankleEval_marks_${i}`);
-    if (savedMarks) {
-      markData[i] = JSON.parse(savedMarks);
-      redrawMarks(i);
+      // ローカルストレージからマーク情報を復元
+      const savedMarks = localStorage.getItem(`ankleEval_marks_${i}`);
+      if (savedMarks) {
+        try {
+          markData[i] = JSON.parse(savedMarks);
+          if (contexts[i]) { // contextが初期化されていれば再描画
+             redrawMarks(i);
+          }
+        } catch (e) {
+          console.error(`マークデータ ${i} のパースに失敗しました:`, e);
+          markData[i] = []; // エラー時はリセット
+        }
+      }
     }
   }
 });
@@ -1247,8 +1276,9 @@ document.querySelectorAll('.tool-btn').forEach(btn => {
     const tool = this.dataset.tool;
     const canvasId = parseInt(this.dataset.canvas);
     
+    if (!canvases[canvasId]) return; // 対象キャンバスがない場合は何もしない
+
     if (tool === 'clear') {
-      // クリアボタンの場合、確認して消去
       if (confirm('この画像のマークをすべて消去しますか？')) {
         markData[canvasId] = [];
         redrawMarks(canvasId);
@@ -1257,7 +1287,6 @@ document.querySelectorAll('.tool-btn').forEach(btn => {
       return;
     }
     
-    // ツール選択状態の更新
     document.querySelectorAll(`.tool-btn[data-canvas="${canvasId}"]`).forEach(b => {
       if (b.dataset.tool !== 'clear') b.classList.remove('selected');
     });
@@ -1273,6 +1302,8 @@ document.querySelectorAll('.color-option').forEach(option => {
     const color = this.dataset.color;
     const canvasId = parseInt(this.dataset.canvas);
     
+    if (!canvases[canvasId]) return; // 対象キャンバスがない場合は何もしない
+
     document.querySelectorAll(`.color-option[data-canvas="${canvasId}"]`).forEach(o => {
       o.classList.remove('selected');
     });
@@ -1287,85 +1318,109 @@ for (let canvasId = 1; canvasId <= 4; canvasId++) {
   const canvas = canvases[canvasId];
   if (!canvas) continue;
   
-  // マウスイベント
-  canvas.addEventListener('mousedown', startDrawing.bind(null, canvasId));
-  canvas.addEventListener('mousemove', draw.bind(null, canvasId));
-  canvas.addEventListener('mouseup', stopDrawing);
-  canvas.addEventListener('mouseout', stopDrawing);
-  
-  // タッチイベント
-  canvas.addEventListener('touchstart', e => {
-    e.preventDefault();
-    const touch = e.touches[0];
-    const mouseEvent = new MouseEvent('mousedown', {
-      clientX: touch.clientX,
-      clientY: touch.clientY
+  const startDrawHandler = (e) => {
+    if (e.type === 'touchstart') e.preventDefault();
+    isDrawing = true;
+    const pos = getMousePos(canvas, e);
+    markData[canvasId].push({
+        x: pos.x, y: pos.y, 
+        tool: currentTool[canvasId], 
+        color: currentColor[canvasId], 
+        lineWidth: currentTool[canvasId] === 'marker' ? 5 : 20,
+        type: 'start' // ストロークの開始を示す
     });
-    canvas.dispatchEvent(mouseEvent);
-  });
-  
-  canvas.addEventListener('touchmove', e => {
-    e.preventDefault();
-    const touch = e.touches[0];
-    const mouseEvent = new MouseEvent('mousemove', {
-      clientX: touch.clientX,
-      clientY: touch.clientY
+    drawMark(canvasId, pos.x, pos.y, true); // 1点目を描画
+  };
+
+  const drawHandler = (e) => {
+    if (!isDrawing) return;
+    if (e.type === 'touchmove') e.preventDefault();
+    const pos = getMousePos(canvas, e);
+    markData[canvasId].push({
+        x: pos.x, y: pos.y, 
+        tool: currentTool[canvasId], 
+        color: currentColor[canvasId], 
+        lineWidth: currentTool[canvasId] === 'marker' ? 5 : 20,
+        type: 'draw' // ストロークの途中を示す
     });
-    canvas.dispatchEvent(mouseEvent);
-  });
-  
-  canvas.addEventListener('touchend', e => {
-    e.preventDefault();
-    const mouseEvent = new MouseEvent('mouseup');
-    canvas.dispatchEvent(mouseEvent);
-  });
-}
+    drawMark(canvasId, pos.x, pos.y, false);
+  };
 
-// 描画開始
-function startDrawing(canvasId, e) {
-  isDrawing = true;
-  draw(canvasId, e);
-}
-
-// 描画
-function draw(canvasId, e) {
-  if (!isDrawing) return;
-  
-  const canvas = canvases[canvasId];
-  const ctx = contexts[canvasId];
-  if (!canvas || !ctx) return;
-  
-  const rect = canvas.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
-  
-  const tool = currentTool[canvasId];
-  const color = currentColor[canvasId];
-  const lineWidth = tool === 'marker' ? 5 : 20;
-  
-  markData[canvasId].push({
-    x,
-    y,
-    tool,
-    color,
-    lineWidth
-  });
-  
-  redrawMarks(canvasId);
-}
-
-// 描画終了
-function stopDrawing() {
-  if (isDrawing) {
+  const stopDrawHandler = (e) => {
+    if (!isDrawing) return;
     isDrawing = false;
-    for (let i = 1; i <= 2; i++) {
-      markData[i].push(null); // null marks the end of a stroke
-      saveMarks(i);
-    }
-  }
+    markData[canvasId].push({type: 'end'}); // ストロークの終了を示す
+    saveMarks(canvasId);
+    redrawMarks(canvasId); // 最終的な再描画で線を滑らかにする
+  };
+
+  canvas.addEventListener('mousedown', startDrawHandler);
+  canvas.addEventListener('mousemove', drawHandler);
+  canvas.addEventListener('mouseup', stopDrawHandler);
+  canvas.addEventListener('mouseout', stopDrawHandler);
+  
+  canvas.addEventListener('touchstart', startDrawHandler, { passive: false });
+  canvas.addEventListener('touchmove', drawHandler, { passive: false });
+  canvas.addEventListener('touchend', stopDrawHandler);
 }
 
-// マークデータの再描画
+function getMousePos(canvas, evt) {
+  const rect = canvas.getBoundingClientRect();
+  let clientX, clientY;
+  if (evt.touches && evt.touches.length > 0) {
+    clientX = evt.touches[0].clientX;
+    clientY = evt.touches[0].clientY;
+  } else if (evt.changedTouches && evt.changedTouches.length > 0) { // touchend用
+    clientX = evt.changedTouches[0].clientX;
+    clientY = evt.changedTouches[0].clientY;
+  }
+  else {
+    clientX = evt.clientX;
+    clientY = evt.clientY;
+  }
+  return {
+    x: clientX - rect.left,
+    y: clientY - rect.top
+  };
+}
+
+
+function drawMark(canvasId, x, y, isStart) {
+    const ctx = contexts[canvasId];
+    if (!ctx) return;
+
+    const lastPoint = markData[canvasId].length > 1 ? markData[canvasId][markData[canvasId].length - (isStart ? 1 : 2)] : null;
+    const currentPoint = markData[canvasId][markData[canvasId].length - 1];
+
+    if (!currentPoint || currentPoint.type === 'end') return;
+
+
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.lineWidth = currentPoint.lineWidth;
+
+    if (currentPoint.tool === 'marker') {
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.strokeStyle = currentPoint.color;
+    } else { // eraser
+        ctx.globalCompositeOperation = 'destination-out';
+        // 消しゴムの色は実際には影響しないが、透明度1の黒などを設定
+        ctx.strokeStyle = 'rgba(0,0,0,1)';
+    }
+
+    ctx.beginPath();
+    if (isStart || !lastPoint || lastPoint.type === 'end' || lastPoint.type === 'start' && markData[canvasId].filter(p => p.type === 'draw').length === 0) {
+        // 新しいストロークの開始点、または単一点
+        ctx.moveTo(currentPoint.x - 0.5, currentPoint.y); // 小さな円を描くために少しずらす
+        ctx.lineTo(currentPoint.x, currentPoint.y);
+    } else {
+        ctx.moveTo(lastPoint.x, lastPoint.y);
+        ctx.lineTo(currentPoint.x, currentPoint.y);
+    }
+    ctx.stroke();
+}
+
+
 function redrawMarks(canvasId) {
   const ctx = contexts[canvasId];
   const canvas = canvases[canvasId];
@@ -1373,84 +1428,93 @@ function redrawMarks(canvasId) {
   
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   
-  let lastPosition = null;
-  
-  markData[canvasId].forEach((mark, i) => {
-    if (!mark) {
-      // End of stroke
-      lastPosition = null;
-      return;
-    }
-    
-    ctx.beginPath();
-    
-    if (mark.tool === 'marker') {
-      ctx.globalCompositeOperation = 'source-over';
-      ctx.strokeStyle = mark.color;
-    } else {
-      ctx.globalCompositeOperation = 'destination-out';
-      ctx.strokeStyle = 'rgba(0,0,0,1)';
-    }
-    
-    ctx.lineWidth = mark.lineWidth;
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-    
-    if (lastPosition) {
-      ctx.moveTo(lastPosition.x, lastPosition.y);
-      ctx.lineTo(mark.x, mark.y);
-      ctx.stroke();
-    } else {
-      ctx.arc(mark.x, mark.y, mark.lineWidth / 2, 0, Math.PI * 2);
+  let lastValidPoint = null;
+
+  for (const point of markData[canvasId]) {
+    if (point.type === 'start') {
+      lastValidPoint = point; // 次の描画のために開始点を保持
+      // 開始点自体も小さな円として描画（オプション）
+      ctx.beginPath();
+      ctx.arc(point.x, point.y, point.lineWidth / 2, 0, Math.PI * 2);
+      ctx.fillStyle = point.tool === 'marker' ? point.color : 'rgba(0,0,0,0)'; // 消しゴムは透明
+      ctx.globalCompositeOperation = point.tool === 'marker' ? 'source-over' : 'destination-out';
       ctx.fill();
+    } else if (point.type === 'draw' && lastValidPoint) {
+      ctx.beginPath();
+      ctx.moveTo(lastValidPoint.x, lastValidPoint.y);
+      ctx.lineTo(point.x, point.y);
+      
+      ctx.lineWidth = point.lineWidth;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      
+      if (point.tool === 'marker') {
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.strokeStyle = point.color;
+      } else { // eraser
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.strokeStyle = 'rgba(0,0,0,1)'; 
+      }
+      ctx.stroke();
+      lastValidPoint = point;
+    } else if (point.type === 'end') {
+      lastValidPoint = null; // ストローク終了
     }
-    
-    lastPosition = mark;
-  });
+  }
+   ctx.globalCompositeOperation = 'source-over'; // デフォルトに戻す
 }
 
 // マークデータの保存
 function saveMarks(canvasId) {
-  localStorage.setItem(`ankleEval_marks_${canvasId}`, JSON.stringify(markData[canvasId]));
-}
-
-// --- SEBT / Yバランステストの図解表示 ---
-const sebtCanvas = document.getElementById('sebt_chart');
-const sebtCtx = sebtCanvas ? sebtCanvas.getContext('2d') : null;
-const sebtDrawBtn = document.getElementById('sebt_draw_btn');
-const sebtDirectionOnlyBtn = document.getElementById('sebt_direction_only_btn');
-
-// 方向と角度のマッピング
-const directions = {
-  'ant': { name: '前方', angle: 90, input: document.getElementById('sebt_ant') },
-  'antlat': { name: '前外側', angle: 45, input: document.getElementById('sebt_antlat') },
-  'lat': { name: '外側', angle: 0, input: document.getElementById('sebt_lat') },
-  'postlat': { name: '後外側', angle: 315, input: document.getElementById('sebt_postlat') },
-  'post': { name: '後方', angle: 270, input: document.getElementById('sebt_post') },
-  'postmed': { name: '後内側', angle: 225, input: document.getElementById('sebt_postmed') },
-  'med': { name: '内側', angle: 180, input: document.getElementById('sebt_med') },
-  'antmed': { name: '前内側', angle: 135, input: document.getElementById('sebt_antmed') }
-};
-
-// 方向のチェックボックスの読み込み
-const directionCheckboxes = {};
-for (const dir in directions) {
-  const checkbox = document.querySelector(`[name="sebt_direction_${dir}"]`);
-  if (checkbox) {
-    directionCheckboxes[dir] = checkbox;
+  if (markData[canvasId]) {
+    localStorage.setItem(`ankleEval_marks_${canvasId}`, JSON.stringify(markData[canvasId]));
   }
 }
 
-if (sebtDrawBtn && sebtCtx) {
-  sebtDrawBtn.addEventListener('click', () => drawSebtChart(false));
-  
-  // 初期化時に一度描画
-  setTimeout(() => drawSebtChart(false), 500); // ページ読み込み後に実行
-}
 
-if (sebtDirectionOnlyBtn && sebtCtx) {
-  sebtDirectionOnlyBtn.addEventListener('click', () => drawSebtChart(true));
-}
+    // --- SEBT / Yバランステストの図解表示 ---
+    const sebtCanvas = document.getElementById('sebt_chart');
+    const sebtCtx = sebtCanvas ? sebtCanvas.getContext('2d') : null;
+    const sebtDrawBtn = document.getElementById('sebt_draw_btn');
+    const sebtDirectionOnlyBtn = document.getElementById('sebt_direction_only_btn');
+
+    // 方向と角度のマッピング
+    const directions = {
+      'ant': { name: '前方', angle: 90, inputId: 'sebt_ant' },
+      'antlat': { name: '前外側', angle: 45, inputId: 'sebt_antlat' },
+      'lat': { name: '外側', angle: 0, inputId: 'sebt_lat' },
+      'postlat': { name: '後外側', angle: 315, inputId: 'sebt_postlat' },
+      'post': { name: '後方', angle: 270, inputId: 'sebt_post' },
+      'postmed': { name: '後内側', angle: 225, inputId: 'sebt_postmed' },
+      'med': { name: '内側', angle: 180, inputId: 'sebt_med' },
+      'antmed': { name: '前内側', angle: 135, inputId: 'sebt_antmed' }
+    };
+    
+    // input要素を事前に取得
+    for (const dir in directions) {
+        directions[dir].input = document.getElementById(directions[dir].inputId);
+    }
+
+
+    // 方向のチェックボックスの読み込み
+    const directionCheckboxes = {};
+    for (const dir in directions) {
+      const checkbox = document.querySelector(`[name="sebt_direction_${dir}"]`);
+      if (checkbox) {
+        directionCheckboxes[dir] = checkbox;
+      }
+    }
+
+    if (sebtDrawBtn && sebtCtx) {
+      sebtDrawBtn.addEventListener('click', () => drawSebtChart(false));
+      
+      // 初期化時に一度描画
+      setTimeout(() => drawSebtChart(false), 500); // ページ読み込み後に実行
+    }
+
+    if (sebtDirectionOnlyBtn && sebtCtx) {
+      sebtDirectionOnlyBtn.addEventListener('click', () => drawSebtChart(true));
+    }
 
 function drawSebtChart(directionOnly = false) {
   if (!sebtCtx) return;
@@ -1459,253 +1523,250 @@ function drawSebtChart(directionOnly = false) {
   const height = sebtCanvas.height;
   const centerX = width / 2;
   const centerY = height / 2;
-  const maxRadius = Math.min(width, height) * 0.45; // 最大半径
+  const maxRadius = Math.min(width, height) * 0.40; // 少し小さくしてラベルスペース確保
   
-  // キャンバスをクリア
   sebtCtx.clearRect(0, 0, width, height);
-  
-  // 円と目盛り線を描画
   drawGrid(sebtCtx, centerX, centerY, maxRadius, directionOnly);
   
-  // 選択された方向と入力値を取得
-  const selectedDirections = [];
-  const points = [];
+  const selectedDirectionsData = [];
+  const polygonPoints = []; // 多角形描画用の点
   
-  for (const dir in directions) {
-    const checkbox = directionCheckboxes[dir];
-    const input = directions[dir].input;
+  for (const dirKey in directions) {
+    const dirInfo = directions[dirKey];
+    const checkbox = directionCheckboxes[dirKey];
     
-    // directionOnlyモードの場合、入力値がなくても方向を描画
     if (checkbox && checkbox.checked) {
-      const angle = directions[dir].angle * Math.PI / 180; // ラジアン変換
-      let value, radius, x, y;
-      
-      if (directionOnly || !input || !input.value) {
-        // 方向のみモードまたは入力値がない場合は固定値を使用
-        value = 50; // 単位はcm
-        radius = (value / 100) * maxRadius; // 固定半径
-      } else {
-        // 入力値がある場合
-        value = parseFloat(input.value);
-        radius = (value / 100) * maxRadius; // 最大100cmとして正規化
+      const angleRad = dirInfo.angle * Math.PI / 180;
+      let value = 0;
+      let radius = 0;
+      let pointX, pointY;
+      let hasInputValue = false;
+
+      if (dirInfo.input && dirInfo.input.value) {
+        value = parseFloat(dirInfo.input.value);
+        if (!isNaN(value)) {
+          radius = (Math.min(value, 150) / 150) * maxRadius; // 最大150cmとして正規化
+          hasInputValue = true;
+        }
       }
       
-      // 点の座標を計算
-      x = centerX + radius * Math.cos(angle);
-      y = centerY - radius * Math.sin(angle); // Canvasは上がマイナス方向
+      if (directionOnly && !hasInputValue) { // 方向のみモードで値がない場合
+        radius = maxRadius * 0.7; // 固定の半径で表示 (例: 70%の位置)
+        value = (radius / maxRadius) * 150; // 相当するcm値を計算
+      } else if (!hasInputValue && !directionOnly) { // 通常モードで値がない場合は0として扱う
+         radius = 0;
+         value = 0;
+      }
+
+
+      pointX = centerX + radius * Math.cos(angleRad);
+      pointY = centerY - radius * Math.sin(angleRad);
       
-      selectedDirections.push({
-        dir: dir,
-        name: directions[dir].name,
-        angle: angle,
-        value: value,
-        x: x,
-        y: y,
-        hasValue: !directionOnly && input && input.value
+      selectedDirectionsData.push({
+        name: dirInfo.name,
+        angleRad: angleRad,
+        value: value, // cm単位の値
+        x: pointX,
+        y: pointY,
+        hasValue: hasInputValue 
       });
       
-      // directionOnlyモードでないか入力値がある場合のみ点を追加
-      if (!directionOnly && input && input.value) {
-        points.push({ x, y });
+      if (hasInputValue || directionOnly) { // 値があるか、方向のみモードなら多角形用の点を追加
+          polygonPoints.push({ x: pointX, y: pointY, angle: dirInfo.angle });
       }
     }
   }
+
+  // 角度順にソートして多角形を正しく描画
+  polygonPoints.sort((a, b) => a.angle - b.angle);
+
+
+  drawSelectedAxes(sebtCtx, centerX, centerY, maxRadius, selectedDirectionsData, directionOnly);
   
-  // 選択された方向の軸を描画
-  drawSelectedAxes(sebtCtx, centerX, centerY, maxRadius, selectedDirections, directionOnly);
-  
-  // directionOnlyモードでない場合のみ数値と多角形を描画
-  if (!directionOnly) {
-    // 数値を描画
-    drawDataPoints(sebtCtx, selectedDirections);
-    
-    // 多角形を描画 (最低で3点必要)
-    if (points.length >= 3) {
-      drawPolygon(sebtCtx, points);
-    }
-  } else {
-    // directionOnlyモードの場合はタイトルを表示
+  if (!directionOnly && polygonPoints.length > 0) {
+    drawDataPointsAndPolygon(sebtCtx, polygonPoints, selectedDirectionsData, centerX, centerY, maxRadius);
+  } else if (directionOnly && polygonPoints.length > 0) {
+    // 方向のみモードのタイトル
     sebtCtx.fillStyle = '#333';
     sebtCtx.font = 'bold 14px Arial';
     sebtCtx.textAlign = 'center';
     sebtCtx.textBaseline = 'top';
-    sebtCtx.fillText('苦手方向確認モード (選択した方向のみ表示)', centerX, 10);
+    sebtCtx.fillText('苦手方向確認モード', centerX, 10);
+    // 方向のみモードでも、選択された軸上の点を強調表示
+    selectedDirectionsData.forEach(dirData => {
+        if (dirData.value > 0) { // 値がある（または固定値が設定された）場合のみ
+            sebtCtx.beginPath();
+            sebtCtx.arc(dirData.x, dirData.y, 5, 0, Math.PI * 2);
+            sebtCtx.fillStyle = 'rgba(0, 120, 255, 0.5)'; // 半透明の青
+            sebtCtx.fill();
+        }
+    });
   }
 }
 
 function drawGrid(ctx, centerX, centerY, maxRadius, directionOnly = false) {
-  // 同心円を描画 (20cm単位ごと)
   ctx.strokeStyle = '#e0e0e0';
-  ctx.fillStyle = '#f8f8f8';
+  ctx.fillStyle = '#f8f9fa'; // 背景色
   
-  // 外円を描画
+  // 外円 (背景)
   ctx.beginPath();
   ctx.arc(centerX, centerY, maxRadius, 0, Math.PI * 2);
   ctx.fill();
-  ctx.stroke();
-  
-  // 同心円を描画
-  for (let i = 1; i <= 5; i++) {
-    const radius = maxRadius * (i * 0.2);
+  // ctx.stroke(); // 外枠線
+
+  const numCircles = 5; // 20cm, 40cm, 60cm, 80cm, 100cm (最大100cmを想定)
+                      // 150cmまで対応させるなら numCircles を 7 or 8 に
+  const maxGridValue = 100; // グリッドの最大値(cm)
+
+  for (let i = 1; i <= numCircles; i++) {
+    const currentGridValue = (maxGridValue / numCircles) * i; // 20, 40, 60, 80, 100
+    const radius = (currentGridValue / 150) * maxRadius; // 150cmを最大として半径を計算
+    
     ctx.beginPath();
     ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+    ctx.strokeStyle = '#d0d0d0'; // 少し濃いめのグレー
     ctx.stroke();
     
-    // 目盛りの数値を表示
     ctx.fillStyle = '#666';
     ctx.font = '10px Arial';
     ctx.textAlign = 'right';
     ctx.textBaseline = 'middle';
-    ctx.fillText(`${i * 20}cm`, centerX - radius - 5, centerY);
+    // X軸の右側に目盛りを表示 (0度の方向)
+    // Y軸の上側 (90度) や他の位置にも追加可能
+    ctx.fillText(`${currentGridValue}cm`, centerX + radius + 15, centerY); 
   }
   
-  // 中心点を描画
+  // 中心点
   ctx.fillStyle = '#333';
   ctx.beginPath();
   ctx.arc(centerX, centerY, 3, 0, Math.PI * 2);
   ctx.fill();
-  
-  // 方向のみモードの場合はその旨の説明を追加
-  if (directionOnly) {
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
-    ctx.fillRect(centerX - 150, centerY + maxRadius - 60, 300, 50);
-    
-    ctx.fillStyle = '#333';
-    ctx.font = '12px Arial';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText('注: 選択した方向のみ表示しています', centerX, centerY + maxRadius - 35);
-    ctx.fillText('大きさはすべて同じスケールで表示', centerX, centerY + maxRadius - 15);
-  }
 }
 
-function drawSelectedAxes(ctx, centerX, centerY, maxRadius, selectedDirections, directionOnly = false) {
-  // 選択された方向の軸を描画
-  ctx.strokeStyle = '#666';
+function drawSelectedAxes(ctx, centerX, centerY, maxRadius, selectedDirectionsData, directionOnly = false) {
   ctx.lineWidth = 1;
-  ctx.setLineDash([5, 3]); // 点線
+  ctx.setLineDash([4, 2]); // 点線
   
-  selectedDirections.forEach(dir => {
+  selectedDirectionsData.forEach(dirData => {
+    ctx.strokeStyle = dirData.hasValue || directionOnly ? '#888' : '#ccc'; // 値があるか方向のみなら濃いめ
     ctx.beginPath();
     ctx.moveTo(centerX, centerY);
-    const x = centerX + maxRadius * Math.cos(dir.angle);
-    const y = centerY - maxRadius * Math.sin(dir.angle);
-    ctx.lineTo(x, y);
+    const xEnd = centerX + maxRadius * Math.cos(dirData.angleRad);
+    const yEnd = centerY - maxRadius * Math.sin(dirData.angleRad);
+    ctx.lineTo(xEnd, yEnd);
     ctx.stroke();
     
-    // 方向のラベルを表示
+    // ラベル
     ctx.fillStyle = '#333';
-    ctx.font = '12px Arial';
+    ctx.font = '11px Arial';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    
-    // ラベルの位置を調整
     const labelRadius = maxRadius + 15;
-    const labelX = centerX + labelRadius * Math.cos(dir.angle);
-    const labelY = centerY - labelRadius * Math.sin(dir.angle);
-    
-    // 方向のみモードの場合は、方向に色を付ける
-    if (directionOnly) {
-      const dirPoint = {
-        x: centerX + 50 * Math.cos(dir.angle),
-        y: centerY - 50 * Math.sin(dir.angle)
-      };
-      
-      ctx.fillStyle = 'rgba(0, 120, 255, 0.4)';
-      ctx.beginPath();
-      ctx.arc(dirPoint.x, dirPoint.y, 5, 0, Math.PI * 2);
-      ctx.fill();
-      
-      ctx.fillStyle = '#333';
-    }
-    
-    ctx.fillText(dir.name, labelX, labelY);
+    const labelX = centerX + labelRadius * Math.cos(dirData.angleRad);
+    const labelY = centerY - labelRadius * Math.sin(dirData.angleRad);
+    ctx.fillText(dirData.name, labelX, labelY);
   });
   
-  ctx.setLineDash([]); // 点線をリセット
+  ctx.setLineDash([]); // 実線に戻す
 }
 
-function drawDataPoints(ctx, selectedDirections) {
-  ctx.fillStyle = 'rgba(255, 0, 0, 0.7)';
-  
-  selectedDirections.forEach(dir => {
+function drawDataPointsAndPolygon(ctx, polygonPoints, selectedDirectionsData, centerX, centerY, maxRadius) {
+  // 多角形
+  if (polygonPoints.length >= 3) {
     ctx.beginPath();
-    ctx.arc(dir.x, dir.y, 5, 0, Math.PI * 2);
+    polygonPoints.forEach((p, index) => {
+      if (index === 0) ctx.moveTo(p.x, p.y);
+      else ctx.lineTo(p.x, p.y);
+    });
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(0, 120, 255, 0.3)';
     ctx.fill();
-    
-    // 数値を表示
-    ctx.fillStyle = '#333';
-    ctx.font = 'bold 12px Arial';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    
-    const scoreX = point.x + 15 * Math.cos(angles[i]);
-    const scoreY = point.y + 15 * Math.sin(angles[i]);
-    
-    ctx.fillText(point.score.toFixed(1), scoreX, scoreY);
+    ctx.strokeStyle = 'rgba(0, 80, 200, 0.7)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+  }
+
+  // データ点と数値
+  selectedDirectionsData.forEach(dirData => {
+    if (dirData.hasValue) { // 値が入力された点のみ
+      ctx.beginPath();
+      ctx.arc(dirData.x, dirData.y, 4, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255, 0, 0, 0.8)'; // 赤い点
+      ctx.fill();
+
+      // 数値 (点の少し外側に表示)
+      ctx.fillStyle = '#000';
+      ctx.font = '10px Arial';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      const textOffsetX = 10 * Math.cos(dirData.angleRad); // X方向オフセット
+      const textOffsetY = -10 * Math.sin(dirData.angleRad); // Y方向オフセット
+      // ラベルが重ならないように調整（簡易的）
+      let valuePosX = dirData.x + textOffsetX;
+      let valuePosY = dirData.y + textOffsetY;
+
+      // 画面端にはみ出さないように調整
+      if (valuePosX < 15) valuePosX = 15;
+      if (valuePosX > ctx.canvas.width - 15) valuePosX = ctx.canvas.width - 15;
+      if (valuePosY < 10) valuePosY = 10;
+      if (valuePosY > ctx.canvas.height - 10) valuePosY = ctx.canvas.height - 10;
+
+
+      ctx.fillText(`${dirData.value.toFixed(1)}`, valuePosX, valuePosY);
+    }
   });
 }
 
-// 評価結果を表示
-function displayRtsResults(overallScore, lowestCategory, scores, categories) {
-  const totalElement = document.getElementById('rtsTotal');
-  const recommendationElement = document.getElementById('rtsRecommendation');
-  
-  if (totalElement) {
-    totalElement.innerHTML = `<strong>総合スコア: ${overallScore.toFixed(1)}/10</strong>`;
-  }
-  
-  if (recommendationElement) {
-    let recommendation = '';
-    
-    if (overallScore >= 8) {
-      recommendation = '<div class="result-good">スポーツへの完全復帰が可能な状態です。ただし定期的な再評価を行いましょう。</div>';
-    } else if (overallScore >= 6) {
-      recommendation = '<div class="result-moderate">段階的な復帰が可能です。制限付きの参加から始めてください。</div>';
-    } else {
-      recommendation = '<div class="result-poor">スポーツ復帰にはまだリスクがあります。リハビリテーションを継続してください。</div>';
-    }
-    
-    recommendation += `<p>特に改善が必要な項目: <strong>${lowestCategory.name}</strong> (スコア: ${lowestCategory.score.toFixed(1)})</p>`;
-    
-    // カテゴリー別のスコア一覧
-    recommendation += '<div style="margin-top: 10px;"><strong>カテゴリー別スコア:</strong></div>';
-    recommendation += '<ul style="padding-left: 20px; margin-top: 5px;">';
-    categories.forEach((category, i) => {
-      recommendation += `<li>${category.name}: ${scores[i].toFixed(1)}</li>`;
-    });
-    recommendation += '</ul>';
-    
-    recommendationElement.innerHTML = recommendation;
-  }
-  
-  // 結果ボックスを表示
-  document.getElementById('rtsResults').style.display = 'block';
-}
-
-function drawPolygon(ctx, points) {
-  if (points.length < 3) return;
-  
-  ctx.fillStyle = 'rgba(0, 120, 255, 0.3)';
-  ctx.strokeStyle = 'rgba(0, 120, 255, 0.7)';
-  ctx.lineWidth = 2;
-  
-  ctx.beginPath();
-  ctx.moveTo(points[0].x, points[0].y);
-  
-  for (let i = 1; i < points.length; i++) {
-    ctx.lineTo(points[i].x, points[i].y);
-  }
-  
-  ctx.closePath();
-  ctx.fill();
-  ctx.stroke();
-}
 
 // スポーツ復帰評価の五角形チャートを描画
 const rtsPentagonCanvas = document.getElementById('rtsPentagon');
 const rtsPentagonCtx = rtsPentagonCanvas ? rtsPentagonCanvas.getContext('2d') : null;
 const rtsEvalBtn = document.getElementById('rtsEvalBtn');
+const rtsPaassCheckBtn = document.getElementById('rtsPaassCheckBtn');
+
+
+if (rtsPaassCheckBtn) {
+    rtsPaassCheckBtn.addEventListener('click', () => {
+        const checkboxes = [
+            { name: '痛み', input: 'rts_pain_check' },
+            { name: '腫脹', input: 'rts_swelling_check' },
+            { name: 'WBLT', input: 'rts_wblt_check' },
+            { name: '腓骨筋筋力', input: 'rts_peroneal_check' },
+            { name: '固有受容感覚', input: 'rts_proprioception_check' },
+            { name: '静的バランス', input: 'rts_static_balance_check' },
+            { name: 'SEBT', input: 'rts_sebt_check' },
+            { name: '垂直ジャンプ', input: 'rts_vertical_jump_check' },
+            { name: 'ホップテスト', input: 'rts_hop_test_check' },
+            { name: 'アジリティ', input: 'rts_agility_check' },
+            { name: '自信', input: 'rts_confidence_check' },
+            { name: '心理的準備', input: 'rts_mental_check' }
+        ];
+
+        let checkedCount = 0;
+        let uncheckedItems = [];
+        checkboxes.forEach(item => {
+            const el = document.querySelector(`input[name="${item.input}"]`);
+            if (el && el.checked) {
+                checkedCount++;
+            } else if (el) {
+                uncheckedItems.push(item.name);
+            }
+        });
+
+        const resultsDiv = document.getElementById('rtsPaassResults');
+        const checkedDiv = document.getElementById('rtsPaassChecked');
+        
+        let html = `<p>達成項目: ${checkedCount} / ${checkboxes.length}</p>`;
+        if (uncheckedItems.length > 0) {
+            html += `<p style="color: red;">未達成項目: ${uncheckedItems.join(', ')}</p>`;
+        } else {
+            html += `<p style="color: green;">全ての項目を達成しました！</p>`;
+        }
+        checkedDiv.innerHTML = html;
+        resultsDiv.style.display = 'block';
+    });
+}
+
 
 if (rtsEvalBtn && rtsPentagonCtx) {
   rtsEvalBtn.addEventListener('click', drawRtsPentagon);
@@ -1720,228 +1781,195 @@ function drawRtsPentagon() {
   const width = canvas.width;
   const height = canvas.height;
   const centerX = width / 2;
-  const centerY = height / 2;
-  const radius = Math.min(width, height) / 2 - 40;
+  const centerY = height / 2 + 10; // 少し下にずらして上部ラベルスペース確保
+  const radius = Math.min(width, height) / 2 - 50; // ラベル用に余白を増やす
   
-  // キャンバスをクリア
   ctx.clearRect(0, 0, width, height);
   
-  // カテゴリとそれに含まれる評価項目の設定
   const categories = [
-    { name: '痛み', inputs: ['rts_pain'] },
-    { name: '身体機能', inputs: ['rts_swelling', 'rts_wblt', 'rts_peroneal'] },
-    { name: '感覚運動制御', inputs: ['rts_proprioception', 'rts_static_balance', 'rts_sebt'] },
-    { name: 'スポーツパフォーマンス', inputs: ['rts_vertical_jump', 'rts_hop_test', 'rts_agility'] },
-    { name: '心理的要因', inputs: ['rts_confidence', 'rts_mental'] }
+    { name: '痛み', inputs: ['rts_pain_check'], weight: 1 }, // 1項目
+    { name: '身体機能', inputs: ['rts_swelling_check', 'rts_wblt_check', 'rts_peroneal_check'], weight: 3 }, // 3項目
+    { name: '感覚運動制御', inputs: ['rts_proprioception_check', 'rts_static_balance_check', 'rts_sebt_check'], weight: 3 }, // 3項目
+    { name: 'スポーツパフォーマンス', inputs: ['rts_vertical_jump_check', 'rts_hop_test_check', 'rts_agility_check'], weight: 3 }, // 3項目
+    { name: '心理的要因', inputs: ['rts_confidence_check', 'rts_mental_check'], weight: 2 } // 2項目
   ];
   
-  // カテゴリごとの平均スコアを計算
-  const scores = [];
-  let totalScore = 0;
-  let lowestCategory = { name: '', score: 10 };
+  const scores = []; // 0-10のスケール
+  let totalWeightedScore = 0;
+  let totalWeight = 0;
   
   categories.forEach(category => {
-    let sum = 0;
-    let count = 0;
-    
+    let checkedCount = 0;
     category.inputs.forEach(inputName => {
-      const input = document.querySelector(`[name="${inputName}"]`);
-      if (input) {
-        const value = parseFloat(input.value);
-        if (!isNaN(value)) {
-          sum += value;
-          count++;
-        }
+      const input = document.querySelector(`input[name="${inputName}"]`);
+      if (input && input.checked) {
+        checkedCount++;
       }
     });
-    
-    const avgScore = count > 0 ? sum / count : 0;
-    scores.push(avgScore);
-    totalScore += avgScore;
-    
-    // 最も低いカテゴリを特定
-    if (avgScore < lowestCategory.score) {
-      lowestCategory = { name: category.name, score: avgScore };
-    }
+    const categoryScore = (checkedCount / category.inputs.length) * 10; // 0-10点満点
+    scores.push(categoryScore);
+    totalWeightedScore += categoryScore * category.weight;
+    totalWeight += category.weight;
   });
   
-  // 全体の平均スコア
-  const overallScore = totalScore / categories.length;
-  
-  // 五角形の背景グリッドを描画
-  drawPentagonGrid(ctx, centerX, centerY, radius);
-  
-  // データの五角形を描画
-  drawPentagonData(ctx, centerX, centerY, radius, scores, categories);
-  
-  // スコアと推奨事項を表示
-  displayRtsResults(overallScore, lowestCategory, scores, categories);
+  const overallScore = totalWeight > 0 ? totalWeightedScore / totalWeight : 0;
+
+  let lowestCategory = { name: categories[0].name, score: scores[0] };
+  scores.forEach((score, index) => {
+      if (score < lowestCategory.score) {
+          lowestCategory = { name: categories[index].name, score: score };
+      }
+  });
+
+  drawPentagonGrid(ctx, centerX, centerY, radius, categories.map(c => c.name));
+  drawPentagonData(ctx, centerX, centerY, radius, scores);
+  displayRtsResults(overallScore, lowestCategory, scores, categories.map(c => c.name));
 }
 
-// 五角形のグリッドを描画
-function drawPentagonGrid(ctx, centerX, centerY, radius) {
-  const angles = Array(5).fill().map((_, i) => i * (2 * Math.PI / 5) - Math.PI / 2);
+function drawPentagonGrid(ctx, centerX, centerY, radius, categoryNames) {
+  const numSides = 5;
+  const angleStep = (2 * Math.PI) / numSides;
   
-  // 同心五角形を描画（レベル別）
-  for (let level = 1; level <= 5; level++) {
+  // 同心五角形 (レベル別)
+  ctx.strokeStyle = '#cccccc';
+  ctx.lineWidth = 0.5;
+  for (let level = 1; level <= 5; level++) { // 2, 4, 6, 8, 10点
     const levelRadius = (radius * level) / 5;
-    
     ctx.beginPath();
-    angles.forEach((angle, i) => {
+    for (let i = 0; i < numSides; i++) {
+      const angle = i * angleStep - Math.PI / 2; // 上を頂点にする
       const x = centerX + levelRadius * Math.cos(angle);
       const y = centerY + levelRadius * Math.sin(angle);
-      if (i === 0) {
-        ctx.moveTo(x, y);
-      } else {
-        ctx.lineTo(x, y);
-      }
-    });
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
     ctx.closePath();
-    
-    ctx.strokeStyle = '#ccc';
     ctx.stroke();
-    
-    // レベルラベルを表示
-    ctx.fillStyle = '#999';
-    ctx.font = '10px Arial';
-    ctx.textAlign = 'right';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(`${level * 2}`, centerX - levelRadius - 5, centerY);
+
+    // レベルラベル (最初の軸、つまり一番上の軸に表示)
+    if (level > 0) {
+        ctx.fillStyle = '#999';
+        ctx.font = '9px Arial';
+        ctx.textAlign = 'center';
+        const labelAngle = -Math.PI / 2; // 一番上の頂点
+        const labelX = centerX + levelRadius * Math.cos(labelAngle) + 10; // 少し右にずらす
+        const labelY = centerY + levelRadius * Math.sin(labelAngle);
+        ctx.fillText((level * 2).toString(), labelX, labelY);
+    }
+
   }
   
-  // カテゴリ軸を描画
-  ctx.strokeStyle = '#666';
-  angles.forEach(angle => {
+  // カテゴリ軸
+  ctx.strokeStyle = '#999999';
+  ctx.lineWidth = 1;
+  for (let i = 0; i < numSides; i++) {
+    const angle = i * angleStep - Math.PI / 2;
     ctx.beginPath();
     ctx.moveTo(centerX, centerY);
-    ctx.lineTo(
-      centerX + radius * Math.cos(angle),
-      centerY + radius * Math.sin(angle)
-    );
+    ctx.lineTo(centerX + radius * Math.cos(angle), centerY + radius * Math.sin(angle));
     ctx.stroke();
-  });
-  
-  // カテゴリラベルを表示
-  const categories = ['痛み', '身体機能', '感覚運動制御', 'スポーツパフォーマンス', '心理的要因'];
-  ctx.fillStyle = '#333';
-  ctx.font = 'bold 12px Arial';
-  
-  angles.forEach((angle, i) => {
-    const labelRadius = radius + 20;
-    const x = centerX + labelRadius * Math.cos(angle);
-    const y = centerY + labelRadius * Math.sin(angle);
     
+    // カテゴリラベル
+    ctx.fillStyle = '#333';
+    ctx.font = 'bold 11px Arial';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    
-    // ラベル位置を微調整
-    let offsetX = 0;
-    let offsetY = 0;
-    
-    if (angle === -Math.PI / 2) { // 上
-      offsetY = -5;
-    } else if (angle === Math.PI / 2) { // 下
-      offsetY = 5;
-    } else if (Math.cos(angle) < 0) { // 左側
-      offsetX = -5;
-    } else { // 右側
-      offsetX = 5;
-    }
-    
-    ctx.fillText(categories[i], x + offsetX, y + offsetY);
-  });
+    const labelRadius = radius + 15;
+    const labelX = centerX + labelRadius * Math.cos(angle);
+    const labelY = centerY + labelRadius * Math.sin(angle);
+    // ラベルが長すぎる場合は改行処理などを検討
+    ctx.fillText(categoryNames[i], labelX, labelY);
+  }
 }
 
-// データの五角形を描画
-function drawPentagonData(ctx, centerX, centerY, radius, scores, categories) {
-  const angles = Array(5).fill().map((_, i) => i * (2 * Math.PI / 5) - Math.PI / 2);
+function drawPentagonData(ctx, centerX, centerY, radius, scores) {
+  const numSides = 5;
+  const angleStep = (2 * Math.PI) / numSides;
   
-  // データポイントの座標を計算
-  const points = angles.map((angle, i) => {
-    const score = scores[i];
-    const pointRadius = (radius * score) / 10; // スコアは0-10
-    
-    return {
-      x: centerX + pointRadius * Math.cos(angle),
-      y: centerY + pointRadius * Math.sin(angle),
-      score: score
-    };
-  });
-  
-  // 五角形を描画
   ctx.beginPath();
-  points.forEach((point, i) => {
-    if (i === 0) {
-      ctx.moveTo(point.x, point.y);
-    } else {
-      ctx.lineTo(point.x, point.y);
-    }
+  scores.forEach((score, i) => {
+    const pointRadius = (radius * score) / 10; // スコアは0-10点
+    const angle = i * angleStep - Math.PI / 2;
+    const x = centerX + pointRadius * Math.cos(angle);
+    const y = centerY + pointRadius * Math.sin(angle);
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
   });
   ctx.closePath();
   
-  ctx.fillStyle = 'rgba(0, 120, 255, 0.3)';
+  ctx.fillStyle = 'rgba(0, 120, 255, 0.4)';
   ctx.fill();
-  
-  ctx.strokeStyle = 'rgba(0, 80, 200, 0.8)';
+  ctx.strokeStyle = 'rgba(0, 80, 200, 0.9)';
   ctx.lineWidth = 2;
   ctx.stroke();
-  
-  // データポイントを描画
-  points.forEach((point, i) => {
+
+  // データポイントとスコア値
+  scores.forEach((score, i) => {
+    const pointRadius = (radius * score) / 10;
+    const angle = i * angleStep - Math.PI / 2;
+    const x = centerX + pointRadius * Math.cos(angle);
+    const y = centerY + pointRadius * Math.sin(angle);
+
     ctx.beginPath();
-    ctx.arc(point.x, point.y, 5, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(0, 80, 200, 0.8)';
+    ctx.arc(x, y, 4, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(0, 80, 200, 0.9)';
     ctx.fill();
-    
-    // スコアを表示
-    ctx.fillStyle = '#333';
-    ctx.font = 'bold 12px Arial';
+
+    // スコアテキスト
+    ctx.fillStyle = '#000';
+    ctx.font = 'bold 10px Arial';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    
-    const scoreX = point.x + 15 * Math.cos(angles[i]);
-    const scoreY = point.y + 15 * Math.sin(angles[i]);
-    
-    ctx.fillText(point.score.toFixed(1), scoreX, scoreY);
+    // スコア表示位置の微調整
+    const textRadius = pointRadius + 10; 
+    const textX = centerX + textRadius * Math.cos(angle);
+    const textY = centerY + textRadius * Math.sin(angle);
+    ctx.fillText(score.toFixed(1), textX, textY);
   });
 }
 
-// 評価結果を表示
-function displayRtsResults(overallScore, lowestCategory, scores, categories) {
+
+function displayRtsResults(overallScore, lowestCategory, scores, categoryNames) {
   const totalElement = document.getElementById('rtsTotal');
   const recommendationElement = document.getElementById('rtsRecommendation');
+  const resultsContainer = document.getElementById('rtsResults');
   
   if (totalElement) {
     totalElement.innerHTML = `<strong>総合スコア: ${overallScore.toFixed(1)}/10</strong>`;
   }
   
   if (recommendationElement) {
-    let recommendation = '';
-    
-    if (overallScore >= 8) {
-      recommendation = '<div class="result-good">スポーツへの完全復帰が可能な状態です。ただし定期的な再評価を行いましょう。</div>';
-    } else if (overallScore >= 6) {
-      recommendation = '<div class="result-moderate">段階的な復帰が可能です。制限付きの参加から始めてください。</div>';
+    let recommendationText = '';
+    let recommendationClass = 'recommendation';
+
+    if (overallScore >= 8.5) { // 基準を少し厳しく
+      recommendationText = 'スポーツへの完全復帰が可能な状態に近いと考えられます。';
+      recommendationClass += ' good';
+    } else if (overallScore >= 6.5) {
+      recommendationText = '段階的な復帰を検討できます。特定の部分練習から開始し、徐々に負荷を上げてください。';
+      recommendationClass += ' caution';
     } else {
-      recommendation = '<div class="result-poor">スポーツ復帰にはまだリスクがあります。リハビリテーションを継続してください。</div>';
+      recommendationText = 'スポーツ復帰にはまだリスクが高いと考えられます。リハビリテーションの継続と、未達成項目の改善に注力してください。';
+      recommendationClass += ' bad';
     }
     
-    recommendation += `<p>特に改善が必要な項目: <strong>${lowestCategory.name}</strong> (スコア: ${lowestCategory.score.toFixed(1)})</p>`;
+    recommendationElement.innerHTML = `<div class="${recommendationClass}">${recommendationText}</div>`;
     
-    // カテゴリー別のスコア一覧
-    recommendation += '<div style="margin-top: 10px;"><strong>カテゴリー別スコア:</strong></div>';
-    recommendation += '<ul style="padding-left: 20px; margin-top: 5px;">';
-    categories.forEach((category, i) => {
-      recommendation += `<li>${category.name}: ${scores[i].toFixed(1)}</li>`;
+    if (lowestCategory && lowestCategory.score < 8.5) { // 8.5点未満の最低カテゴリを表示
+         recommendationElement.innerHTML += `<p style="margin-top: 8px;">特に改善が推奨される項目: <strong>${lowestCategory.name}</strong> (スコア: ${lowestCategory.score.toFixed(1)})</p>`;
+    }
+
+    let categoryDetails = '<div style="margin-top: 10px;"><strong>カテゴリー別スコア:</strong><ul style="padding-left: 20px; margin-top: 5px; list-style-type: none;">';
+    categoryNames.forEach((name, i) => {
+      categoryDetails += `<li>${name}: ${scores[i].toFixed(1)} 点</li>`;
     });
-    recommendation += '</ul>';
-    
-    recommendationElement.innerHTML = recommendation;
+    categoryDetails += '</ul></div>';
+    recommendationElement.innerHTML += categoryDetails;
   }
   
-  // 結果ボックスを表示
-  document.getElementById('rtsResults').style.display = 'block';
+  if(resultsContainer) resultsContainer.style.display = 'block';
 }
+
 
 // ----- 競技復帰評価（CAI機能テスト）関連 -----
 // パネル表示制御
@@ -1958,20 +1986,26 @@ document.getElementById('showFaamBtn').addEventListener('click', function() {
 });
 
 // ALR-RSIスライダーの値表示を更新
-document.querySelectorAll('.slider').forEach(slider => {
-  slider.addEventListener('input', function() {
-    this.nextElementSibling.nextElementSibling.textContent = this.value;
-  });
+document.querySelectorAll('#alrRsiPanel .slider').forEach(slider => {
+  const valueDisplay = slider.parentElement.querySelector('.slider-value');
+  if (valueDisplay) {
+      valueDisplay.textContent = slider.value; // 初期値を表示
+      slider.addEventListener('input', function() {
+          valueDisplay.textContent = this.value;
+      });
+  }
 });
+
 
 // ALR-RSI平均点計算
 document.getElementById('calcAlrRsiBtn').addEventListener('click', function() {
-  const sliders = [];
-  for (let i = 1; i <= 12; i++) {
-    sliders.push(parseInt(document.getElementById(`alrRsi${i}`).value));
-  }
+  let sum = 0;
+  const sliders = document.querySelectorAll('#alrRsiPanel .slider');
+  sliders.forEach(slider => {
+    sum += parseInt(slider.value);
+  });
   
-  const average = sliders.reduce((sum, val) => sum + val, 0) / sliders.length;
+  const average = sliders.length > 0 ? sum / sliders.length : 0;
   const resultBox = document.getElementById('alrRsiResult');
   resultBox.style.display = 'block';
   
@@ -1979,53 +2013,46 @@ document.getElementById('calcAlrRsiBtn').addEventListener('click', function() {
   scoreElement.textContent = `ALR-RSI平均点: ${average.toFixed(1)}点`;
   
   const evalElement = document.getElementById('alrRsiEvaluation');
+  let radioToSelect;
   if (average >= 60) {
     evalElement.textContent = '心理的準備性: 良好（60点以上）';
     evalElement.className = 'recommendation good';
-    // CAI機能テストの対応するラジオボタンを自動選択
-    document.querySelector('input[name="cai_alr_rsi"][value="0"]').checked = true;
+    radioToSelect = document.querySelector('input[name="cai_alr_rsi"][value="0"]');
   } else if (average >= 40) {
     evalElement.textContent = '心理的準備性: 注意（40-60点）';
     evalElement.className = 'recommendation caution';
-    document.querySelector('input[name="cai_alr_rsi"][value="1"]').checked = true;
+    radioToSelect = document.querySelector('input[name="cai_alr_rsi"][value="1"]');
   } else {
     evalElement.textContent = '心理的準備性: 不十分（40点未満）';
     evalElement.className = 'recommendation bad';
-    document.querySelector('input[name="cai_alr_rsi"][value="5"]').checked = true;
+    radioToSelect = document.querySelector('input[name="cai_alr_rsi"][value="5"]');
   }
+  if (radioToSelect) radioToSelect.checked = true;
 });
 
 // FAAM得点計算
 document.getElementById('calcFaamBtn').addEventListener('click', function() {
-  // ADLサブスケール計算
-  const adlValues = [];
   let adlTotal = 0;
   let adlResponded = 0;
-  
-  for (let i = 1; i <= 5; i++) { // サンプル用に5項目だけ使用
-    const select = document.getElementById(`faamAdl${i}`);
-    const value = select.value;
-    if (value !== 'na') {
-      adlTotal += parseInt(value);
-      adlResponded++;
-    }
-  }
-  
-  // スポーツサブスケール計算
-  const sportValues = [];
+  const adlSelects = document.querySelectorAll('#faamPanel #faamAdl1, #faamPanel #faamAdl2, #faamPanel #faamAdl3, #faamPanel #faamAdl4, #faamPanel #faamAdl5'); // 5項目のみ
+  adlSelects.forEach(select => {
+      if (select.value !== 'na') {
+          adlTotal += parseInt(select.value);
+          adlResponded++;
+      }
+  });
+
   let sportTotal = 0;
   let sportResponded = 0;
+  const sportSelects = document.querySelectorAll('#faamPanel #faamSport1, #faamPanel #faamSport2, #faamPanel #faamSport3, #faamPanel #faamSport4, #faamPanel #faamSport5'); // 5項目のみ
+  sportSelects.forEach(select => {
+      if (select.value !== 'na') {
+          sportTotal += parseInt(select.value);
+          sportResponded++;
+      }
+  });
   
-  for (let i = 1; i <= 5; i++) { // サンプル用に5項目だけ使用
-    const select = document.getElementById(`faamSport${i}`);
-    const value = select.value;
-    if (value !== 'na') {
-      sportTotal += parseInt(value);
-      sportResponded++;
-    }
-  }
-  
-  const adlMaxPossible = adlResponded * 4; // 各項目の最大値は4
+  const adlMaxPossible = adlResponded * 4;
   const sportMaxPossible = sportResponded * 4;
   
   const adlPercentage = adlMaxPossible > 0 ? (adlTotal / adlMaxPossible) * 100 : 0;
@@ -2034,310 +2061,167 @@ document.getElementById('calcFaamBtn').addEventListener('click', function() {
   const resultBox = document.getElementById('faamResult');
   resultBox.style.display = 'block';
   
-  document.getElementById('faamAdlScore').textContent = `ADLスコア: ${adlPercentage.toFixed(1)}%`;
-  document.getElementById('faamSportScore').textContent = `スポーツスコア: ${sportPercentage.toFixed(1)}%`;
+  document.getElementById('faamAdlScore').textContent = `ADLスコア: ${adlPercentage.toFixed(1)}% (回答数: ${adlResponded}/5)`;
+  document.getElementById('faamSportScore').textContent = `スポーツスコア: ${sportPercentage.toFixed(1)}% (回答数: ${sportResponded}/5)`;
   
   const evalElement = document.getElementById('faamEvaluation');
-  let evaluation = '';
-  let evaluationClass = '';
+  let adlRadio, sportRadio;
+
+  if (adlPercentage >= 90) adlRadio = document.querySelector('input[name="cai_faam_adl"][value="0"]');
+  else if (adlPercentage >= 80) adlRadio = document.querySelector('input[name="cai_faam_adl"][value="1"]');
+  else adlRadio = document.querySelector('input[name="cai_faam_adl"][value="2"]');
+  if(adlRadio) adlRadio.checked = true;
   
-  // ADLの評価を設定
-  if (adlPercentage >= 90) {
-    document.querySelector('input[name="cai_faam_adl"][value="0"]').checked = true;
-  } else if (adlPercentage >= 80) {
-    document.querySelector('input[name="cai_faam_adl"][value="1"]').checked = true;
-  } else {
-    document.querySelector('input[name="cai_faam_adl"][value="2"]').checked = true;
-  }
+  if (sportPercentage >= 80) sportRadio = document.querySelector('input[name="cai_faam_sports"][value="0"]');
+  else if (sportPercentage >= 60) sportRadio = document.querySelector('input[name="cai_faam_sports"][value="2"]');
+  else sportRadio = document.querySelector('input[name="cai_faam_sports"][value="3"]');
+  if(sportRadio) sportRadio.checked = true;
   
-  // スポーツスコアの評価を設定
-  if (sportPercentage >= 80) {
-    document.querySelector('input[name="cai_faam_sports"][value="0"]').checked = true;
-  } else if (sportPercentage >= 60) {
-    document.querySelector('input[name="cai_faam_sports"][value="2"]').checked = true;
-  } else {
-    document.querySelector('input[name="cai_faam_sports"][value="3"]').checked = true;
-  }
-  
-  // 総合評価
   if (adlPercentage >= 90 && sportPercentage >= 80) {
-    evaluation = '足部・足関節機能: 良好';
-    evaluationClass = 'good';
-  } else if (adlPercentage >= 80 && sportPercentage >= 60) {
-    evaluation = '足部・足関節機能: 回復途上（注意）';
-    evaluationClass = 'caution';
+    evalElement.textContent = '足部・足関節機能: 良好';
+    evalElement.className = 'recommendation good';
+  } else if (adlPercentage >= 80 || sportPercentage >= 60) { //どちらかが基準を満たしていれば注意
+    evalElement.textContent = '足部・足関節機能: 回復途上（一部注意）';
+    evalElement.className = 'recommendation caution';
   } else {
-    evaluation = '足部・足関節機能: 機能低下（要改善）';
-    evaluationClass = 'bad';
+    evalElement.textContent = '足部・足関節機能: 機能低下（要改善）';
+    evalElement.className = 'recommendation bad';
   }
-  
-  evalElement.textContent = evaluation;
-  evalElement.className = `recommendation ${evaluationClass}`;
 });
 
 // CAI機能テスト総合評価
 document.getElementById('caiEvalBtn').addEventListener('click', function() {
-  // 各テストのスコアを取得
-  const getRadioValue = function(name) {
+  const getRadioValue = (name) => {
     const radio = document.querySelector(`input[name="${name}"]:checked`);
     return radio ? parseInt(radio.value) : null;
   };
   
-  const sls = getRadioValue('cai_sls');
-  const msebt = getRadioValue('cai_msebt');
-  const sht = getRadioValue('cai_sht');
-  const f8t = getRadioValue('cai_f8t');
-  const alrRsi = getRadioValue('cai_alr_rsi');
-  const faamAdl = getRadioValue('cai_faam_adl');
-  const faamSports = getRadioValue('cai_faam_sports');
+  const scoresMap = {
+    sls: getRadioValue('cai_sls'),
+    msebt: getRadioValue('cai_msebt'),
+    sht: getRadioValue('cai_sht'),
+    f8t: getRadioValue('cai_f8t'),
+    alrRsi: getRadioValue('cai_alr_rsi'),
+    faamAdl: getRadioValue('cai_faam_adl'),
+    faamSports: getRadioValue('cai_faam_sports')
+  };
   
-  // 未入力項目があるかチェック
-  const scores = [sls, msebt, sht, f8t, alrRsi, faamAdl, faamSports];
-  if (scores.some(score => score === null)) {
-    alert('すべてのCAI機能テスト項目を評価してください。');
+  const scoresArray = Object.values(scoresMap);
+  if (scoresArray.some(score => score === null)) {
+    alert('CAI機能テストの全ての項目を評価または計算してください。');
     return;
   }
   
-  // 総合点の計算
-  const totalScore = scores.reduce((sum, score) => sum + score, 0);
-  
-  // 結果の表示
+  const totalScore = scoresArray.reduce((sum, score) => sum + score, 0);
   const resultBox = document.getElementById('caiResults');
   resultBox.style.display = 'block';
   
-  const totalElement = document.getElementById('caiTotal');
-  totalElement.textContent = `CAI機能テスト総合点: ${totalScore}/25点`;
+  document.getElementById('caiTotal').textContent = `CAI機能テスト総合点: ${totalScore}/25点`;
   
   const evalElement = document.getElementById('caiEvaluation');
   if (totalScore < 8) {
-    evalElement.textContent = '評価: 競技復帰可能（8点未満）';
+    evalElement.textContent = '評価: 競技復帰可能の可能性が高い (8点未満)';
     evalElement.className = 'recommendation good';
   } else if (totalScore < 15) {
-    evalElement.textContent = '評価: 要注意・追加トレーニング推奨（8-14点）';
+    evalElement.textContent = '評価: 復帰に注意が必要、追加のトレーニングや評価を推奨 (8-14点)';
     evalElement.className = 'recommendation caution';
   } else {
-    evalElement.textContent = '評価: 競技復帰不可・リハビリ継続（15点以上）';
+    evalElement.textContent = '評価: 競技復帰は非推奨、リハビリ継続が必要 (15点以上)';
     evalElement.className = 'recommendation bad';
   }
   
-  // 詳細スコア表示
   document.getElementById('caiDetailScores').textContent = 
-    `SLS: ${sls}点, mSEBT: ${msebt}点, SHT: ${sht}点, F8T: ${f8t}点, ALR-RSI: ${alrRsi}点, FAAM-ADL: ${faamAdl}点, FAAM-Sports: ${faamSports}点`;
-  
-  // データをローカルストレージに保存
-  saveCompetitionData();
+    `SLS: ${scoresMap.sls}点, mSEBT: ${scoresMap.msebt}点, SHT: ${scoresMap.sht}点, F8T: ${scoresMap.f8t}点, ALR-RSI: ${scoresMap.alrRsi}点, FAAM-ADL: ${scoresMap.faamAdl}点, FAAM-Sports: ${scoresMap.faamSports}点`;
 });
 
-// ローカルストレージにデータを保存する関数
+// ローカルストレージに競技復帰評価データを保存する関数（呼び出しは適宜）
 function saveCompetitionData() {
-  try {
-    // CAI機能テストのラジオボタン値
-    const radioData = {};
-    const radioGroups = ['cai_sls', 'cai_msebt', 'cai_sht', 'cai_f8t', 'cai_alr_rsi', 'cai_faam_adl', 'cai_faam_sports'];
-    
-    radioGroups.forEach(name => {
-      const selected = document.querySelector(`input[name="${name}"]:checked`);
-      if (selected) {
-        radioData[name] = selected.value;
-      }
-    });
-    
-    // ALR-RSIスライダー値
-    const sliderData = {};
-    for (let i = 1; i <= 12; i++) {
-      const slider = document.getElementById(`alrRsi${i}`);
-      if (slider) {
-        sliderData[`alrRsi${i}`] = slider.value;
-      }
-    }
-    
-    // FAAM選択値
-    const faamData = {};
-    for (let i = 1; i <= 5; i++) {
-      const adlSelect = document.getElementById(`faamAdl${i}`);
-      const sportSelect = document.getElementById(`faamSport${i}`);
-      
-      if (adlSelect) {
-        faamData[`faamAdl${i}`] = adlSelect.value;
-      }
-      
-      if (sportSelect) {
-        faamData[`faamSport${i}`] = sportSelect.value;
-      }
-    }
-    
-    // データを統合して保存
-    const competitionData = {
-      radioData,
-      sliderData,
-      faamData
-    };
-    
-    localStorage.setItem('competitionData', JSON.stringify(competitionData));
-    console.log('競技復帰評価データを保存しました');
-  } catch (error) {
-    console.error('データ保存中にエラーが発生しました:', error);
-  }
+  // 既存のsaveAllDataに統合されているか、個別に保存したい場合に実装
 }
-
-// ALR-RSIスライダー値を保存
-function saveAlrRsiSliders() {
-  const values = {};
-  for (let i = 1; i <= 12; i++) {
-    const slider = document.getElementById(`alrRsi${i}`);
-    if (slider) {
-      values[`alrRsi${i}`] = slider.value;
-    }
-  }
-  
-  // 既存のデータと統合
-  const existingData = localStorage.getItem('competitionData');
-  let competitionData = { radioData: {}, sliderData: {}, faamData: {} };
-  
-  if (existingData) {
-    competitionData = JSON.parse(existingData);
-  }
-  
-  competitionData.sliderData = values;
-  localStorage.setItem('competitionData', JSON.stringify(competitionData));
-}
-
-// ローカルストレージからデータを読み込む関数
+// ローカルストレージから競技復帰評価データを読み込む関数（呼び出しはDOMContentLoadedなど）
 function loadCompetitionData() {
-  try {
-    const data = localStorage.getItem('competitionData');
-    if (!data) return;
-    
-    const competitionData = JSON.parse(data);
-    const { radioData, sliderData, faamData } = competitionData;
-    
-    // ラジオボタンの設定
-    if (radioData) {
-      Object.entries(radioData).forEach(([name, value]) => {
-        const radio = document.querySelector(`input[name="${name}"][value="${value}"]`);
-        if (radio) {
-          radio.checked = true;
-        }
-      });
-    }
-    
-    // ALR-RSIスライダーの設定
-    if (sliderData) {
-      Object.entries(sliderData).forEach(([id, value]) => {
-        const slider = document.getElementById(id);
-        if (slider) {
-          slider.value = value;
-          // 値表示も更新
-          const valueDisplay = slider.nextElementSibling.nextElementSibling;
-          if (valueDisplay) {
-            valueDisplay.textContent = value;
-          }
-        }
-      });
-    }
-    
-    // FAAMセレクトボックスの設定
-    if (faamData) {
-      Object.entries(faamData).forEach(([id, value]) => {
-        const select = document.getElementById(id);
-        if (select) {
-          select.value = value;
-        }
-      });
-    }
-    
-    console.log('競技復帰評価データを読み込みました');
-  } catch (error) {
-    console.error('データ読み込み中にエラーが発生しました:', error);
-  }
+  // 既存のloadAllDataに統合されているか、個別に読み込みたい場合に実装
 }
+
+// ALR-RSIスライダー値を保存する関数（呼び出しはスライダー変更時）
+function saveAlrRsiSliders() {
+  // 既存のsaveAllDataに統合されているか、個別に保存したい場合に実装
+}
+
 
 // すべてのタブの全データを保存する関数
 function saveAllData() {
   try {
-    // フォームの全ての要素を取得
-    const form = document.getElementById('evalForm');
-    const formData = new FormData(form);
-    
-    // フォームデータをオブジェクトに変換
+    const formElement = document.getElementById('evalForm');
+    const formData = new FormData(formElement);
     const allFormData = {};
-    formData.forEach((value, key) => {
-      // チェックボックスの場合は特別扱い
-      const element = form.elements[key];
-      if (element && element.type === 'checkbox') {
-        allFormData[key] = element.checked;
-      } else {
-        allFormData[key] = value;
+    
+    for (const [key, value] of formData.entries()) {
+      const element = formElement.elements[key];
+      if (element) {
+        if (element.type === 'checkbox') {
+          // FormData はチェックされたチェックボックスしか含めないので、
+          // 全てのチェックボックスの状態を別途取得する
+          allFormData[key] = element.checked;
+        } else if (element.type === 'radio') {
+          // ラジオボタンはチェックされたものだけが FormData に入るので、
+          // そのままで良いが、確実に保存するためにここで処理も可能
+          if (element.checked) {
+              allFormData[key] = value;
+          }
+        } else {
+          allFormData[key] = value;
+        }
       }
+    }
+    // チェックされていないチェックボックスの値をfalseとして追加
+    const checkboxes = formElement.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(cb => {
+        if (!allFormData.hasOwnProperty(cb.name)) {
+            allFormData[cb.name] = false;
+        }
     });
-    
-    // CAI機能テストのラジオボタン値
-    const radioData = {};
-    const radioGroups = ['cai_sls', 'cai_msebt', 'cai_sht', 'cai_f8t', 'cai_alr_rsi', 'cai_faam_adl', 'cai_faam_sports'];
-    
-    radioGroups.forEach(name => {
-      const selected = document.querySelector(`input[name="${name}"]:checked`);
-      if (selected) {
-        radioData[name] = selected.value;
-      }
-    });
-    
-    // ALR-RSIスライダー値
+
+
+    // ALR-RSIスライダー値 (競技復帰タブ内)
     const sliderData = {};
-    for (let i = 1; i <= 12; i++) {
-      const slider = document.getElementById(`alrRsi${i}`);
-      if (slider) {
-        sliderData[`alrRsi${i}`] = slider.value;
-      }
-    }
-    
-    // FAAM選択値
+    document.querySelectorAll('#alrRsiPanel .slider').forEach(slider => {
+        sliderData[slider.id] = slider.value;
+    });
+
+    // FAAM選択値 (競技復帰タブ内)
     const faamData = {};
-    for (let i = 1; i <= 5; i++) {
-      const adlSelect = document.getElementById(`faamAdl${i}`);
-      const sportSelect = document.getElementById(`faamSport${i}`);
-      
-      if (adlSelect) {
-        faamData[`faamAdl${i}`] = adlSelect.value;
-      }
-      
-      if (sportSelect) {
-        faamData[`faamSport${i}`] = sportSelect.value;
-      }
-    }
+    document.querySelectorAll('#faamPanel select').forEach(select => {
+        faamData[select.id] = select.value;
+    });
     
     // 画像マーキングデータ
-    const markingData = {};
-    if (typeof markData !== 'undefined') {
-      markingData.markData = JSON.parse(JSON.stringify(markData));
+    const markingDataToSave = {};
+    for (let i = 1; i <= 4; i++) {
+        if (markData[i]) {
+            markingDataToSave[i] = markData[i];
+        }
     }
-    
-    // 全データを統合
+
     const completeData = {
-      formData: allFormData,
-      radioData,
-      sliderData,
-      faamData,
-      markingData,
+      formData: allFormData, // Ottawa, 急性期, 亜急性期, スポーツ復帰のチェックボックスなど
+      // 競技復帰タブのラジオボタンは formData に含まれる (name属性でグループ化されているため)
+      alrRsiSliderData: sliderData,
+      faamSelectData: faamData,
+      markingData: markingDataToSave,
       timestamp: new Date().toISOString()
     };
     
-    // ローカルストレージに保存
-    localStorage.setItem('ankleEvalData', JSON.stringify(completeData));
+    localStorage.setItem('ankleEvalData_latest', JSON.stringify(completeData)); // 最新のデータとして保存
     
-    // 保存成功メッセージを表示
     const confirmation = document.getElementById('saveConfirmation');
     confirmation.style.display = 'block';
-    
-    // 3秒後にメッセージを非表示
     setTimeout(() => {
       confirmation.style.display = 'none';
     }, 3000);
     
-    console.log('全データが正常に保存されました');
-    
-    // 履歴データにも保存
-    saveHistoryData(completeData);
+    console.log('全データが正常に保存されました (latest)');
+    saveHistoryData(completeData); // 履歴にも保存
     return true;
   } catch (error) {
     console.error('データ保存中にエラーが発生しました:', error);
@@ -2346,79 +2230,88 @@ function saveAllData() {
 }
 
 // 保存した全データを読み込む関数
-function loadAllData() {
+function loadAllData(dataToLoad) {
   try {
-    const data = localStorage.getItem('ankleEvalData');
-    if (!data) return false;
-    
-    const completeData = JSON.parse(data);
-    const { formData, radioData, sliderData, faamData, markingData } = completeData;
-    
-    // フォームデータの復元
-    if (formData) {
-      const form = document.getElementById('evalForm');
-      
-      Object.entries(formData).forEach(([name, value]) => {
-        const element = form.elements[name];
-        if (element) {
-          if (element.type === 'checkbox') {
-            element.checked = value;
-          } else if (element.type === 'radio') {
-            // ラジオボタンの場合は別途処理
-          } else {
-            element.value = value;
-          }
-        }
-      });
+    const data = dataToLoad || JSON.parse(localStorage.getItem('ankleEvalData_latest'));
+    if (!data) {
+        console.log('読み込む保存データがありません。');
+        return false;
     }
     
-    // ラジオボタンの設定
-    if (radioData) {
-      Object.entries(radioData).forEach(([name, value]) => {
-        const radio = document.querySelector(`input[name="${name}"][value="${value}"]`);
-        if (radio) {
-          radio.checked = true;
+    const { formData, alrRsiSliderData, faamSelectData, markingData: loadedMarkingData } = data;
+    const formElement = document.getElementById('evalForm');
+
+    // フォームデータの復元 (チェックボックス、テキスト入力、選択されたラジオボタンなど)
+    if (formData) {
+      for (const [name, value] of Object.entries(formData)) {
+        const elements = formElement.elements[name];
+        if (elements) {
+          if (elements.nodeName === 'INPUT' && elements.type === 'checkbox') {
+            elements.checked = value;
+          } else if (elements.nodeName === 'INPUT' && elements.type === 'radio') {
+            // ラジオボタン群の場合
+            const radioToSelect = formElement.querySelector(`input[name="${name}"][value="${value}"]`);
+            if (radioToSelect) radioToSelect.checked = true;
+          } else if (elements.length && elements[0].type === 'radio') { // RadioNodeList
+            for (const radio of elements) {
+              if (radio.value === value) {
+                radio.checked = true;
+                break;
+              }
+            }
+          }
+          else {
+            elements.value = value;
+            // WBLTタグなど、入力値に連動するUIの更新
+            if (name === 'wblt') updateWBLTTag();
+          }
         }
-      });
+      }
     }
     
     // ALR-RSIスライダーの設定
-    if (sliderData) {
-      Object.entries(sliderData).forEach(([id, value]) => {
+    if (alrRsiSliderData) {
+      for (const [id, value] of Object.entries(alrRsiSliderData)) {
         const slider = document.getElementById(id);
         if (slider) {
           slider.value = value;
-          // 値表示も更新
-          const valueDisplay = slider.nextElementSibling.nextElementSibling;
-          if (valueDisplay) {
-            valueDisplay.textContent = value;
-          }
+          const valueDisplay = slider.parentElement.querySelector('.slider-value');
+          if (valueDisplay) valueDisplay.textContent = value;
         }
-      });
+      }
     }
     
     // FAAMセレクトボックスの設定
-    if (faamData) {
-      Object.entries(faamData).forEach(([id, value]) => {
+    if (faamSelectData) {
+      for (const [id, value] of Object.entries(faamSelectData)) {
         const select = document.getElementById(id);
-        if (select) {
-          select.value = value;
-        }
-      });
+        if (select) select.value = value;
+      }
     }
     
     // マーキングデータの復元
-    if (markingData && markingData.markData && typeof markData !== 'undefined') {
-      Object.assign(markData, markingData.markData);
-      // キャンバスにマーキングを再描画
-      Object.keys(markData).forEach(canvasId => {
-        if (contexts[canvasId]) {
-          redrawMarks(canvasId);
+    if (loadedMarkingData) {
+      for (let i = 1; i <= 4; i++) {
+        if (loadedMarkingData[i]) {
+          markData[i] = loadedMarkingData[i];
+          if (canvases[i] && contexts[i]) { // キャンバスとコンテキストが存在するか確認
+             updateCanvasSize(i); // サイズを再確認してから再描画
+             redrawMarks(i);
+          } else if (canvases[i]) { // コンテキストがない場合は、画像読み込み後に再描画されるようにする
+            const img = canvases[i].previousElementSibling;
+            if (img && img.complete) redrawMarks(i);
+            else if (img) img.onload = () => { updateCanvasSize(i); redrawMarks(i); };
+          }
+        } else {
+          markData[i] = []; // データがない場合は空にする
+          if (canvases[i] && contexts[i]) redrawMarks(i); // クリア
         }
-      });
+      }
     }
     
-    console.log('全データを読み込みました');
+    console.log('全データをフォームに読み込みました');
+    // 必要であれば、読み込み後に計算結果を再表示する処理をトリガー
+    //例: if(document.querySelector('.tab.active[data-tab="competition"]')) { document.getElementById('caiEvalBtn').click(); }
     return true;
   } catch (error) {
     console.error('データ読み込み中にエラーが発生しました:', error);
@@ -2428,58 +2321,24 @@ function loadAllData() {
 
 // 履歴データを保存する関数
 function saveHistoryData(currentData) {
-  console.log('履歴データ保存関数が呼び出されました');
-  console.log('保存するデータ:', currentData);
-  
   try {
-    // 既存の履歴を取得
     const historyString = localStorage.getItem('ankleEvalHistory');
-    console.log('現在の履歴データ文字列:', historyString);
+    let historyData = historyString ? JSON.parse(historyString) : [];
+    if (!Array.isArray(historyData)) historyData = []; // 安全策
     
-    let historyData = [];
-    if (historyString) {
-      try {
-        historyData = JSON.parse(historyString);
-      } catch (parseError) {
-        console.error('履歴データの解析エラー、新規作成します:', parseError);
-        historyData = [];
-      }
-    }
-    
-    if (!Array.isArray(historyData)) {
-      console.warn('履歴データが配列ではありません、新規作成します');
-      historyData = [];
-    }
-    
-    // 現在のデータに一意のIDを付与
     const newEntry = {
-      id: Date.now().toString(),
-      timestamp: new Date().toISOString(),
-      data: currentData
+      id: `eval_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`, // よりユニークなID
+      timestamp: currentData.timestamp || new Date().toISOString(), // currentDataにtimestampがなければ新規作成
+      data: JSON.parse(JSON.stringify(currentData)) // ディープコピーして保存
     };
     
-    console.log('新規エントリーを作成しました:', newEntry);
-    
-    // 履歴の先頭に追加（新しいものが上に表示される）
     historyData.unshift(newEntry);
+    if (historyData.length > 20) historyData = historyData.slice(0, 20);
     
-    console.log('更新後の履歴データ数:', historyData.length);
+    localStorage.setItem('ankleEvalHistory', JSON.stringify(historyData));
+    console.log('履歴データを保存しました:', newEntry.id);
     
-    // 履歴の最大保存数を制限（例：20件）
-    if (historyData.length > 20) {
-      historyData = historyData.slice(0, 20);
-    }
-    
-    // 履歴を保存
-    const historyJson = JSON.stringify(historyData);
-    console.log('保存する履歴JSON:', historyJson);
-    localStorage.setItem('ankleEvalHistory', historyJson);
-    console.log('履歴データを保存しました');
-    
-    // 履歴タブが表示されている場合は更新
-    const historyTab = document.querySelector('.tab[data-tab="history"]');
-    if (historyTab && historyTab.classList.contains('active')) {
-      console.log('履歴タブがアクティブなのでリストを更新します');
+    if (document.querySelector('.tab.active[data-tab="history"]')) {
       displayHistoryList();
     }
   } catch (error) {
@@ -2489,171 +2348,177 @@ function saveHistoryData(currentData) {
 
 // 履歴リストを表示する関数
 function displayHistoryList() {
-  console.log('履歴リスト表示関数が呼び出されました');
   const historyListElement = document.getElementById('historyList');
-  if (!historyListElement) {
-    console.error('historyList要素が見つかりません');
-    return;
-  }
-  
-  historyListElement.innerHTML = '';
+  if (!historyListElement) return;
+  historyListElement.innerHTML = ''; 
   
   try {
-    // デバッグ出力
-    console.log('ローカルストレージから履歴データを取得します');
-    const historyDataString = localStorage.getItem('ankleEvalHistory');
-    console.log('取得したデータ:', historyDataString);
-    
-    const historyData = JSON.parse(historyDataString || '[]');
-    console.log('履歴データ数:', historyData.length);
-    
-    if (!historyData || historyData.length === 0) {
-      console.log('履歴データはありません');
-      historyListElement.innerHTML = '<div class="empty-history-message">保存されたデータがありません。評価を実施して保存してください。</div>';
+    const historyData = JSON.parse(localStorage.getItem('ankleEvalHistory') || '[]');
+    if (historyData.length === 0) {
+      historyListElement.innerHTML = '<div class="empty-history-message">保存された評価データはありません。</div>';
       return;
     }
     
-    console.log('履歴データを表示します:', historyData);
-    
-    // 履歴データを単純なリストとして表示（デバッグ用）
-    const debugList = document.createElement('div');
-    debugList.innerHTML = `<p>履歴データ数: ${historyData.length}</p>`;
-    historyListElement.appendChild(debugList);
-    
-    // テーブル要素を作成
-    const table = document.createElement('table');
-    table.style.width = '100%';
-    table.style.borderCollapse = 'collapse';
-    table.style.marginTop = '1rem';
-    
-    // テーブルヘッダー
-    const thead = document.createElement('thead');
-    thead.innerHTML = `
-      <tr>
-        <th style="padding: 0.75rem; border-bottom: 1px solid #dee2e6; text-align: left;">日時</th>
-        <th style="padding: 0.75rem; border-bottom: 1px solid #dee2e6; text-align: left;">アクション</th>
-      </tr>
-    `;
-    table.appendChild(thead);
-    
-    // テーブルボディ
-    const tbody = document.createElement('tbody');
-    
+    const ul = document.createElement('ul');
+    ul.style.listStyleType = 'none';
+    ul.style.padding = '0';
+
     historyData.forEach(entry => {
-      const tr = document.createElement('tr');
-      tr.style.cursor = 'pointer';
-      tr.dataset.id = entry.id;
-      
-      // 日付フォーマット
+      const li = document.createElement('li');
+      li.style.border = '1px solid #ddd';
+      li.style.marginBottom = '10px';
+      li.style.padding = '10px';
+      li.style.borderRadius = '5px';
+      li.style.backgroundColor = '#f9f9f9';
+
       const date = new Date(entry.timestamp);
       const formattedDate = `${date.getFullYear()}/${(date.getMonth()+1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
       
-      tr.innerHTML = `
-        <td style="padding: 0.75rem; border-bottom: 1px solid #dee2e6;">${formattedDate}</td>
-        <td style="padding: 0.75rem; border-bottom: 1px solid #dee2e6;">
-          <button class="view-details-btn" data-id="${entry.id}" style="background-color: #6a75eb; color: white; border: none; padding: 0.25rem 0.5rem; border-radius: 3px; cursor: pointer; margin-right: 0.5rem;">詳細</button>
-          <button class="load-data-btn" data-id="${entry.id}" style="background-color: #28a745; color: white; border: none; padding: 0.25rem 0.5rem; border-radius: 3px; cursor: pointer; margin-right: 0.5rem;">読込</button>
-          <button class="delete-entry-btn" data-id="${entry.id}" style="background-color: #dc3545; color: white; border: none; padding: 0.25rem 0.5rem; border-radius: 3px; cursor: pointer;">削除</button>
-        </td>
+      let summary = `評価日時: ${formattedDate}`;
+      // 簡単なサマリー (例: Ottawaの陽性項目数)
+      if (entry.data && entry.data.formData) {
+          const ottawaFields = ['ottawa_lateral_malleolus', 'ottawa_medial_malleolus', 'ottawa_walk4', 'ottawa_navicular', 'ottawa_5thmeta'];
+          let ottawaPositiveCount = 0;
+          ottawaFields.forEach(field => {
+              if (entry.data.formData[field] === true) ottawaPositiveCount++;
+          });
+          if (ottawaPositiveCount > 0) {
+              summary += ` (Ottawa: ${ottawaPositiveCount}項目陽性)`;
+          }
+      }
+
+
+      li.innerHTML = `
+        <div style="font-weight: bold;">${summary}</div>
+        <div style="margin-top: 8px;">
+          <button class="view-details-btn" data-id="${entry.id}" style="padding: 5px 10px; margin-right: 5px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">詳細表示</button>
+          <button class="load-data-btn" data-id="${entry.id}" style="padding: 5px 10px; margin-right: 5px; background-color: #28a745; color: white; border: none; border-radius: 3px; cursor: pointer;">このデータを読込</button>
+          <button class="delete-entry-btn" data-id="${entry.id}" style="padding: 5px 10px; background-color: #dc3545; color: white; border: none; border-radius: 3px; cursor: pointer;">削除</button>
+        </div>
       `;
-      
-      tbody.appendChild(tr);
+      ul.appendChild(li);
     });
+    historyListElement.appendChild(ul);
     
-    table.appendChild(tbody);
-    historyListElement.appendChild(table);
-    
-    // イベントリスナーを設定
-    document.querySelectorAll('.view-details-btn').forEach(btn => {
-      btn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        const id = this.dataset.id;
-        showHistoryDetails(id);
-      });
-    });
-    
-    document.querySelectorAll('.load-data-btn').forEach(btn => {
-      btn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        const id = this.dataset.id;
-        loadHistoryData(id);
-      });
-    });
-    
-    document.querySelectorAll('.delete-entry-btn').forEach(btn => {
-      btn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        const id = this.dataset.id;
-        deleteHistoryEntry(id);
-      });
-    });
-    
+    // イベントリスナー再設定
+    addHistoryEventListeners();
+
   } catch (error) {
-    console.error('履歴リストの表示中にエラーが発生しました:', error);
-    historyListElement.innerHTML = '<div class="error-message">データの読み込み中にエラーが発生しました。</div>';
+    console.error('履歴リストの表示中にエラー:', error);
+    historyListElement.innerHTML = '<div class="error-message">履歴データの読み込みに失敗しました。</div>';
   }
 }
+
+function addHistoryEventListeners() {
+    document.querySelectorAll('.view-details-btn').forEach(btn => {
+      btn.addEventListener('click', function() { showHistoryDetails(this.dataset.id); });
+    });
+    document.querySelectorAll('.load-data-btn').forEach(btn => {
+      btn.addEventListener('click', function() { loadHistoryEntry(this.dataset.id); });
+    });
+    document.querySelectorAll('.delete-entry-btn').forEach(btn => {
+      btn.addEventListener('click', function() { deleteHistoryEntry(this.dataset.id); });
+    });
+}
+
 
 // 履歴の詳細を表示する関数
 function showHistoryDetails(id) {
   const historyDetailElement = document.getElementById('historyDetail');
   const historyDetailContent = document.getElementById('historyDetailContent');
-  
+  if (!historyDetailElement || !historyDetailContent) return;
+
   try {
     const historyData = JSON.parse(localStorage.getItem('ankleEvalHistory') || '[]');
     const entry = historyData.find(item => item.id === id);
     
-    if (!entry) {
-      historyDetailContent.innerHTML = '<p>指定されたデータが見つかりません。</p>';
+    if (!entry || !entry.data) {
+      historyDetailContent.innerHTML = '<p>指定された詳細データが見つかりません。</p>';
       historyDetailElement.style.display = 'block';
       return;
     }
     
-    // タイムスタンプのフォーマット
     const date = new Date(entry.timestamp);
     const formattedDate = `${date.getFullYear()}年${(date.getMonth()+1)}月${date.getDate()}日 ${date.getHours()}:${date.getMinutes().toString().padStart(2, '0')}`;
     
-    // 詳細内容の生成
-    let detailsHTML = `<p><strong>評価日時:</strong> ${formattedDate}</p>`;
+    let detailsHTML = `<p><strong>評価日時:</strong> ${formattedDate}</p><hr>`;
     
-    // 主要な評価結果をまとめる
-    detailsHTML += '<div style="margin-top: 1rem;"><h4>主要な評価結果</h4>';
-    
-    // Ottawa Ankle Rules
-    const ottawaChecks = ['ottawa_lateral_malleolus', 'ottawa_medial_malleolus', 'ottawa_walk4', 'ottawa_navicular', 'ottawa_5thmeta'].filter(
-      key => entry.data.formData && entry.data.formData[key]
-    ).length;
-    
-    detailsHTML += `<p><strong>Ottawa Ankle Rules:</strong> ${ottawaChecks}個の陽性所見</p>`;
-    
-    // CAI機能テスト（競技復帰評価）のスコア表示
-    if (entry.data.radioData) {
-      const caiScores = [
-        entry.data.radioData.cai_sls, 
-        entry.data.radioData.cai_msebt, 
-        entry.data.radioData.cai_sht, 
-        entry.data.radioData.cai_f8t, 
-        entry.data.radioData.cai_alr_rsi, 
-        entry.data.radioData.cai_faam_adl, 
-        entry.data.radioData.cai_faam_sports
-      ].filter(score => score !== undefined).map(score => parseInt(score));
-      
-      if (caiScores.length > 0) {
-        const totalScore = caiScores.reduce((sum, score) => sum + score, 0);
-        let status = '';
-        if (totalScore < 8) {
-          status = '競技復帰可能';
-        } else {
-          status = '要リハビリ継続';
+    // 現場評価
+    detailsHTML += "<h4>現場評価 (Ottawa Ankle Rules)</h4><ul>";
+    const ottawaFields = {
+        'ottawa_lateral_malleolus': '腓骨遠位・外果の痛み',
+        'ottawa_medial_malleolus': '脛骨遠位・内果の痛み',
+        'ottawa_walk4': '受傷直後4歩以上歩けない',
+        'ottawa_navicular': '舟状骨の圧痛',
+        'ottawa_5thmeta': '第5中足骨の圧痛'
+    };
+    let ottawaPositive = false;
+    for (const key in ottawaFields) {
+        if (entry.data.formData && entry.data.formData[key]) {
+            detailsHTML += `<li>${ottawaFields[key]}: <span style="color:red;">陽性</span></li>`;
+            ottawaPositive = true;
+        } else if (entry.data.formData && entry.data.formData.hasOwnProperty(key)) {
+             detailsHTML += `<li>${ottawaFields[key]}: 陰性</li>`;
         }
-        detailsHTML += `<p><strong>競技復帰評価スコア:</strong> ${totalScore}点 (${status})</p>`;
-      }
     }
-    
-    detailsHTML += '</div>';
-    
+    if (!ottawaPositive && entry.data.formData) detailsHTML += "<li>全ての項目が陰性でした。</li>";
+    else if (!entry.data.formData) detailsHTML += "<li>データなし</li>";
+    detailsHTML += "</ul>";
+
+    // スポーツ復帰評価 (チェック項目)
+    detailsHTML += "<h4>スポーツ復帰評価 (チェック項目)</h4><ul>";
+    const rtsFields = {
+        'rts_pain_check': '痛みがない/減少', 'rts_swelling_check': '腫脹なし',
+        'rts_wblt_check': 'WBLT左右差なし', 'rts_peroneal_check': '腓骨筋筋力左右差なし',
+        'rts_proprioception_check': '固有受容感覚正常', 'rts_static_balance_check': '静的バランス正常',
+        'rts_sebt_check': 'SEBT健側80%以上', 'rts_vertical_jump_check': '垂直ジャンプ健側90%以上',
+        'rts_hop_test_check': 'ホップテスト健側80%以上', 'rts_agility_check': 'アジリティ年齢相応',
+        'rts_confidence_check': '足関節への自信', 'rts_mental_check': '復帰への心理的準備'
+    };
+    let rtsChecked = 0;
+    if (entry.data.formData) {
+        for (const key in rtsFields) {
+            if (entry.data.formData[key]) {
+                detailsHTML += `<li>${rtsFields[key]}: <span style="color:green;">達成</span></li>`;
+                rtsChecked++;
+            } else if (entry.data.formData.hasOwnProperty(key)) {
+                detailsHTML += `<li>${rtsFields[key]}: 未達成</li>`;
+            }
+        }
+        detailsHTML += `<li><strong>達成項目数: ${rtsChecked} / ${Object.keys(rtsFields).length}</strong></li>`;
+    } else {
+         detailsHTML += "<li>データなし</li>";
+    }
+    detailsHTML += "</ul>";
+
+
+    // CAI機能テスト (競技復帰評価)
+    detailsHTML += "<h4>競技復帰評価 (CAI機能テスト)</h4>";
+    if (entry.data.formData && entry.data.formData['cai_sls'] !== undefined) { // cai_slsの存在で判定
+        const caiNames = {
+            'cai_sls': 'SLS', 'cai_msebt': 'mSEBT', 'cai_sht': 'SHT', 'cai_f8t': 'F8T',
+            'cai_alr_rsi': 'ALR-RSI', 'cai_faam_adl': 'FAAM ADL', 'cai_faam_sports': 'FAAM Sports'
+        };
+        let caiTotalScore = 0;
+        detailsHTML += "<ul>";
+        for(const key in caiNames) {
+            const score = parseInt(entry.data.formData[key]);
+            if (!isNaN(score)) {
+                detailsHTML += `<li>${caiNames[key]}: ${score}点</li>`;
+                caiTotalScore += score;
+            } else {
+                detailsHTML += `<li>${caiNames[key]}: - 点</li>`;
+            }
+        }
+        detailsHTML += `<li><strong>CAI総合点: ${caiTotalScore} / 25点</strong></li>`;
+        detailsHTML += "</ul>";
+    } else {
+        detailsHTML += "<p>データなし</p>";
+    }
+
     historyDetailContent.innerHTML = detailsHTML;
     historyDetailElement.style.display = 'block';
+    historyDetailElement.scrollIntoView({ behavior: 'smooth' });
     
   } catch (error) {
     console.error('履歴詳細の表示中にエラーが発生しました:', error);
@@ -2663,22 +2528,22 @@ function showHistoryDetails(id) {
 }
 
 // 履歴データを読み込む関数
-function loadHistoryData(id) {
+function loadHistoryEntry(id) {
   try {
     const historyData = JSON.parse(localStorage.getItem('ankleEvalHistory') || '[]');
     const entry = historyData.find(item => item.id === id);
     
-    if (!entry) {
-      alert('指定されたデータが見つかりません。');
+    if (!entry || !entry.data) {
+      alert('指定された履歴データが見つかりません。');
       return;
     }
     
-    // 現在のデータを保存
-    localStorage.setItem('ankleEvalData', JSON.stringify(entry.data));
-    
-    // リロードしてデータを反映
-    alert('選択したデータを読み込みます。ページをリロードします。');
-    window.location.reload();
+    if (confirm('この履歴データを現在のフォームに読み込みますか？\n（現在の入力内容は上書きされます）')) {
+        loadAllData(entry.data); // entry.data を渡して読み込み
+        alert('データを読み込みました。各タブを確認してください。');
+        // 必要に応じて、最初のタブに切り替えるなど
+        document.querySelector('.tab[data-tab="field"]').click();
+    }
     
   } catch (error) {
     console.error('履歴データの読み込み中にエラーが発生しました:', error);
@@ -2688,32 +2553,25 @@ function loadHistoryData(id) {
 
 // 履歴エントリーを削除する関数
 function deleteHistoryEntry(id) {
-  if (!confirm('このデータを削除してもよろしいですか？')) {
-    return;
-  }
+  if (!confirm('この履歴データを削除してもよろしいですか？')) return;
   
   try {
     let historyData = JSON.parse(localStorage.getItem('ankleEvalHistory') || '[]');
     historyData = historyData.filter(item => item.id !== id);
     localStorage.setItem('ankleEvalHistory', JSON.stringify(historyData));
     
-    // 履歴リストを更新
-    displayHistoryList();
-    
-    // 詳細表示をクリア
-    document.getElementById('historyDetail').style.display = 'none';
-    
+    displayHistoryList(); // リストを更新
+    document.getElementById('historyDetail').style.display = 'none'; // 詳細表示を隠す
+    alert('データを削除しました。');
   } catch (error) {
-    console.error('履歴エントリーの削除中にエラーが発生しました:', error);
+    console.error('履歴エントリーの削除中にエラー:', error);
     alert('データの削除中にエラーが発生しました。');
   }
 }
 
 // すべての履歴を削除する関数
 function clearAllHistory() {
-  if (!confirm('すべての履歴データを削除してもよろしいですか？この操作は元に戻せません。')) {
-    return;
-  }
+  if (!confirm('本当にすべての履歴データを削除してもよろしいですか？\nこの操作は元に戻せません。')) return;
   
   try {
     localStorage.removeItem('ankleEvalHistory');
@@ -2721,56 +2579,41 @@ function clearAllHistory() {
     document.getElementById('historyDetail').style.display = 'none';
     alert('すべての履歴データが削除されました。');
   } catch (error) {
-    console.error('履歴データの一括削除中にエラーが発生しました:', error);
+    console.error('履歴データの一括削除中にエラー:', error);
     alert('データの削除中にエラーが発生しました。');
   }
 }
 
 // ページ初期化時の処理
 document.addEventListener('DOMContentLoaded', function() {
-  // 既存の初期化処理
-  loadCompetitionData();
-  loadAllData();
+  loadAllData(); // 最新のデータを読み込む
   
-  // ALR-RSIスライダーの変更時にデータを保存
-  document.querySelectorAll('.slider').forEach(slider => {
-    slider.addEventListener('change', function() {
-      saveAlrRsiSliders();
-    });
-  });
+  // 履歴タブ関連のボタンにイベントリスナーを設定
+  const refreshBtn = document.getElementById('refreshHistoryBtn');
+  if (refreshBtn) refreshBtn.addEventListener('click', displayHistoryList);
   
-  // FAAMセレクトボックスの変更時にデータを保存
-  document.querySelectorAll('[id^="faamAdl"], [id^="faamSport"]').forEach(select => {
-    select.addEventListener('change', function() {
-      saveCompetitionData();
-    });
-  });
-  
-  // 履歴タブのイベントリスナー
-  document.querySelectorAll('.tab').forEach(tab => {
-    tab.addEventListener('click', function() {
-      if (this.dataset.tab === 'history') {
-        displayHistoryList();
-      }
-    });
-  });
-  
-  // 履歴更新ボタン
-  document.getElementById('refreshHistoryBtn').addEventListener('click', function() {
-    displayHistoryList();
-  });
-  
-  // 履歴一括削除ボタン
-  document.getElementById('clearHistoryBtn').addEventListener('click', function() {
-    clearAllHistory();
-  });
+  const clearBtn = document.getElementById('clearHistoryBtn');
+  if (clearBtn) clearBtn.addEventListener('click', clearAllHistory);
+
+  // 最初のタブが履歴タブだった場合のためにリスト表示
+  if (document.querySelector('.tab.active[data-tab="history"]')) {
+      displayHistoryList();
+  }
+
+  // ALR-RSIスライダーなどの動的UIの初期化（もしあれば）
 });
 
 // フォーム送信時にデータを保存
 document.getElementById('evalForm').addEventListener('submit', function(e) {
-  e.preventDefault(); // ページのリロードを防止
-  saveAllData();
+  e.preventDefault(); 
+  if(saveAllData()){
+      // 保存成功時の追加処理（例：メッセージ表示など）はsaveAllData内で行われる
+  } else {
+      alert('データの保存に失敗しました。');
+  }
 });
 </script>
 </body>
 </html>
+```
+Start typing a prompt
