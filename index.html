@@ -1,0 +1,2856 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>足関節内反捻挫 評価アプリ</title>
+  <style>
+    :root { font-family: 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; }
+    body { margin: 0; padding: 0; background-color: #f5f7fa; }
+    
+    /* ヘッダースタイル */
+    .header {
+      background: linear-gradient(135deg, #6a75eb 0%, #9066cc 100%);
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+      border-radius: 0 0 10px 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-bottom: 1.5rem;
+    }
+    
+    .header h1 {
+      font-size: 1.8rem;
+      margin: 0;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+    
+    .subtitle {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      margin-top: 0.5rem;
+    }
+    
+    /* コンテンツコンテナ */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    
+    /* タブナビゲーション */
+    .tabs-container {
+      margin-bottom: 1.5rem;
+      overflow-y: auto; /* 縦スクロール可能にする */
+      -webkit-overflow-scrolling: touch; /* iOSのスムーズスクロール */
+    }
+    .tabs {
+      display: flex;
+      flex-direction: column; /* 縦方向に変更 */
+      border-left: 1px solid #ddd;
+      margin-bottom: 1rem;
+      width: 100%;
+    }
+    .tab {
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      border: 1px solid #ddd;
+      border-left: 3px solid transparent;
+      margin-bottom: 0.25rem; /* 下余白で間隔を取る */
+      background-color: #f8f9fa;
+      transition: all 0.2s ease;
+    }
+    .tab:hover {
+      background-color: #e9ecef;
+      border-left: 3px solid #9066cc;
+    }
+    .tab.active {
+      border: 1px solid #ddd;
+      border-left: 3px solid #6a75eb;
+      background-color: white;
+      font-weight: bold;
+    }
+    
+    /* スマートフォン向け最適化 */
+    @media (max-width: 768px) {
+      .tab {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.9rem;
+      }
+      
+      .container {
+        padding: 0.75rem;
+      }
+      
+      h1 {
+        font-size: 1.5rem;
+      }
+      
+      h2 {
+        font-size: 1.3rem;
+      }
+    }
+    
+    /* タブコンテンツ */
+    .tab-content {
+      display: none;
+      padding: 1.5rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      margin-bottom: 1.5rem;
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+    label { display: block; margin: .5rem 0; }
+    input[type="number"], input[type="text"] { width: 100%; padding: .4rem; }
+    .radio-group { display: flex; gap: .75rem; flex-wrap: wrap; }
+    .tag { padding: .2rem .5rem; border-radius: .3rem; font-size: .8rem; }
+    .tag.Hypomobile  { background:#ffdad6; }
+    .tag.Inflexible  { background:#ffe5c0; }
+    /* .tag.Normal      { background:#e0ffd6; } */
+    /* 背屈可動域が正常範囲内 (6  15 ) */
+    .tag.Normal      { background:#e0ffd6; }
+    .tag.Flexible    { background:#d6f0ff; }
+    .tag.Hypermobile { background:#e0d6ff; }
+    button { padding: .6rem 1.2rem; font-size: 1rem; margin-top: 1rem; }
+    .classification-table { margin-top: 1rem; padding: 1rem; border: 1px solid #e0e0e0; border-radius: .5rem; }
+.classification-item { margin-bottom: .5rem; }
+.reference-image { max-width: 100%; height: auto; margin-top: 1rem; border: 1px solid #e0e0e0; }
+.image-container { position: relative; margin-bottom: 1rem; }
+.image-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.tool-btn { padding: .4rem .8rem; margin-right: .5rem; cursor: pointer; border-radius: .3rem; }
+.tool-btn.selected { background: #007bff; color: white; }
+.color-option { width: 20px; height: 20px; display: inline-block; margin-right: .5rem; border-radius: 50%; cursor: pointer; }
+.color-option.selected { border: 2px solid black; }
+.mark-controls { margin-bottom: 1rem; display: flex; flex-wrap: wrap; gap: 1rem; }
+    
+    /* 競技復帰評価関連スタイル */
+    .btn-small {
+      background-color: #6c757d;
+      color: white;
+      border: none;
+      padding: 0.25rem 0.5rem;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+    }
+    
+    .btn-small:hover {
+      background-color: #5a6268;
+    }
+    
+    .subsection {
+      margin-bottom: 1.5rem;
+      padding: 0.75rem;
+      background-color: #f8f9fa;
+      border-radius: 5px;
+    }
+    
+    .subsection h4 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      color: #495057;
+    }
+    
+    .slider-container {
+      margin-bottom: 1rem;
+    }
+    
+    .slider-container p {
+      margin-bottom: 0.25rem;
+      font-weight: 500;
+    }
+    
+    .slider {
+      width: 100%;
+      margin: 10px 0;
+    }
+    
+    .slider-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: #6c757d;
+    }
+    
+    .slider-value {
+      text-align: center;
+      font-weight: 600;
+      color: #007bff;
+      margin-top: 0.25rem;
+    }
+    
+    .faam-item {
+      margin-bottom: 0.75rem;
+    }
+    
+    .faam-item p {
+      margin-bottom: 0.25rem;
+      font-weight: 500;
+    }
+    
+    .faam-item select {
+      width: 100%;
+      padding: 0.25rem;
+      border: 1px solid #ced4da;
+      border-radius: 3px;
+    }
+    
+    .score-item {
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    
+    .recommendation {
+      padding: 0.5rem;
+      border-radius: 5px;
+      margin-top: 0.5rem;
+      font-weight: 500;
+    }
+    
+    .recommendation.good {
+      background-color: #d4edda;
+      color: #155724;
+    }
+    
+    .recommendation.caution {
+      background-color: #fff3cd;
+      color: #856404;
+    }
+    
+    .recommendation.bad {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- グラデーションヘッダー -->
+  <div class="header">
+    <h1>足関節内反捻挫<br>評価アプリ</h1>
+  </div>
+
+  <div class="container">
+    <!-- タブナビゲーション -->
+    <div class="tabs-container">
+      <div class="tabs">
+        <div class="tab active" data-tab="field">現場評価</div>
+        <div class="tab" data-tab="acute">急性期</div>
+        <div class="tab" data-tab="subacute_recovery">亜急性期・回復期</div>
+        <div class="tab" data-tab="return">スポーツ復帰評価</div>
+        <div class="tab" data-tab="competition">競技復帰評価</div>
+        <div class="tab" data-tab="history">データ履歴</div>
+      </div>
+    </div>
+
+    <form id="evalForm">
+      <!-- 0. 現場評価 (On‑field / Sideline) -->
+      <div class="tab-content active" data-tab="field">
+        <h2>Ottawa Ankle Rules</h2>
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+        <div style="display: flex; flex-direction: column; gap: .5rem;">
+          <label><input type="checkbox" name="ottawa_lateral_malleolus" /> 腓骨遠位・外果の痛み（圧痛を含む）</label>
+          <label><input type="checkbox" name="ottawa_medial_malleolus" /> 脛骨遠位・内果の痛み（圧痛を含む）</label>
+          <label><input type="checkbox" name="ottawa_walk4" /> 受傷直後4歩以上歩けない</label>
+          <label><input type="checkbox" name="ottawa_navicular" /> 舟状骨の圧痛</label>
+          <label><input type="checkbox" name="ottawa_5thmeta" /> 第5中足骨の圧痛</label>
+          <p id="ottawaResult"></p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <h3>解説</h3>
+          <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+            <!-- 画像1とマーキングキャンバス -->
+            <div class="image-container" style="width: 45%; min-width: 250px; max-width: 100%; box-shadow: 0 4px 8px rgba(0,0,0,0.2); border-radius: 8px; overflow: hidden; padding: 10px; background: white; margin: 0 auto;">
+              <img src="3.png" alt="Ottawa Ankle Rules 1" style="width: 100%; display: block; border-radius: 5px;">
+              <canvas id="markCanvas1" class="image-canvas"></canvas>
+              <p style="text-align: center; font-weight: bold; margin-top: 0.5rem;">内側</p>
+              <p style="text-align: center; color: #666; font-size: 0.85rem;"><i class="fas fa-pencil-alt"></i> ここをタップ/クリックしてマーキングできます</p>
+            </div>
+            <!-- 画像2とマーキングキャンバス -->
+            <div class="image-container" style="width: 45%; min-width: 250px; max-width: 100%; box-shadow: 0 4px 8px rgba(0,0,0,0.2); border-radius: 8px; overflow: hidden; padding: 10px; background: white; margin: 0 auto;">
+              <img src="4.png" alt="Ottawa Ankle Rules 2" style="width: 100%; display: block; border-radius: 5px;">
+              <canvas id="markCanvas2" class="image-canvas"></canvas>
+              <p style="text-align: center; font-weight: bold; margin-top: 0.5rem;">外側</p>
+              <p style="text-align: center; color: #666; font-size: 0.85rem;"><i class="fas fa-pencil-alt"></i> ここをタップ/クリックしてマーキングできます</p>
+            </div>
+            <!-- マーキングツール -->
+            <div style="width: 100%; margin-top: 1rem;">
+              <div class="mark-controls" style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.8rem;">
+                <div style="display: flex; flex-wrap: wrap; gap: 0.3rem;">
+                  <button type="button" class="tool-btn selected" data-tool="marker" data-canvas="1" style="padding: 0.4rem 0.6rem; font-size: 0.9rem;">マーカー</button>
+                  <button type="button" class="tool-btn" data-tool="eraser" data-canvas="1" style="padding: 0.4rem 0.6rem; font-size: 0.9rem;">消しゴム</button>
+                  <button type="button" class="tool-btn" data-tool="clear" data-canvas="1" style="padding: 0.4rem 0.6rem; font-size: 0.9rem;">クリア</button>
+                </div>
+                <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 0.3rem;">
+                  <span style="font-size: 0.9rem;">画像1の色: </span>
+                  <span class="color-option selected" data-color="#FF0000" data-canvas="1" style="background-color: #FF0000; width: 1.2rem; height: 1.2rem;"></span>
+                  <span class="color-option" data-color="#00FF00" data-canvas="1" style="background-color: #00FF00; width: 1.2rem; height: 1.2rem;"></span>
+                  <span class="color-option" data-color="#0000FF" data-canvas="1" style="background-color: #0000FF; width: 1.2rem; height: 1.2rem;"></span>
+                </div>
+              </div>
+              <div class="mark-controls" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                <div style="display: flex; flex-wrap: wrap; gap: 0.3rem;">
+                  <button type="button" class="tool-btn selected" data-tool="marker" data-canvas="2" style="padding: 0.4rem 0.6rem; font-size: 0.9rem;">マーカー</button>
+                  <button type="button" class="tool-btn" data-tool="eraser" data-canvas="2" style="padding: 0.4rem 0.6rem; font-size: 0.9rem;">消しゴム</button>
+                  <button type="button" class="tool-btn" data-tool="clear" data-canvas="2" style="padding: 0.4rem 0.6rem; font-size: 0.9rem;">クリア</button>
+                </div>
+                <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 0.3rem;">
+                  <span style="font-size: 0.9rem;">画像2の色: </span>
+                  <span class="color-option selected" data-color="#FF0000" data-canvas="2" style="background-color: #FF0000; width: 1.2rem; height: 1.2rem;"></span>
+                  <span class="color-option" data-color="#00FF00" data-canvas="2" style="background-color: #00FF00; width: 1.2rem; height: 1.2rem;"></span>
+                  <span class="color-option" data-color="#0000FF" data-canvas="2" style="background-color: #0000FF; width: 1.2rem; height: 1.2rem;"></span>
+                </div>
+              </div>
+            </div>
+            <div style="flex: 1; min-width: 300px;">
+              <p>Ottawa Ankle Rulesは、足関節捻挫時のX線撮影の必要性を評価するためのガイドラインです。</p>
+              <p><strong>★1つでも当てはまれば骨折を疑いレントゲン撮影を推奨</strong></p>
+              <ul style="margin-left: 1rem;">
+                <li>腓骨遠位・外果の痛み（圧痛を含む）</li>
+                <li>脛骨遠位・内果の痛み（圧痛を含む）</li>
+                <li>受傷直後4歩以上歩けない</li>
+                <li>舟状骨、第5中足骨の圧痛</li>
+              </ul>
+              <p><em>感度91%、特異度25%であり、OARの陽性は骨折確率が1.5倍に増加する</em></p>
+              <p><em>注意点：特異度が低いため偽陽性の結果も出やすい</em></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1. 急性期 -->
+    <div class="tab-content" data-tab="acute">
+      <h2>圧痛ポイントの診断と記録</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+        <!-- 画像1とマーキングキャンバス -->
+        <div class="image-container" style="width: 45%; min-width: 250px; max-width: 100%; box-shadow: 0 4px 8px rgba(0,0,0,0.2); border-radius: 8px; overflow: hidden; padding: 10px; background: white; margin: 0 auto;">
+          <img src="3.png" alt="Ottawa Ankle Rules 1" style="width: 100%; display: block; border-radius: 5px;">
+          <canvas id="markCanvas3" class="image-canvas"></canvas>
+          <p style="text-align: center; font-weight: bold; margin-top: 0.5rem;">内側の圧痛ポイント</p>
+          <p style="text-align: center; color: #666; font-size: 0.85rem;"><i class="fas fa-pencil-alt"></i> ここをタップ/クリックしてマーキングできます</p>
+        </div>
+        <!-- 画像2とマーキングキャンバス -->
+        <div class="image-container" style="width: 45%; min-width: 250px; max-width: 100%; box-shadow: 0 4px 8px rgba(0,0,0,0.2); border-radius: 8px; overflow: hidden; padding: 10px; background: white; margin: 0 auto;">
+          <img src="4.png" alt="Ottawa Ankle Rules 2" style="width: 100%; display: block; border-radius: 5px;">
+          <canvas id="markCanvas4" class="image-canvas"></canvas>
+          <p style="text-align: center; font-weight: bold; margin-top: 0.5rem;">外側の圧痛ポイント</p>
+          <p style="text-align: center; color: #666; font-size: 0.85rem;"><i class="fas fa-pencil-alt"></i> ここをタップ/クリックしてマーキングできます</p>
+        </div>
+        <!-- マーキングツール -->
+        <div style="width: 100%; margin-top: 1rem;">
+          <div class="mark-controls" style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.8rem;">
+            <div style="display: flex; flex-wrap: wrap; gap: 0.3rem;">
+              <button type="button" class="tool-btn selected" data-tool="marker" data-canvas="3" style="padding: 0.4rem 0.6rem; font-size: 0.9rem;">マーカー</button>
+              <button type="button" class="tool-btn" data-tool="eraser" data-canvas="3" style="padding: 0.4rem 0.6rem; font-size: 0.9rem;">消しゴム</button>
+              <button type="button" class="tool-btn" data-tool="clear" data-canvas="3" style="padding: 0.4rem 0.6rem; font-size: 0.9rem;">クリア</button>
+            </div>
+            <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 0.3rem;">
+              <span style="font-size: 0.9rem;">画像1の色: </span>
+              <span class="color-option selected" data-color="#FF0000" data-canvas="3" style="background-color: #FF0000; width: 1.2rem; height: 1.2rem;"></span>
+              <span class="color-option" data-color="#00FF00" data-canvas="3" style="background-color: #00FF00; width: 1.2rem; height: 1.2rem;"></span>
+              <span class="color-option" data-color="#0000FF" data-canvas="3" style="background-color: #0000FF; width: 1.2rem; height: 1.2rem;"></span>
+            </div>
+          </div>
+          <div class="mark-controls" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+            <div style="display: flex; flex-wrap: wrap; gap: 0.3rem;">
+              <button type="button" class="tool-btn selected" data-tool="marker" data-canvas="4" style="padding: 0.4rem 0.6rem; font-size: 0.9rem;">マーカー</button>
+              <button type="button" class="tool-btn" data-tool="eraser" data-canvas="4" style="padding: 0.4rem 0.6rem; font-size: 0.9rem;">消しゴム</button>
+              <button type="button" class="tool-btn" data-tool="clear" data-canvas="4" style="padding: 0.4rem 0.6rem; font-size: 0.9rem;">クリア</button>
+            </div>
+            <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 0.3rem;">
+              <span style="font-size: 0.9rem;">画像2の色: </span>
+              <span class="color-option selected" data-color="#FF0000" data-canvas="4" style="background-color: #FF0000; width: 1.2rem; height: 1.2rem;"></span>
+              <span class="color-option" data-color="#00FF00" data-canvas="4" style="background-color: #00FF00; width: 1.2rem; height: 1.2rem;"></span>
+              <span class="color-option" data-color="#0000FF" data-canvas="4" style="background-color: #0000FF; width: 1.2rem; height: 1.2rem;"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <h2>痛み評価</h2>
+      <label>VAS /10: <input type="number" name="acute_pain_vas" min="0" max="10" step="1"></label>
+      <label><input type="checkbox" name="acute_pain_rest" /> 安静時痛あり</label>
+      <label><input type="checkbox" name="acute_pain_move" /> 動作時痛あり</label>
+      <label><input type="checkbox" name="acute_pain_weight" /> 荷重時痛あり</label>
+
+      <h2>腫脹評価</h2>
+      <label>足関節周径 (cm): <input type="number" name="acute_swelling_circ" step="0.1"></label>
+      <p style="font-size:.85rem;color:#666;">※ 受傷3〜4日後からは自然回復傾向を確認</p>
+
+      <h2>圧痛ポイント</h2>
+      <div class="subsection" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 0.8rem;">
+        <label style="display: flex; align-items: center; padding: 8px; background: #f8f9fa; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+          <input type="checkbox" name="tender_l_peroneus_longus" style="margin-right: 8px;"/> 
+          <span>長腓骨筋</span>
+        </label>
+        <label style="display: flex; align-items: center; padding: 8px; background: #f8f9fa; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+          <input type="checkbox" name="tender_s_peroneus_brevis" style="margin-right: 8px;"/> 
+          <span>短腓骨筋</span>
+        </label>
+        <label style="display: flex; align-items: center; padding: 8px; background: #f8f9fa; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+          <input type="checkbox" name="tender_atfl" style="margin-right: 8px;"/> 
+          <span>前距腓靱帶</span>
+        </label>
+        <label style="display: flex; align-items: center; padding: 8px; background: #f8f9fa; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+          <input type="checkbox" name="tender_cfl" style="margin-right: 8px;"/> 
+          <span>踏腓靱帶</span>
+        </label>
+        <label style="display: flex; align-items: center; padding: 8px; background: #f8f9fa; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+          <input type="checkbox" name="tender_deltoid" style="margin-right: 8px;"/> 
+          <span>三角靱帶</span>
+        </label>
+        <label style="display: flex; align-items: center; padding: 8px; background: #f8f9fa; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+          <input type="checkbox" name="tender_achilles" style="margin-right: 8px;"/> 
+          <span>アキレスけん</span>
+        </label>
+        <label style="display: flex; align-items: center; padding: 8px; background: #f8f9fa; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+          <input type="checkbox" name="tender_kager" style="margin-right: 8px;"/> 
+          <span>Kager's fat pad</span>
+        </label>
+      </div>
+
+      <h2>自他動運動</h2>
+      <label><input type="checkbox" name="active_dorsiflex_pain" /> 背屈で疼痛</label>
+    </div>
+
+    <!-- 2. 亜急性期・回復期 -->
+    <div class="tab-content" data-tab="subacute_recovery">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <h2>亜急性期・回復期の評価</h2>
+      </div>
+      
+      <h3>背屈可動域 (荷重下 WBLT)</h3>
+      <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+        <div style="min-width: 300px; flex: 1;">
+          <label>母趾-壁距離(cm): <input type="number" id="wblt" name="wblt" step="0.1"></label>
+          <span id="wbltTag" class="tag"></span>
+          
+          <div class="classification-table">
+            <h4 style="margin-top: 0; margin-bottom: 0.5rem;">母趾-壁距離の分類</h4>
+            <div class="classification-item">
+              <span class="tag Hypomobile">Hypomobile</span> &lt; 6cm - 著しく制限あり
+            </div>
+            <div class="classification-item">
+              <span class="tag Inflexible">Inflexible</span> 6-9cm - 制限あり
+            </div>
+            <div class="classification-item">
+              <span class="tag Normal">Normal</span> 9-15cm - 正常範囲
+            </div>
+            <div class="classification-item">
+              <span class="tag Flexible">Flexible</span> 15-18cm - 柔軟性あり
+            </div>
+            <div class="classification-item">
+              <span class="tag Hypermobile">Hypermobile</span> ≥ 18cm - 過度の柔軟性
+            </div>
+          </div>
+        </div>
+        <div style="min-width: 300px; flex: 1;">
+          <img src="dorsiflexion_wblt.png" alt="背屈可動域 WBLT測定方法" class="reference-image">
+          <p style="font-size: 0.9rem; color: #666;">壁に向かって立ち、足の母趾を壁につけた状態で、膝が壁に触れるまで前傾。このとき、踏が浮かない最大距離を測定。</p>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 2rem; margin-top: 1.5rem;">
+        <div style="flex: 1; min-width: 300px;">
+          <h3>早期機能評価</h3>
+          <div style="display: grid; grid-template-columns: 1fr; gap: 0.5rem;">
+            <label>背屈可動域 (非荷重) 度: <input type="number" name="dorsiflex_rom_nw" step="0.1"></label>
+            <label>底屈筋力 (MMT /5): <input type="number" name="strength_pf" min="0" max="5"></label>
+            <label>腓骨筋筋力 (MMT /5): <input type="number" name="strength_evert" min="0" max="5"></label>
+            <label>片足静的保持 (秒): <input type="number" name="balance_single" step="1"></label>
+          </div>
+        </div>
+
+        <div style="flex: 1; min-width: 300px;">
+          <h3>SEBT / Yバランステスト</h3>
+          <div style="margin-bottom: 1rem;">
+            <h4>方向の選択</h4>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
+              <label><input type="checkbox" name="sebt_direction_ant" checked> 前方 (Anterior)</label>
+              <label><input type="checkbox" name="sebt_direction_antlat"> 前外側 (Anterolateral)</label>
+              <label><input type="checkbox" name="sebt_direction_lat"> 外側 (Lateral)</label>
+              <label><input type="checkbox" name="sebt_direction_postlat" checked> 後外側 (Posterolateral)</label>
+              <label><input type="checkbox" name="sebt_direction_post"> 後方 (Posterior)</label>
+              <label><input type="checkbox" name="sebt_direction_postmed" checked> 後内側 (Posteromedial)</label>
+              <label><input type="checkbox" name="sebt_direction_med"> 内側 (Medial)</label>
+              <label><input type="checkbox" name="sebt_direction_antmed"> 前内側 (Anteromedial)</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div style="margin-top: 1rem;">
+        <h4>距離の入力 (cm)</h4>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.5rem;">
+          <label>前方: <input type="number" id="sebt_ant" name="sebt_ant" step="0.1" min="0" max="150"></label>
+          <label>前外側: <input type="number" id="sebt_antlat" name="sebt_antlat" step="0.1" min="0" max="150"></label>
+          <label>外側: <input type="number" id="sebt_lat" name="sebt_lat" step="0.1" min="0" max="150"></label>
+          <label>後外側: <input type="number" id="sebt_postlat" name="sebt_postlat" step="0.1" min="0" max="150"></label>
+          <label>後方: <input type="number" id="sebt_post" name="sebt_post" step="0.1" min="0" max="150"></label>
+          <label>後内側: <input type="number" id="sebt_postmed" name="sebt_postmed" step="0.1" min="0" max="150"></label>
+          <label>内側: <input type="number" id="sebt_med" name="sebt_med" step="0.1" min="0" max="150"></label>
+          <label>前内側: <input type="number" id="sebt_antmed" name="sebt_antmed" step="0.1" min="0" max="150"></label>
+        </div>
+        <div style="margin-top: 1rem;">
+          <button type="button" id="sebt_draw_btn" style="margin-right: 1rem;">入力した距離で図解表示</button>
+          <button type="button" id="sebt_direction_only_btn">選択方向のみで表示（苦手方向確認）</button>
+        </div>
+      </div>
+      
+      <!-- 参照画像と図解 -->
+      <div style="margin-top: 1.5rem;">
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+          <div style="flex: 1; min-width: 200px;">
+            <h4>バランステストの参照画像</h4>
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+              <div style="flex: 1; min-width: 150px;">
+                <img src="foot_directions.png" alt="足の方向" style="width: 100%; max-width: 300px; display: block; margin-bottom: 0.5rem;">
+                <p style="font-size: 0.9rem; color: #666; margin-top: 0;">足の方向の参照</p>
+              </div>
+              <div style="flex: 1; min-width: 150px;">
+                <img src="star_balance.png" alt="スターバランステスト" style="width: 100%; max-width: 300px; display: block; margin-bottom: 0.5rem;">
+                <p style="font-size: 0.9rem; color: #666; margin-top: 0;">スターバランステストの参照</p>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <h3>結果の図解表示</h3>
+            <div id="sebt_chart_container" style="position: relative; width: 100%; max-width: 400px; height: 400px; margin: 0 auto;">
+              <canvas id="sebt_chart" width="400" height="400" style="display: block;"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. スポーツ復帰評価 -->
+    <div class="tab-content" data-tab="return">
+      <h2>スポーツ復帰評価</h2>
+      <p class="info">足関節捻挫からの復帰基準を評価します。各項目をチェックし、復帰評価を実施してください。</p>
+      
+      <div class="section">
+        <h3>1. 痛み</h3>
+        <div class="form-group">
+          <label><input type="checkbox" name="rts_pain_check"> NRS/VAS 痛みがない/痛みの減少</label>
+        </div>
+      </div>
+      
+      <div class="section">
+        <h3>2. 身体機能</h3>
+        <div class="form-group">
+          <label><input type="checkbox" name="rts_swelling_check"> 腫脹（周径の差）なし</label>
+        </div>
+        <div class="form-group">
+          <label><input type="checkbox" name="rts_wblt_check"> 母趾壁距離テスト 左右差なし</label>
+        </div>
+        <div class="form-group">
+          <label><input type="checkbox" name="rts_peroneal_check"> 腓骨筋筋力 左右差なし</label>
+        </div>
+      </div>
+      
+      <div class="section">
+        <h3>3. 感覚運動制御</h3>
+        <div class="form-group">
+          <label><input type="checkbox" name="rts_proprioception_check"> 固有受容感覚（位置覚/運動覚）正常</label>
+        </div>
+        <div class="form-group">
+          <label><input type="checkbox" name="rts_static_balance_check"> 静的片足バランステスト正常</label>
+        </div>
+        <div class="form-group">
+          <label><input type="checkbox" name="rts_sebt_check"> SEBT 健側の80%以上</label>
+        </div>
+      </div>
+      
+      <div class="section">
+        <h3>4. スポーツパフォーマンス</h3>
+        <div class="form-group">
+          <label><input type="checkbox" name="rts_vertical_jump_check"> 垂直ジャンプテスト 健側の90%以上</label>
+        </div>
+        <div class="form-group">
+          <label><input type="checkbox" name="rts_hop_test_check"> シングル/サイドホップテスト 健側の80%以上</label>
+        </div>
+        <div class="form-group">
+          <label><input type="checkbox" name="rts_agility_check"> アジリティTテスト (年齢相応)</label>
+          <div class="info" style="font-size: 0.8em; margin-top: 5px;">
+            小学生: 12〜14秒 / 中学生: 10〜12秒 / 高校生: 8〜10秒 / 成人: 8.9〜13.5秒
+          </div>
+        </div>
+      </div>
+      
+      <div class="section">
+        <h3>5. 心理的要因</h3>
+        <div class="form-group">
+          <label><input type="checkbox" name="rts_confidence_check"> 足関節への自信/安心感</label>
+        </div>
+        <div class="form-group">
+          <label><input type="checkbox" name="rts_mental_check"> 復帰への心理的準備</label>
+        </div>
+      </div>
+      
+      <div class="section results">
+        <h3>総合評価</h3>
+        <button type="button" id="rtsPaassCheckBtn" class="btn">項目の達成状況を確認</button>
+        <div id="rtsPaassResults" style="margin-top: 10px; display: none;">
+          <div class="result-box" style="padding: 10px;">
+            <div id="rtsPaassChecked" class="total-score"></div>
+          </div>
+        </div>
+        <button type="button" id="rtsEvalBtn" class="btn" style="margin-top: 15px;">評価結果を表示</button>
+        <div id="rtsResults" class="result-box">
+          <div id="rtsPentagonContainer" style="width: 100%; height: 350px; position: relative;">
+            <canvas id="rtsPentagon" width="400" height="350"></canvas>
+          </div>
+          <div id="rtsTotal" class="total-score"></div>
+          <div id="rtsRecommendation" class="recommendation"></div>
+          <p class="info" style="margin-top: 15px;">注意: 五角形の各頂点は評価カテゴリーを表し、形状が大きいほど復帰に近い状態です。収縮している頂点の項目に特に注目が必要です。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. 競技復帰評価 -->
+    <div class="tab-content" data-tab="competition">
+      <h2>競技復帰評価</h2>
+      <p class="info">CAI機能テストは慢性足関節不安定症の包括的評価ツールです。7つのテスト項目を評価し、25点満点でスコア化します。カットオフ値8点未満で受傷前の競技レベルに復帰可能と判断します。</p>
+      
+      <div class="section">
+        <h3>A. 機能テスト評価</h3>
+        <div style="display: flex; flex-wrap: wrap; gap: 1.5rem;">
+          <!-- 左カラム: テスト1-3 -->
+          <div style="flex: 1; min-width: 300px;">
+            <div class="subsection">
+              <h4>1. 片脚立位テスト (SLS)</h4>
+              <p>目を閉じて片脚立位を30秒間保持</p>
+              <div class="form-group">
+                <label>
+                  <input type="radio" name="cai_sls" value="0"> 完遂 (0点)
+                </label>
+              </div>
+              <div class="form-group">
+                <label>
+                  <input type="radio" name="cai_sls" value="1"> 不安定さあり (1点)
+                </label>
+              </div>
+              <div class="form-group">
+                <label>
+                  <input type="radio" name="cai_sls" value="4"> 完遂不可 (4点)
+                </label>
+              </div>
+            </div>
+            
+            <div class="subsection">
+              <h4>2. 修正型スターエクスカーションバランステスト (mSEBT)</h4>
+              <p>前方・後外側・後内側の3方向の到達距離を測定し、健側と比較</p>
+              <div class="form-group">
+                <label>
+                  <input type="radio" name="cai_msebt" value="0"> 健側の≧90% (0点)
+                </label>
+              </div>
+              <div class="form-group">
+                <label>
+                  <input type="radio" name="cai_msebt" value="2"> 健側の80-90% (2点)
+                </label>
+              </div>
+              <div class="form-group">
+                <label>
+                  <input type="radio" name="cai_msebt" value="3"> 健側の<80% (3点)
+                </label>
+              </div>
+            </div>
+            
+            <div class="subsection">
+              <h4>3. サイドホップテスト (SHT)</h4>
+              <p>30cmの距離を10往復ジャンプ</p>
+              <div class="form-group">
+                <label>
+                  <input type="radio" name="cai_sht" value="0"> 健側の≧90% (0点)
+                </label>
+              </div>
+              <div class="form-group">
+                <label>
+                  <input type="radio" name="cai_sht" value="2"> 健側の80-90% (2点)
+                </label>
+              </div>
+              <div class="form-group">
+                <label>
+                  <input type="radio" name="cai_sht" value="4"> 健側の<80% (4点)
+                </label>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 右カラム: テスト4-7 -->
+          <div style="flex: 1; min-width: 300px;">
+            <div class="subsection">
+              <h4>4. 8の字ホップテスト (F8T)</h4>
+              <p>5mの8の字を2周ホッピング</p>
+              <div class="form-group">
+                <label>
+                  <input type="radio" name="cai_f8t" value="0"> 健側の≧90% (0点)
+                </label>
+              </div>
+              <div class="form-group">
+                <label>
+                  <input type="radio" name="cai_f8t" value="2"> 健側の80-90% (2点)
+                </label>
+              </div>
+              <div class="form-group">
+                <label>
+                  <input type="radio" name="cai_f8t" value="4"> 健側の<80% (4点)
+                </label>
+              </div>
+            </div>
+            
+            <div class="subsection">
+              <h4>5. ALR-RSI 心理的準備性尺度</h4>
+              <p>復帰への心理的準備性を評価する12項目の質問</p>
+              <div class="form-group">
+                <label>
+                  <input type="radio" name="cai_alr_rsi" value="0"> ≧60点 (0点)
+                </label>
+              </div>
+              <div class="form-group">
+                <label>
+                  <input type="radio" name="cai_alr_rsi" value="1"> 40-60点 (1点)
+                </label>
+              </div>
+              <div class="form-group">
+                <label>
+                  <input type="radio" name="cai_alr_rsi" value="5"> <40点 (5点)
+                </label>
+              </div>
+              <button type="button" id="showAlrRsiBtn" class="btn-small">ALR-RSI質問項目を表示</button>
+            </div>
+            
+            <div class="subsection">
+              <h4>6. FAAM ADL サブスケール</h4>
+              <p>日常生活動作の自己評価</p>
+              <div class="form-group">
+                <label>
+                  <input type="radio" name="cai_faam_adl" value="0"> ≧90% (0点)
+                </label>
+              </div>
+              <div class="form-group">
+                <label>
+                  <input type="radio" name="cai_faam_adl" value="1"> 80-90% (1点)
+                </label>
+              </div>
+              <div class="form-group">
+                <label>
+                  <input type="radio" name="cai_faam_adl" value="2"> <80% (2点)
+                </label>
+              </div>
+            </div>
+            
+            <div class="subsection">
+              <h4>7. FAAM スポーツサブスケール</h4>
+              <p>スポーツ活動の自己評価</p>
+              <div class="form-group">
+                <label>
+                  <input type="radio" name="cai_faam_sports" value="0"> ≧80% (0点)
+                </label>
+              </div>
+              <div class="form-group">
+                <label>
+                  <input type="radio" name="cai_faam_sports" value="2"> 60-80% (2点)
+                </label>
+              </div>
+              <div class="form-group">
+                <label>
+                  <input type="radio" name="cai_faam_sports" value="3"> <60% (3点)
+                </label>
+              </div>
+              <button type="button" id="showFaamBtn" class="btn-small">FAAM質問項目を表示</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="section">
+        <h3>B. ALR-RSI 心理的準備性尺度</h3>
+        <div id="alrRsiPanel" style="display: none;">
+          <p class="info">各項目を0-100の範囲で評価し、平均点を算出します。カットオフ値は60点で、これを下回ると心理的準備ができていない可能性があります。</p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem;">
+            <div class="slider-container">
+              <p>1. スポーツ復帰後の再受傷に対する不安</p>
+              <input type="range" min="0" max="100" value="50" class="slider" id="alrRsi1">
+              <div class="slider-labels">
+                <span>非常に不安 (0)</span>
+                <span>全く不安なし (100)</span>
+              </div>
+              <p class="slider-value">50</p>
+            </div>
+            <div class="slider-container">
+              <p>2. スポーツ時に足首について考える頻度</p>
+              <input type="range" min="0" max="100" value="50" class="slider" id="alrRsi2">
+              <div class="slider-labels">
+                <span>常に考える (0)</span>
+                <span>全く考えない (100)</span>
+              </div>
+              <p class="slider-value">50</p>
+            </div>
+            <div class="slider-container">
+              <p>3. 足首への自信</p>
+              <input type="range" min="0" max="100" value="50" class="slider" id="alrRsi3">
+              <div class="slider-labels">
+                <span>全く自信なし (0)</span>
+                <span>完全に自信あり (100)</span>
+              </div>
+              <p class="slider-value">50</p>
+            </div>
+            <div class="slider-container">
+              <p>4. 足首の安定性に関する自信</p>
+              <input type="range" min="0" max="100" value="50" class="slider" id="alrRsi4">
+              <div class="slider-labels">
+                <span>全く自信なし (0)</span>
+                <span>完全に自信あり (100)</span>
+              </div>
+              <p class="slider-value">50</p>
+            </div>
+            <div class="slider-container">
+              <p>5. 全力でプレイできる自信</p>
+              <input type="range" min="0" max="100" value="50" class="slider" id="alrRsi5">
+              <div class="slider-labels">
+                <span>全く自信なし (0)</span>
+                <span>完全に自信あり (100)</span>
+              </div>
+              <p class="slider-value">50</p>
+            </div>
+            <div class="slider-container">
+              <p>6. 足首に対する不安感</p>
+              <input type="range" min="0" max="100" value="50" class="slider" id="alrRsi6">
+              <div class="slider-labels">
+                <span>常に不安 (0)</span>
+                <span>全く不安なし (100)</span>
+              </div>
+              <p class="slider-value">50</p>
+            </div>
+            <div class="slider-container">
+              <p>7. 足首の状態について考える頻度</p>
+              <input type="range" min="0" max="100" value="50" class="slider" id="alrRsi7">
+              <div class="slider-labels">
+                <span>常に考える (0)</span>
+                <span>全く考えない (100)</span>
+              </div>
+              <p class="slider-value">50</p>
+            </div>
+            <div class="slider-container">
+              <p>8. 試合で全力プレイを控える頻度</p>
+              <input type="range" min="0" max="100" value="50" class="slider" id="alrRsi8">
+              <div class="slider-labels">
+                <span>常に控える (0)</span>
+                <span>全く控えない (100)</span>
+              </div>
+              <p class="slider-value">50</p>
+            </div>
+            <div class="slider-container">
+              <p>9. 足首の違和感頻度</p>
+              <input type="range" min="0" max="100" value="50" class="slider" id="alrRsi9">
+              <div class="slider-labels">
+                <span>常にある (0)</span>
+                <span>全くない (100)</span>
+              </div>
+              <p class="slider-value">50</p>
+            </div>
+            <div class="slider-container">
+              <p>10. 他の選手との比較での能力発揮</p>
+              <input type="range" min="0" max="100" value="50" class="slider" id="alrRsi10">
+              <div class="slider-labels">
+                <span>まったく発揮できない (0)</span>
+                <span>完全に発揮できる (100)</span>
+              </div>
+              <p class="slider-value">50</p>
+            </div>
+            <div class="slider-container">
+              <p>11. 足首が回復したという実感</p>
+              <input type="range" min="0" max="100" value="50" class="slider" id="alrRsi11">
+              <div class="slider-labels">
+                <span>全く回復していない (0)</span>
+                <span>完全に回復した (100)</span>
+              </div>
+              <p class="slider-value">50</p>
+            </div>
+            <div class="slider-container">
+              <p>12. 足首の動きへの信頼感</p>
+              <input type="range" min="0" max="100" value="50" class="slider" id="alrRsi12">
+              <div class="slider-labels">
+                <span>全く信頼していない (0)</span>
+                <span>完全に信頼している (100)</span>
+              </div>
+              <p class="slider-value">50</p>
+            </div>
+          </div>
+          <div style="margin-top: 20px;">
+            <button type="button" id="calcAlrRsiBtn" class="btn">ALR-RSI平均点を計算</button>
+            <div id="alrRsiResult" class="result-box" style="margin-top: 10px; display: none;">
+              <div id="alrRsiScore" class="total-score"></div>
+              <div id="alrRsiEvaluation" class="recommendation"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="section">
+        <h3>C. FAAM（足部および足関節能力測定）</h3>
+        <div id="faamPanel" style="display: none;">
+          <p class="info">FAAM（Foot and Ankle Ability Measure）は足部・足関節の機能状態を評価する自己記入式調査票です。日常生活活動（ADL）サブスケール21項目と、スポーツサブスケール8項目で構成されます。</p>
+          
+          <!-- ADLサブスケール -->
+          <div class="subsection">
+            <h4>FAAM ADLサブスケール</h4>
+            <p>各項目について、現在の能力を評価してください：</p>
+            <p>0 = 不可能、1 = かなり困難、2 = 中程度困難、3 = やや困難、4 = 困難なし、NA = 該当なし</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 0.5rem; margin-top: 10px;">
+              <div class="faam-item">
+                <p>1. 立位</p>
+                <select id="faamAdl1">
+                  <option value="4">困難なし</option>
+                  <option value="3">やや困難</option>
+                  <option value="2">中程度困難</option>
+                  <option value="1">かなり困難</option>
+                  <option value="0">不可能</option>
+                  <option value="na">該当なし</option>
+                </select>
+              </div>
+              <div class="faam-item">
+                <p>2. 平地歩行</p>
+                <select id="faamAdl2">
+                  <option value="4">困難なし</option>
+                  <option value="3">やや困難</option>
+                  <option value="2">中程度困難</option>
+                  <option value="1">かなり困難</option>
+                  <option value="0">不可能</option>
+                  <option value="na">該当なし</option>
+                </select>
+              </div>
+              <div class="faam-item">
+                <p>3. 不整地歩行</p>
+                <select id="faamAdl3">
+                  <option value="4">困難なし</option>
+                  <option value="3">やや困難</option>
+                  <option value="2">中程度困難</option>
+                  <option value="1">かなり困難</option>
+                  <option value="0">不可能</option>
+                  <option value="na">該当なし</option>
+                </select>
+              </div>
+              <!-- 他のADL項目（スペース制約のため一部のみ表示） -->
+              <div class="faam-item">
+                <p>4. 階段昇り</p>
+                <select id="faamAdl4">
+                  <option value="4">困難なし</option>
+                  <option value="3">やや困難</option>
+                  <option value="2">中程度困難</option>
+                  <option value="1">かなり困難</option>
+                  <option value="0">不可能</option>
+                  <option value="na">該当なし</option>
+                </select>
+              </div>
+              <div class="faam-item">
+                <p>5. 階段降り</p>
+                <select id="faamAdl5">
+                  <option value="4">困難なし</option>
+                  <option value="3">やや困難</option>
+                  <option value="2">中程度困難</option>
+                  <option value="1">かなり困難</option>
+                  <option value="0">不可能</option>
+                  <option value="na">該当なし</option>
+                </select>
+              </div>
+            </div>
+            <div style="margin-top: 15px;">
+              <p>※ 実際のFAAM ADLは21項目ありますが、画面スペースの都合上、代表的な5項目のみ表示しています。総合評価では、最低でも80%（約17項目）の回答が必要です。</p>
+            </div>
+          </div>
+          
+          <!-- スポーツサブスケール -->
+          <div class="subsection" style="margin-top: 20px;">
+            <h4>FAAMスポーツサブスケール</h4>
+            <p>各項目について、現在の能力を評価してください：</p>
+            <p>0 = 不可能、1 = かなり困難、2 = 中程度困難、3 = やや困難、4 = 困難なし、NA = 該当なし</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 0.5rem; margin-top: 10px;">
+              <div class="faam-item">
+                <p>1. ランニング</p>
+                <select id="faamSport1">
+                  <option value="4">困難なし</option>
+                  <option value="3">やや困難</option>
+                  <option value="2">中程度困難</option>
+                  <option value="1">かなり困難</option>
+                  <option value="0">不可能</option>
+                  <option value="na">該当なし</option>
+                </select>
+              </div>
+              <div class="faam-item">
+                <p>2. ジャンプ</p>
+                <select id="faamSport2">
+                  <option value="4">困難なし</option>
+                  <option value="3">やや困難</option>
+                  <option value="2">中程度困難</option>
+                  <option value="1">かなり困難</option>
+                  <option value="0">不可能</option>
+                  <option value="na">該当なし</option>
+                </select>
+              </div>
+              <div class="faam-item">
+                <p>3. 着地</p>
+                <select id="faamSport3">
+                  <option value="4">困難なし</option>
+                  <option value="3">やや困難</option>
+                  <option value="2">中程度困難</option>
+                  <option value="1">かなり困難</option>
+                  <option value="0">不可能</option>
+                  <option value="na">該当なし</option>
+                </select>
+              </div>
+              <div class="faam-item">
+                <p>4. 急な方向転換</p>
+                <select id="faamSport4">
+                  <option value="4">困難なし</option>
+                  <option value="3">やや困難</option>
+                  <option value="2">中程度困難</option>
+                  <option value="1">かなり困難</option>
+                  <option value="0">不可能</option>
+                  <option value="na">該当なし</option>
+                </select>
+              </div>
+              <div class="faam-item">
+                <p>5. 低速での運動</p>
+                <select id="faamSport5">
+                  <option value="4">困難なし</option>
+                  <option value="3">やや困難</option>
+                  <option value="2">中程度困難</option>
+                  <option value="1">かなり困難</option>
+                  <option value="0">不可能</option>
+                  <option value="na">該当なし</option>
+                </select>
+              </div>
+            </div>
+            <div style="margin-top: 15px;">
+              <p>※ 実際のFAAMスポーツサブスケールは8項目ありますが、画面スペースの都合上、代表的な5項目のみ表示しています。総合評価では、最低でも80%（約6項目）の回答が必要です。</p>
+            </div>
+          </div>
+          
+          <div style="margin-top: 20px;">
+            <button type="button" id="calcFaamBtn" class="btn">FAAM得点を計算</button>
+            <div id="faamResult" class="result-box" style="margin-top: 10px; display: none;">
+              <div id="faamAdlScore" class="score-item"></div>
+              <div id="faamSportScore" class="score-item"></div>
+              <div id="faamEvaluation" class="recommendation"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="section results">
+        <h3>CAI機能テスト総合評価</h3>
+        <button type="button" id="caiEvalBtn" class="btn">CAI機能テストの総合点を計算</button>
+        <div id="caiResults" class="result-box" style="margin-top: 10px; display: none;">
+          <div id="caiTotal" class="total-score"></div>
+          <div id="caiEvaluation" class="recommendation"></div>
+          <p class="info" style="margin-top: 10px;">カットオフ値: 8点未満 ⇒ 受傷前の競技レベルに復帰可能</p>
+          <p class="info">各項目の得点: <span id="caiDetailScores"></span></p>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" id="saveAllBtn" style="background-color: #28a745; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 5px; font-size: 1.1rem; cursor: pointer;">評価を保存</button>
+  <div id="saveConfirmation" style="display: none; margin-top: 1rem; padding: 0.5rem; background-color: #d4edda; color: #155724; border-radius: 5px;">データが正常に保存されました</div>
+</form>
+
+    <!-- 6. データ履歴 -->
+    <div class="tab-content" data-tab="history">
+      <h2>評価データ履歴</h2>
+      <p class="info">保存された評価データの一覧です。データをクリックすると詳細を確認できます。</p>
+      
+      <div class="section">
+        <div class="history-controls" style="margin-bottom: 1rem;">
+          <button type="button" id="refreshHistoryBtn" style="background-color: #6a75eb; color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-right: 0.5rem;">履歴を更新</button>
+          <button type="button" id="clearHistoryBtn" style="background-color: #dc3545; color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer;">すべての履歴を削除</button>
+        </div>
+        
+        <div id="historyList" style="margin-top: 1rem;">
+          <div class="empty-history-message">保存されたデータがありません。評価を実施して保存してください。</div>
+        </div>
+        
+        <div id="historyDetail" style="margin-top: 2rem; display: none;">
+          <h3>評価詳細</h3>
+          <div id="historyDetailContent"></div>
+        </div>
+      </div>
+    </div>
+
+</div> <!-- container end -->
+
+  <script>
+    // --- タブ切り替え ---
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        // 現在のタブを非アクティブ化
+        document.querySelector('.tab.active').classList.remove('active');
+        // クリックされたタブをアクティブ化
+        tab.classList.add('active');
+        
+        // すべてのタブコンテンツを非表示
+        document.querySelectorAll('.tab-content').forEach(content => {
+          content.classList.remove('active');
+        });
+        
+        // 選択されたタブのコンテンツを表示
+        const tabName = tab.dataset.tab;
+        document.querySelector(`.tab-content[data-tab="${tabName}"]`).classList.add('active');
+        
+        // 履歴タブがクリックされた場合は履歴データを表示
+        if (tabName === 'history') {
+          displayHistoryList();
+        }
+      });
+    });
+
+    // --- Ottawa Rule 判定 ---
+    const ottawaInputs = document.querySelectorAll('[name^="ottawa_"]');
+    ottawaInputs.forEach(i => i.addEventListener('change', ottawaCheck));
+    ottawaCheck();
+    function ottawaCheck() {
+      const anyChecked = [...ottawaInputs].some(i => i.checked);
+      document.getElementById('ottawaResult').textContent = anyChecked ? '▶ 骨折の可能性あり → X線を推奨' : '';
+    }
+
+    // --- 背屈可動域タグ付け ---
+    const wbltInput = document.getElementById('wblt');
+    wbltInput.addEventListener('input', updateWBLTTag);
+    function updateWBLTTag() {
+      const v = parseFloat(wbltInput.value);
+      const tag = document.getElementById('wbltTag');
+      if (isNaN(v)) { tag.textContent = ''; tag.className = 'tag'; return; }
+      let label = '', cls='';
+      if (v < 6) { label='Hypomobile'; cls='Hypomobile'; }
+      else if (v < 9) { label='Inflexible'; cls='Inflexible'; }
+      else if (v < 15) { label='Normal'; cls='Normal'; }
+      else if (v < 18) { label='Flexible'; cls='Flexible'; }
+      else { label='Hypermobile'; cls='Hypermobile'; }
+      tag.textContent = label; tag.className = 'tag ' + cls;
+    }
+
+    // --- 保存 (localStorage) ---
+    const form = document.getElementById('evalForm');
+    // ロード
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedData = JSON.parse(localStorage.getItem('ankleEvalForm') || '{}');
+      for (const key in savedData) {
+        const el = document.querySelector(`[name="${key}"]`);
+        if (el) {
+          if (el.type === 'checkbox') {
+            el.checked = savedData[key];
+          } else {
+            el.value = savedData[key];
+          }
+        }
+      }
+      const data = {};
+      [...form.elements].forEach(el => {
+        if (!el.name) return;
+        data[el.name] = el.type === 'checkbox' ? el.checked : el.value;
+      });
+      localStorage.setItem('ankleEval', JSON.stringify(data));
+      alert('保存しました (ブラウザのローカルストレージ)');
+    });
+
+// --- 画像マーキング機能 ---
+const canvases = {
+  1: document.getElementById('markCanvas1'),
+  2: document.getElementById('markCanvas2'),
+  3: document.getElementById('markCanvas3'),
+  4: document.getElementById('markCanvas4')
+};
+const contexts = {};
+const markData = {
+  1: [],
+  2: [],
+  3: [],
+  4: []
+};
+let isDrawing = false;
+const currentTool = {
+  1: 'marker',
+  2: 'marker',
+  3: 'marker',
+  4: 'marker'
+};
+const currentColor = {
+  1: '#FF0000',
+  2: '#FF0000',
+  3: '#FF0000',
+  4: '#FF0000'
+};
+
+// キャンバスのサイズを画像に合わせる
+function updateCanvasSize(canvasId) {
+  const canvas = canvases[canvasId];
+  if (!canvas) return;
+  
+  const img = canvas.previousElementSibling;
+  if (!img) return;
+  
+  canvas.width = img.offsetWidth;
+  canvas.height = img.offsetHeight;
+  
+  contexts[canvasId] = canvas.getContext('2d');
+  redrawMarks(canvasId);
+}
+
+// 画像サイズ変更時にキャンバスサイズも更新
+window.addEventListener('resize', () => {
+  updateCanvasSize(1);
+  updateCanvasSize(2);
+});
+
+// ページ読み込み時に実行
+window.addEventListener('DOMContentLoaded', () => {
+  // 画像読み込み完了後にキャンバスサイズを設定
+  const imgs = [
+    document.querySelector('.image-container:nth-of-type(1) img'),
+    document.querySelector('.image-container:nth-of-type(2) img')
+  ];
+  
+  imgs.forEach((img, idx) => {
+    if (img) {
+      if (img.complete) {
+        updateCanvasSize(idx + 1);
+      } else {
+        img.onload = () => updateCanvasSize(idx + 1);
+      }
+    }
+  });
+  
+  // ローカルストレージからマーク情報を復元
+  for (let i = 1; i <= 2; i++) {
+    const savedMarks = localStorage.getItem(`ankleEval_marks_${i}`);
+    if (savedMarks) {
+      markData[i] = JSON.parse(savedMarks);
+      redrawMarks(i);
+    }
+  }
+});
+
+// マーカーツール選択
+document.querySelectorAll('.tool-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const tool = this.dataset.tool;
+    const canvasId = parseInt(this.dataset.canvas);
+    
+    if (tool === 'clear') {
+      // クリアボタンの場合、確認して消去
+      if (confirm('この画像のマークをすべて消去しますか？')) {
+        markData[canvasId] = [];
+        redrawMarks(canvasId);
+        saveMarks(canvasId);
+      }
+      return;
+    }
+    
+    // ツール選択状態の更新
+    document.querySelectorAll(`.tool-btn[data-canvas="${canvasId}"]`).forEach(b => {
+      if (b.dataset.tool !== 'clear') b.classList.remove('selected');
+    });
+    if (this.dataset.tool !== 'clear') this.classList.add('selected');
+    
+    currentTool[canvasId] = tool;
+  });
+});
+
+// 色選択
+document.querySelectorAll('.color-option').forEach(option => {
+  option.addEventListener('click', function() {
+    const color = this.dataset.color;
+    const canvasId = parseInt(this.dataset.canvas);
+    
+    document.querySelectorAll(`.color-option[data-canvas="${canvasId}"]`).forEach(o => {
+      o.classList.remove('selected');
+    });
+    this.classList.add('selected');
+    
+    currentColor[canvasId] = color;
+  });
+});
+
+// 描画イベント
+for (let canvasId = 1; canvasId <= 4; canvasId++) {
+  const canvas = canvases[canvasId];
+  if (!canvas) continue;
+  
+  // マウスイベント
+  canvas.addEventListener('mousedown', startDrawing.bind(null, canvasId));
+  canvas.addEventListener('mousemove', draw.bind(null, canvasId));
+  canvas.addEventListener('mouseup', stopDrawing);
+  canvas.addEventListener('mouseout', stopDrawing);
+  
+  // タッチイベント
+  canvas.addEventListener('touchstart', e => {
+    e.preventDefault();
+    const touch = e.touches[0];
+    const mouseEvent = new MouseEvent('mousedown', {
+      clientX: touch.clientX,
+      clientY: touch.clientY
+    });
+    canvas.dispatchEvent(mouseEvent);
+  });
+  
+  canvas.addEventListener('touchmove', e => {
+    e.preventDefault();
+    const touch = e.touches[0];
+    const mouseEvent = new MouseEvent('mousemove', {
+      clientX: touch.clientX,
+      clientY: touch.clientY
+    });
+    canvas.dispatchEvent(mouseEvent);
+  });
+  
+  canvas.addEventListener('touchend', e => {
+    e.preventDefault();
+    const mouseEvent = new MouseEvent('mouseup');
+    canvas.dispatchEvent(mouseEvent);
+  });
+}
+
+// 描画開始
+function startDrawing(canvasId, e) {
+  isDrawing = true;
+  draw(canvasId, e);
+}
+
+// 描画
+function draw(canvasId, e) {
+  if (!isDrawing) return;
+  
+  const canvas = canvases[canvasId];
+  const ctx = contexts[canvasId];
+  if (!canvas || !ctx) return;
+  
+  const rect = canvas.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  
+  const tool = currentTool[canvasId];
+  const color = currentColor[canvasId];
+  const lineWidth = tool === 'marker' ? 5 : 20;
+  
+  markData[canvasId].push({
+    x,
+    y,
+    tool,
+    color,
+    lineWidth
+  });
+  
+  redrawMarks(canvasId);
+}
+
+// 描画終了
+function stopDrawing() {
+  if (isDrawing) {
+    isDrawing = false;
+    for (let i = 1; i <= 2; i++) {
+      markData[i].push(null); // null marks the end of a stroke
+      saveMarks(i);
+    }
+  }
+}
+
+// マークデータの再描画
+function redrawMarks(canvasId) {
+  const ctx = contexts[canvasId];
+  const canvas = canvases[canvasId];
+  if (!ctx || !canvas) return;
+  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  let lastPosition = null;
+  
+  markData[canvasId].forEach((mark, i) => {
+    if (!mark) {
+      // End of stroke
+      lastPosition = null;
+      return;
+    }
+    
+    ctx.beginPath();
+    
+    if (mark.tool === 'marker') {
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.strokeStyle = mark.color;
+    } else {
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.strokeStyle = 'rgba(0,0,0,1)';
+    }
+    
+    ctx.lineWidth = mark.lineWidth;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    
+    if (lastPosition) {
+      ctx.moveTo(lastPosition.x, lastPosition.y);
+      ctx.lineTo(mark.x, mark.y);
+      ctx.stroke();
+    } else {
+      ctx.arc(mark.x, mark.y, mark.lineWidth / 2, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    
+    lastPosition = mark;
+  });
+}
+
+// マークデータの保存
+function saveMarks(canvasId) {
+  localStorage.setItem(`ankleEval_marks_${canvasId}`, JSON.stringify(markData[canvasId]));
+}
+
+// --- SEBT / Yバランステストの図解表示 ---
+const sebtCanvas = document.getElementById('sebt_chart');
+const sebtCtx = sebtCanvas ? sebtCanvas.getContext('2d') : null;
+const sebtDrawBtn = document.getElementById('sebt_draw_btn');
+const sebtDirectionOnlyBtn = document.getElementById('sebt_direction_only_btn');
+
+// 方向と角度のマッピング
+const directions = {
+  'ant': { name: '前方', angle: 90, input: document.getElementById('sebt_ant') },
+  'antlat': { name: '前外側', angle: 45, input: document.getElementById('sebt_antlat') },
+  'lat': { name: '外側', angle: 0, input: document.getElementById('sebt_lat') },
+  'postlat': { name: '後外側', angle: 315, input: document.getElementById('sebt_postlat') },
+  'post': { name: '後方', angle: 270, input: document.getElementById('sebt_post') },
+  'postmed': { name: '後内側', angle: 225, input: document.getElementById('sebt_postmed') },
+  'med': { name: '内側', angle: 180, input: document.getElementById('sebt_med') },
+  'antmed': { name: '前内側', angle: 135, input: document.getElementById('sebt_antmed') }
+};
+
+// 方向のチェックボックスの読み込み
+const directionCheckboxes = {};
+for (const dir in directions) {
+  const checkbox = document.querySelector(`[name="sebt_direction_${dir}"]`);
+  if (checkbox) {
+    directionCheckboxes[dir] = checkbox;
+  }
+}
+
+if (sebtDrawBtn && sebtCtx) {
+  sebtDrawBtn.addEventListener('click', () => drawSebtChart(false));
+  
+  // 初期化時に一度描画
+  setTimeout(() => drawSebtChart(false), 500); // ページ読み込み後に実行
+}
+
+if (sebtDirectionOnlyBtn && sebtCtx) {
+  sebtDirectionOnlyBtn.addEventListener('click', () => drawSebtChart(true));
+}
+
+function drawSebtChart(directionOnly = false) {
+  if (!sebtCtx) return;
+  
+  const width = sebtCanvas.width;
+  const height = sebtCanvas.height;
+  const centerX = width / 2;
+  const centerY = height / 2;
+  const maxRadius = Math.min(width, height) * 0.45; // 最大半径
+  
+  // キャンバスをクリア
+  sebtCtx.clearRect(0, 0, width, height);
+  
+  // 円と目盛り線を描画
+  drawGrid(sebtCtx, centerX, centerY, maxRadius, directionOnly);
+  
+  // 選択された方向と入力値を取得
+  const selectedDirections = [];
+  const points = [];
+  
+  for (const dir in directions) {
+    const checkbox = directionCheckboxes[dir];
+    const input = directions[dir].input;
+    
+    // directionOnlyモードの場合、入力値がなくても方向を描画
+    if (checkbox && checkbox.checked) {
+      const angle = directions[dir].angle * Math.PI / 180; // ラジアン変換
+      let value, radius, x, y;
+      
+      if (directionOnly || !input || !input.value) {
+        // 方向のみモードまたは入力値がない場合は固定値を使用
+        value = 50; // 単位はcm
+        radius = (value / 100) * maxRadius; // 固定半径
+      } else {
+        // 入力値がある場合
+        value = parseFloat(input.value);
+        radius = (value / 100) * maxRadius; // 最大100cmとして正規化
+      }
+      
+      // 点の座標を計算
+      x = centerX + radius * Math.cos(angle);
+      y = centerY - radius * Math.sin(angle); // Canvasは上がマイナス方向
+      
+      selectedDirections.push({
+        dir: dir,
+        name: directions[dir].name,
+        angle: angle,
+        value: value,
+        x: x,
+        y: y,
+        hasValue: !directionOnly && input && input.value
+      });
+      
+      // directionOnlyモードでないか入力値がある場合のみ点を追加
+      if (!directionOnly && input && input.value) {
+        points.push({ x, y });
+      }
+    }
+  }
+  
+  // 選択された方向の軸を描画
+  drawSelectedAxes(sebtCtx, centerX, centerY, maxRadius, selectedDirections, directionOnly);
+  
+  // directionOnlyモードでない場合のみ数値と多角形を描画
+  if (!directionOnly) {
+    // 数値を描画
+    drawDataPoints(sebtCtx, selectedDirections);
+    
+    // 多角形を描画 (最低で3点必要)
+    if (points.length >= 3) {
+      drawPolygon(sebtCtx, points);
+    }
+  } else {
+    // directionOnlyモードの場合はタイトルを表示
+    sebtCtx.fillStyle = '#333';
+    sebtCtx.font = 'bold 14px Arial';
+    sebtCtx.textAlign = 'center';
+    sebtCtx.textBaseline = 'top';
+    sebtCtx.fillText('苦手方向確認モード (選択した方向のみ表示)', centerX, 10);
+  }
+}
+
+function drawGrid(ctx, centerX, centerY, maxRadius, directionOnly = false) {
+  // 同心円を描画 (20cm単位ごと)
+  ctx.strokeStyle = '#e0e0e0';
+  ctx.fillStyle = '#f8f8f8';
+  
+  // 外円を描画
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, maxRadius, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.stroke();
+  
+  // 同心円を描画
+  for (let i = 1; i <= 5; i++) {
+    const radius = maxRadius * (i * 0.2);
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+    ctx.stroke();
+    
+    // 目盛りの数値を表示
+    ctx.fillStyle = '#666';
+    ctx.font = '10px Arial';
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(`${i * 20}cm`, centerX - radius - 5, centerY);
+  }
+  
+  // 中心点を描画
+  ctx.fillStyle = '#333';
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, 3, 0, Math.PI * 2);
+  ctx.fill();
+  
+  // 方向のみモードの場合はその旨の説明を追加
+  if (directionOnly) {
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+    ctx.fillRect(centerX - 150, centerY + maxRadius - 60, 300, 50);
+    
+    ctx.fillStyle = '#333';
+    ctx.font = '12px Arial';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('注: 選択した方向のみ表示しています', centerX, centerY + maxRadius - 35);
+    ctx.fillText('大きさはすべて同じスケールで表示', centerX, centerY + maxRadius - 15);
+  }
+}
+
+function drawSelectedAxes(ctx, centerX, centerY, maxRadius, selectedDirections, directionOnly = false) {
+  // 選択された方向の軸を描画
+  ctx.strokeStyle = '#666';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([5, 3]); // 点線
+  
+  selectedDirections.forEach(dir => {
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY);
+    const x = centerX + maxRadius * Math.cos(dir.angle);
+    const y = centerY - maxRadius * Math.sin(dir.angle);
+    ctx.lineTo(x, y);
+    ctx.stroke();
+    
+    // 方向のラベルを表示
+    ctx.fillStyle = '#333';
+    ctx.font = '12px Arial';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    
+    // ラベルの位置を調整
+    const labelRadius = maxRadius + 15;
+    const labelX = centerX + labelRadius * Math.cos(dir.angle);
+    const labelY = centerY - labelRadius * Math.sin(dir.angle);
+    
+    // 方向のみモードの場合は、方向に色を付ける
+    if (directionOnly) {
+      const dirPoint = {
+        x: centerX + 50 * Math.cos(dir.angle),
+        y: centerY - 50 * Math.sin(dir.angle)
+      };
+      
+      ctx.fillStyle = 'rgba(0, 120, 255, 0.4)';
+      ctx.beginPath();
+      ctx.arc(dirPoint.x, dirPoint.y, 5, 0, Math.PI * 2);
+      ctx.fill();
+      
+      ctx.fillStyle = '#333';
+    }
+    
+    ctx.fillText(dir.name, labelX, labelY);
+  });
+  
+  ctx.setLineDash([]); // 点線をリセット
+}
+
+function drawDataPoints(ctx, selectedDirections) {
+  ctx.fillStyle = 'rgba(255, 0, 0, 0.7)';
+  
+  selectedDirections.forEach(dir => {
+    ctx.beginPath();
+    ctx.arc(dir.x, dir.y, 5, 0, Math.PI * 2);
+    ctx.fill();
+    
+    // 数値を表示
+    ctx.fillStyle = '#333';
+    ctx.font = 'bold 12px Arial';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    
+    const scoreX = point.x + 15 * Math.cos(angles[i]);
+    const scoreY = point.y + 15 * Math.sin(angles[i]);
+    
+    ctx.fillText(point.score.toFixed(1), scoreX, scoreY);
+  });
+}
+
+// 評価結果を表示
+function displayRtsResults(overallScore, lowestCategory, scores, categories) {
+  const totalElement = document.getElementById('rtsTotal');
+  const recommendationElement = document.getElementById('rtsRecommendation');
+  
+  if (totalElement) {
+    totalElement.innerHTML = `<strong>総合スコア: ${overallScore.toFixed(1)}/10</strong>`;
+  }
+  
+  if (recommendationElement) {
+    let recommendation = '';
+    
+    if (overallScore >= 8) {
+      recommendation = '<div class="result-good">スポーツへの完全復帰が可能な状態です。ただし定期的な再評価を行いましょう。</div>';
+    } else if (overallScore >= 6) {
+      recommendation = '<div class="result-moderate">段階的な復帰が可能です。制限付きの参加から始めてください。</div>';
+    } else {
+      recommendation = '<div class="result-poor">スポーツ復帰にはまだリスクがあります。リハビリテーションを継続してください。</div>';
+    }
+    
+    recommendation += `<p>特に改善が必要な項目: <strong>${lowestCategory.name}</strong> (スコア: ${lowestCategory.score.toFixed(1)})</p>`;
+    
+    // カテゴリー別のスコア一覧
+    recommendation += '<div style="margin-top: 10px;"><strong>カテゴリー別スコア:</strong></div>';
+    recommendation += '<ul style="padding-left: 20px; margin-top: 5px;">';
+    categories.forEach((category, i) => {
+      recommendation += `<li>${category.name}: ${scores[i].toFixed(1)}</li>`;
+    });
+    recommendation += '</ul>';
+    
+    recommendationElement.innerHTML = recommendation;
+  }
+  
+  // 結果ボックスを表示
+  document.getElementById('rtsResults').style.display = 'block';
+}
+
+function drawPolygon(ctx, points) {
+  if (points.length < 3) return;
+  
+  ctx.fillStyle = 'rgba(0, 120, 255, 0.3)';
+  ctx.strokeStyle = 'rgba(0, 120, 255, 0.7)';
+  ctx.lineWidth = 2;
+  
+  ctx.beginPath();
+  ctx.moveTo(points[0].x, points[0].y);
+  
+  for (let i = 1; i < points.length; i++) {
+    ctx.lineTo(points[i].x, points[i].y);
+  }
+  
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+}
+
+// スポーツ復帰評価の五角形チャートを描画
+const rtsPentagonCanvas = document.getElementById('rtsPentagon');
+const rtsPentagonCtx = rtsPentagonCanvas ? rtsPentagonCanvas.getContext('2d') : null;
+const rtsEvalBtn = document.getElementById('rtsEvalBtn');
+
+if (rtsEvalBtn && rtsPentagonCtx) {
+  rtsEvalBtn.addEventListener('click', drawRtsPentagon);
+}
+
+// 五角形チャート描画関数
+function drawRtsPentagon() {
+  if (!rtsPentagonCtx) return;
+  
+  const canvas = rtsPentagonCanvas;
+  const ctx = rtsPentagonCtx;
+  const width = canvas.width;
+  const height = canvas.height;
+  const centerX = width / 2;
+  const centerY = height / 2;
+  const radius = Math.min(width, height) / 2 - 40;
+  
+  // キャンバスをクリア
+  ctx.clearRect(0, 0, width, height);
+  
+  // カテゴリとそれに含まれる評価項目の設定
+  const categories = [
+    { name: '痛み', inputs: ['rts_pain'] },
+    { name: '身体機能', inputs: ['rts_swelling', 'rts_wblt', 'rts_peroneal'] },
+    { name: '感覚運動制御', inputs: ['rts_proprioception', 'rts_static_balance', 'rts_sebt'] },
+    { name: 'スポーツパフォーマンス', inputs: ['rts_vertical_jump', 'rts_hop_test', 'rts_agility'] },
+    { name: '心理的要因', inputs: ['rts_confidence', 'rts_mental'] }
+  ];
+  
+  // カテゴリごとの平均スコアを計算
+  const scores = [];
+  let totalScore = 0;
+  let lowestCategory = { name: '', score: 10 };
+  
+  categories.forEach(category => {
+    let sum = 0;
+    let count = 0;
+    
+    category.inputs.forEach(inputName => {
+      const input = document.querySelector(`[name="${inputName}"]`);
+      if (input) {
+        const value = parseFloat(input.value);
+        if (!isNaN(value)) {
+          sum += value;
+          count++;
+        }
+      }
+    });
+    
+    const avgScore = count > 0 ? sum / count : 0;
+    scores.push(avgScore);
+    totalScore += avgScore;
+    
+    // 最も低いカテゴリを特定
+    if (avgScore < lowestCategory.score) {
+      lowestCategory = { name: category.name, score: avgScore };
+    }
+  });
+  
+  // 全体の平均スコア
+  const overallScore = totalScore / categories.length;
+  
+  // 五角形の背景グリッドを描画
+  drawPentagonGrid(ctx, centerX, centerY, radius);
+  
+  // データの五角形を描画
+  drawPentagonData(ctx, centerX, centerY, radius, scores, categories);
+  
+  // スコアと推奨事項を表示
+  displayRtsResults(overallScore, lowestCategory, scores, categories);
+}
+
+// 五角形のグリッドを描画
+function drawPentagonGrid(ctx, centerX, centerY, radius) {
+  const angles = Array(5).fill().map((_, i) => i * (2 * Math.PI / 5) - Math.PI / 2);
+  
+  // 同心五角形を描画（レベル別）
+  for (let level = 1; level <= 5; level++) {
+    const levelRadius = (radius * level) / 5;
+    
+    ctx.beginPath();
+    angles.forEach((angle, i) => {
+      const x = centerX + levelRadius * Math.cos(angle);
+      const y = centerY + levelRadius * Math.sin(angle);
+      if (i === 0) {
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+      }
+    });
+    ctx.closePath();
+    
+    ctx.strokeStyle = '#ccc';
+    ctx.stroke();
+    
+    // レベルラベルを表示
+    ctx.fillStyle = '#999';
+    ctx.font = '10px Arial';
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(`${level * 2}`, centerX - levelRadius - 5, centerY);
+  }
+  
+  // カテゴリ軸を描画
+  ctx.strokeStyle = '#666';
+  angles.forEach(angle => {
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY);
+    ctx.lineTo(
+      centerX + radius * Math.cos(angle),
+      centerY + radius * Math.sin(angle)
+    );
+    ctx.stroke();
+  });
+  
+  // カテゴリラベルを表示
+  const categories = ['痛み', '身体機能', '感覚運動制御', 'スポーツパフォーマンス', '心理的要因'];
+  ctx.fillStyle = '#333';
+  ctx.font = 'bold 12px Arial';
+  
+  angles.forEach((angle, i) => {
+    const labelRadius = radius + 20;
+    const x = centerX + labelRadius * Math.cos(angle);
+    const y = centerY + labelRadius * Math.sin(angle);
+    
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    
+    // ラベル位置を微調整
+    let offsetX = 0;
+    let offsetY = 0;
+    
+    if (angle === -Math.PI / 2) { // 上
+      offsetY = -5;
+    } else if (angle === Math.PI / 2) { // 下
+      offsetY = 5;
+    } else if (Math.cos(angle) < 0) { // 左側
+      offsetX = -5;
+    } else { // 右側
+      offsetX = 5;
+    }
+    
+    ctx.fillText(categories[i], x + offsetX, y + offsetY);
+  });
+}
+
+// データの五角形を描画
+function drawPentagonData(ctx, centerX, centerY, radius, scores, categories) {
+  const angles = Array(5).fill().map((_, i) => i * (2 * Math.PI / 5) - Math.PI / 2);
+  
+  // データポイントの座標を計算
+  const points = angles.map((angle, i) => {
+    const score = scores[i];
+    const pointRadius = (radius * score) / 10; // スコアは0-10
+    
+    return {
+      x: centerX + pointRadius * Math.cos(angle),
+      y: centerY + pointRadius * Math.sin(angle),
+      score: score
+    };
+  });
+  
+  // 五角形を描画
+  ctx.beginPath();
+  points.forEach((point, i) => {
+    if (i === 0) {
+      ctx.moveTo(point.x, point.y);
+    } else {
+      ctx.lineTo(point.x, point.y);
+    }
+  });
+  ctx.closePath();
+  
+  ctx.fillStyle = 'rgba(0, 120, 255, 0.3)';
+  ctx.fill();
+  
+  ctx.strokeStyle = 'rgba(0, 80, 200, 0.8)';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  
+  // データポイントを描画
+  points.forEach((point, i) => {
+    ctx.beginPath();
+    ctx.arc(point.x, point.y, 5, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(0, 80, 200, 0.8)';
+    ctx.fill();
+    
+    // スコアを表示
+    ctx.fillStyle = '#333';
+    ctx.font = 'bold 12px Arial';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    
+    const scoreX = point.x + 15 * Math.cos(angles[i]);
+    const scoreY = point.y + 15 * Math.sin(angles[i]);
+    
+    ctx.fillText(point.score.toFixed(1), scoreX, scoreY);
+  });
+}
+
+// 評価結果を表示
+function displayRtsResults(overallScore, lowestCategory, scores, categories) {
+  const totalElement = document.getElementById('rtsTotal');
+  const recommendationElement = document.getElementById('rtsRecommendation');
+  
+  if (totalElement) {
+    totalElement.innerHTML = `<strong>総合スコア: ${overallScore.toFixed(1)}/10</strong>`;
+  }
+  
+  if (recommendationElement) {
+    let recommendation = '';
+    
+    if (overallScore >= 8) {
+      recommendation = '<div class="result-good">スポーツへの完全復帰が可能な状態です。ただし定期的な再評価を行いましょう。</div>';
+    } else if (overallScore >= 6) {
+      recommendation = '<div class="result-moderate">段階的な復帰が可能です。制限付きの参加から始めてください。</div>';
+    } else {
+      recommendation = '<div class="result-poor">スポーツ復帰にはまだリスクがあります。リハビリテーションを継続してください。</div>';
+    }
+    
+    recommendation += `<p>特に改善が必要な項目: <strong>${lowestCategory.name}</strong> (スコア: ${lowestCategory.score.toFixed(1)})</p>`;
+    
+    // カテゴリー別のスコア一覧
+    recommendation += '<div style="margin-top: 10px;"><strong>カテゴリー別スコア:</strong></div>';
+    recommendation += '<ul style="padding-left: 20px; margin-top: 5px;">';
+    categories.forEach((category, i) => {
+      recommendation += `<li>${category.name}: ${scores[i].toFixed(1)}</li>`;
+    });
+    recommendation += '</ul>';
+    
+    recommendationElement.innerHTML = recommendation;
+  }
+  
+  // 結果ボックスを表示
+  document.getElementById('rtsResults').style.display = 'block';
+}
+
+// ----- 競技復帰評価（CAI機能テスト）関連 -----
+// パネル表示制御
+document.getElementById('showAlrRsiBtn').addEventListener('click', function() {
+  const panel = document.getElementById('alrRsiPanel');
+  panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+  this.textContent = panel.style.display === 'none' ? 'ALR-RSI質問項目を表示' : 'ALR-RSI質問項目を閉じる';
+});
+
+document.getElementById('showFaamBtn').addEventListener('click', function() {
+  const panel = document.getElementById('faamPanel');
+  panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+  this.textContent = panel.style.display === 'none' ? 'FAAM質問項目を表示' : 'FAAM質問項目を閉じる';
+});
+
+// ALR-RSIスライダーの値表示を更新
+document.querySelectorAll('.slider').forEach(slider => {
+  slider.addEventListener('input', function() {
+    this.nextElementSibling.nextElementSibling.textContent = this.value;
+  });
+});
+
+// ALR-RSI平均点計算
+document.getElementById('calcAlrRsiBtn').addEventListener('click', function() {
+  const sliders = [];
+  for (let i = 1; i <= 12; i++) {
+    sliders.push(parseInt(document.getElementById(`alrRsi${i}`).value));
+  }
+  
+  const average = sliders.reduce((sum, val) => sum + val, 0) / sliders.length;
+  const resultBox = document.getElementById('alrRsiResult');
+  resultBox.style.display = 'block';
+  
+  const scoreElement = document.getElementById('alrRsiScore');
+  scoreElement.textContent = `ALR-RSI平均点: ${average.toFixed(1)}点`;
+  
+  const evalElement = document.getElementById('alrRsiEvaluation');
+  if (average >= 60) {
+    evalElement.textContent = '心理的準備性: 良好（60点以上）';
+    evalElement.className = 'recommendation good';
+    // CAI機能テストの対応するラジオボタンを自動選択
+    document.querySelector('input[name="cai_alr_rsi"][value="0"]').checked = true;
+  } else if (average >= 40) {
+    evalElement.textContent = '心理的準備性: 注意（40-60点）';
+    evalElement.className = 'recommendation caution';
+    document.querySelector('input[name="cai_alr_rsi"][value="1"]').checked = true;
+  } else {
+    evalElement.textContent = '心理的準備性: 不十分（40点未満）';
+    evalElement.className = 'recommendation bad';
+    document.querySelector('input[name="cai_alr_rsi"][value="5"]').checked = true;
+  }
+});
+
+// FAAM得点計算
+document.getElementById('calcFaamBtn').addEventListener('click', function() {
+  // ADLサブスケール計算
+  const adlValues = [];
+  let adlTotal = 0;
+  let adlResponded = 0;
+  
+  for (let i = 1; i <= 5; i++) { // サンプル用に5項目だけ使用
+    const select = document.getElementById(`faamAdl${i}`);
+    const value = select.value;
+    if (value !== 'na') {
+      adlTotal += parseInt(value);
+      adlResponded++;
+    }
+  }
+  
+  // スポーツサブスケール計算
+  const sportValues = [];
+  let sportTotal = 0;
+  let sportResponded = 0;
+  
+  for (let i = 1; i <= 5; i++) { // サンプル用に5項目だけ使用
+    const select = document.getElementById(`faamSport${i}`);
+    const value = select.value;
+    if (value !== 'na') {
+      sportTotal += parseInt(value);
+      sportResponded++;
+    }
+  }
+  
+  const adlMaxPossible = adlResponded * 4; // 各項目の最大値は4
+  const sportMaxPossible = sportResponded * 4;
+  
+  const adlPercentage = adlMaxPossible > 0 ? (adlTotal / adlMaxPossible) * 100 : 0;
+  const sportPercentage = sportMaxPossible > 0 ? (sportTotal / sportMaxPossible) * 100 : 0;
+  
+  const resultBox = document.getElementById('faamResult');
+  resultBox.style.display = 'block';
+  
+  document.getElementById('faamAdlScore').textContent = `ADLスコア: ${adlPercentage.toFixed(1)}%`;
+  document.getElementById('faamSportScore').textContent = `スポーツスコア: ${sportPercentage.toFixed(1)}%`;
+  
+  const evalElement = document.getElementById('faamEvaluation');
+  let evaluation = '';
+  let evaluationClass = '';
+  
+  // ADLの評価を設定
+  if (adlPercentage >= 90) {
+    document.querySelector('input[name="cai_faam_adl"][value="0"]').checked = true;
+  } else if (adlPercentage >= 80) {
+    document.querySelector('input[name="cai_faam_adl"][value="1"]').checked = true;
+  } else {
+    document.querySelector('input[name="cai_faam_adl"][value="2"]').checked = true;
+  }
+  
+  // スポーツスコアの評価を設定
+  if (sportPercentage >= 80) {
+    document.querySelector('input[name="cai_faam_sports"][value="0"]').checked = true;
+  } else if (sportPercentage >= 60) {
+    document.querySelector('input[name="cai_faam_sports"][value="2"]').checked = true;
+  } else {
+    document.querySelector('input[name="cai_faam_sports"][value="3"]').checked = true;
+  }
+  
+  // 総合評価
+  if (adlPercentage >= 90 && sportPercentage >= 80) {
+    evaluation = '足部・足関節機能: 良好';
+    evaluationClass = 'good';
+  } else if (adlPercentage >= 80 && sportPercentage >= 60) {
+    evaluation = '足部・足関節機能: 回復途上（注意）';
+    evaluationClass = 'caution';
+  } else {
+    evaluation = '足部・足関節機能: 機能低下（要改善）';
+    evaluationClass = 'bad';
+  }
+  
+  evalElement.textContent = evaluation;
+  evalElement.className = `recommendation ${evaluationClass}`;
+});
+
+// CAI機能テスト総合評価
+document.getElementById('caiEvalBtn').addEventListener('click', function() {
+  // 各テストのスコアを取得
+  const getRadioValue = function(name) {
+    const radio = document.querySelector(`input[name="${name}"]:checked`);
+    return radio ? parseInt(radio.value) : null;
+  };
+  
+  const sls = getRadioValue('cai_sls');
+  const msebt = getRadioValue('cai_msebt');
+  const sht = getRadioValue('cai_sht');
+  const f8t = getRadioValue('cai_f8t');
+  const alrRsi = getRadioValue('cai_alr_rsi');
+  const faamAdl = getRadioValue('cai_faam_adl');
+  const faamSports = getRadioValue('cai_faam_sports');
+  
+  // 未入力項目があるかチェック
+  const scores = [sls, msebt, sht, f8t, alrRsi, faamAdl, faamSports];
+  if (scores.some(score => score === null)) {
+    alert('すべてのCAI機能テスト項目を評価してください。');
+    return;
+  }
+  
+  // 総合点の計算
+  const totalScore = scores.reduce((sum, score) => sum + score, 0);
+  
+  // 結果の表示
+  const resultBox = document.getElementById('caiResults');
+  resultBox.style.display = 'block';
+  
+  const totalElement = document.getElementById('caiTotal');
+  totalElement.textContent = `CAI機能テスト総合点: ${totalScore}/25点`;
+  
+  const evalElement = document.getElementById('caiEvaluation');
+  if (totalScore < 8) {
+    evalElement.textContent = '評価: 競技復帰可能（8点未満）';
+    evalElement.className = 'recommendation good';
+  } else if (totalScore < 15) {
+    evalElement.textContent = '評価: 要注意・追加トレーニング推奨（8-14点）';
+    evalElement.className = 'recommendation caution';
+  } else {
+    evalElement.textContent = '評価: 競技復帰不可・リハビリ継続（15点以上）';
+    evalElement.className = 'recommendation bad';
+  }
+  
+  // 詳細スコア表示
+  document.getElementById('caiDetailScores').textContent = 
+    `SLS: ${sls}点, mSEBT: ${msebt}点, SHT: ${sht}点, F8T: ${f8t}点, ALR-RSI: ${alrRsi}点, FAAM-ADL: ${faamAdl}点, FAAM-Sports: ${faamSports}点`;
+  
+  // データをローカルストレージに保存
+  saveCompetitionData();
+});
+
+// ローカルストレージにデータを保存する関数
+function saveCompetitionData() {
+  try {
+    // CAI機能テストのラジオボタン値
+    const radioData = {};
+    const radioGroups = ['cai_sls', 'cai_msebt', 'cai_sht', 'cai_f8t', 'cai_alr_rsi', 'cai_faam_adl', 'cai_faam_sports'];
+    
+    radioGroups.forEach(name => {
+      const selected = document.querySelector(`input[name="${name}"]:checked`);
+      if (selected) {
+        radioData[name] = selected.value;
+      }
+    });
+    
+    // ALR-RSIスライダー値
+    const sliderData = {};
+    for (let i = 1; i <= 12; i++) {
+      const slider = document.getElementById(`alrRsi${i}`);
+      if (slider) {
+        sliderData[`alrRsi${i}`] = slider.value;
+      }
+    }
+    
+    // FAAM選択値
+    const faamData = {};
+    for (let i = 1; i <= 5; i++) {
+      const adlSelect = document.getElementById(`faamAdl${i}`);
+      const sportSelect = document.getElementById(`faamSport${i}`);
+      
+      if (adlSelect) {
+        faamData[`faamAdl${i}`] = adlSelect.value;
+      }
+      
+      if (sportSelect) {
+        faamData[`faamSport${i}`] = sportSelect.value;
+      }
+    }
+    
+    // データを統合して保存
+    const competitionData = {
+      radioData,
+      sliderData,
+      faamData
+    };
+    
+    localStorage.setItem('competitionData', JSON.stringify(competitionData));
+    console.log('競技復帰評価データを保存しました');
+  } catch (error) {
+    console.error('データ保存中にエラーが発生しました:', error);
+  }
+}
+
+// ALR-RSIスライダー値を保存
+function saveAlrRsiSliders() {
+  const values = {};
+  for (let i = 1; i <= 12; i++) {
+    const slider = document.getElementById(`alrRsi${i}`);
+    if (slider) {
+      values[`alrRsi${i}`] = slider.value;
+    }
+  }
+  
+  // 既存のデータと統合
+  const existingData = localStorage.getItem('competitionData');
+  let competitionData = { radioData: {}, sliderData: {}, faamData: {} };
+  
+  if (existingData) {
+    competitionData = JSON.parse(existingData);
+  }
+  
+  competitionData.sliderData = values;
+  localStorage.setItem('competitionData', JSON.stringify(competitionData));
+}
+
+// ローカルストレージからデータを読み込む関数
+function loadCompetitionData() {
+  try {
+    const data = localStorage.getItem('competitionData');
+    if (!data) return;
+    
+    const competitionData = JSON.parse(data);
+    const { radioData, sliderData, faamData } = competitionData;
+    
+    // ラジオボタンの設定
+    if (radioData) {
+      Object.entries(radioData).forEach(([name, value]) => {
+        const radio = document.querySelector(`input[name="${name}"][value="${value}"]`);
+        if (radio) {
+          radio.checked = true;
+        }
+      });
+    }
+    
+    // ALR-RSIスライダーの設定
+    if (sliderData) {
+      Object.entries(sliderData).forEach(([id, value]) => {
+        const slider = document.getElementById(id);
+        if (slider) {
+          slider.value = value;
+          // 値表示も更新
+          const valueDisplay = slider.nextElementSibling.nextElementSibling;
+          if (valueDisplay) {
+            valueDisplay.textContent = value;
+          }
+        }
+      });
+    }
+    
+    // FAAMセレクトボックスの設定
+    if (faamData) {
+      Object.entries(faamData).forEach(([id, value]) => {
+        const select = document.getElementById(id);
+        if (select) {
+          select.value = value;
+        }
+      });
+    }
+    
+    console.log('競技復帰評価データを読み込みました');
+  } catch (error) {
+    console.error('データ読み込み中にエラーが発生しました:', error);
+  }
+}
+
+// すべてのタブの全データを保存する関数
+function saveAllData() {
+  try {
+    // フォームの全ての要素を取得
+    const form = document.getElementById('evalForm');
+    const formData = new FormData(form);
+    
+    // フォームデータをオブジェクトに変換
+    const allFormData = {};
+    formData.forEach((value, key) => {
+      // チェックボックスの場合は特別扱い
+      const element = form.elements[key];
+      if (element && element.type === 'checkbox') {
+        allFormData[key] = element.checked;
+      } else {
+        allFormData[key] = value;
+      }
+    });
+    
+    // CAI機能テストのラジオボタン値
+    const radioData = {};
+    const radioGroups = ['cai_sls', 'cai_msebt', 'cai_sht', 'cai_f8t', 'cai_alr_rsi', 'cai_faam_adl', 'cai_faam_sports'];
+    
+    radioGroups.forEach(name => {
+      const selected = document.querySelector(`input[name="${name}"]:checked`);
+      if (selected) {
+        radioData[name] = selected.value;
+      }
+    });
+    
+    // ALR-RSIスライダー値
+    const sliderData = {};
+    for (let i = 1; i <= 12; i++) {
+      const slider = document.getElementById(`alrRsi${i}`);
+      if (slider) {
+        sliderData[`alrRsi${i}`] = slider.value;
+      }
+    }
+    
+    // FAAM選択値
+    const faamData = {};
+    for (let i = 1; i <= 5; i++) {
+      const adlSelect = document.getElementById(`faamAdl${i}`);
+      const sportSelect = document.getElementById(`faamSport${i}`);
+      
+      if (adlSelect) {
+        faamData[`faamAdl${i}`] = adlSelect.value;
+      }
+      
+      if (sportSelect) {
+        faamData[`faamSport${i}`] = sportSelect.value;
+      }
+    }
+    
+    // 画像マーキングデータ
+    const markingData = {};
+    if (typeof markData !== 'undefined') {
+      markingData.markData = JSON.parse(JSON.stringify(markData));
+    }
+    
+    // 全データを統合
+    const completeData = {
+      formData: allFormData,
+      radioData,
+      sliderData,
+      faamData,
+      markingData,
+      timestamp: new Date().toISOString()
+    };
+    
+    // ローカルストレージに保存
+    localStorage.setItem('ankleEvalData', JSON.stringify(completeData));
+    
+    // 保存成功メッセージを表示
+    const confirmation = document.getElementById('saveConfirmation');
+    confirmation.style.display = 'block';
+    
+    // 3秒後にメッセージを非表示
+    setTimeout(() => {
+      confirmation.style.display = 'none';
+    }, 3000);
+    
+    console.log('全データが正常に保存されました');
+    
+    // 履歴データにも保存
+    saveHistoryData(completeData);
+    return true;
+  } catch (error) {
+    console.error('データ保存中にエラーが発生しました:', error);
+    return false;
+  }
+}
+
+// 保存した全データを読み込む関数
+function loadAllData() {
+  try {
+    const data = localStorage.getItem('ankleEvalData');
+    if (!data) return false;
+    
+    const completeData = JSON.parse(data);
+    const { formData, radioData, sliderData, faamData, markingData } = completeData;
+    
+    // フォームデータの復元
+    if (formData) {
+      const form = document.getElementById('evalForm');
+      
+      Object.entries(formData).forEach(([name, value]) => {
+        const element = form.elements[name];
+        if (element) {
+          if (element.type === 'checkbox') {
+            element.checked = value;
+          } else if (element.type === 'radio') {
+            // ラジオボタンの場合は別途処理
+          } else {
+            element.value = value;
+          }
+        }
+      });
+    }
+    
+    // ラジオボタンの設定
+    if (radioData) {
+      Object.entries(radioData).forEach(([name, value]) => {
+        const radio = document.querySelector(`input[name="${name}"][value="${value}"]`);
+        if (radio) {
+          radio.checked = true;
+        }
+      });
+    }
+    
+    // ALR-RSIスライダーの設定
+    if (sliderData) {
+      Object.entries(sliderData).forEach(([id, value]) => {
+        const slider = document.getElementById(id);
+        if (slider) {
+          slider.value = value;
+          // 値表示も更新
+          const valueDisplay = slider.nextElementSibling.nextElementSibling;
+          if (valueDisplay) {
+            valueDisplay.textContent = value;
+          }
+        }
+      });
+    }
+    
+    // FAAMセレクトボックスの設定
+    if (faamData) {
+      Object.entries(faamData).forEach(([id, value]) => {
+        const select = document.getElementById(id);
+        if (select) {
+          select.value = value;
+        }
+      });
+    }
+    
+    // マーキングデータの復元
+    if (markingData && markingData.markData && typeof markData !== 'undefined') {
+      Object.assign(markData, markingData.markData);
+      // キャンバスにマーキングを再描画
+      Object.keys(markData).forEach(canvasId => {
+        if (contexts[canvasId]) {
+          redrawMarks(canvasId);
+        }
+      });
+    }
+    
+    console.log('全データを読み込みました');
+    return true;
+  } catch (error) {
+    console.error('データ読み込み中にエラーが発生しました:', error);
+    return false;
+  }
+}
+
+// 履歴データを保存する関数
+function saveHistoryData(currentData) {
+  console.log('履歴データ保存関数が呼び出されました');
+  console.log('保存するデータ:', currentData);
+  
+  try {
+    // 既存の履歴を取得
+    const historyString = localStorage.getItem('ankleEvalHistory');
+    console.log('現在の履歴データ文字列:', historyString);
+    
+    let historyData = [];
+    if (historyString) {
+      try {
+        historyData = JSON.parse(historyString);
+      } catch (parseError) {
+        console.error('履歴データの解析エラー、新規作成します:', parseError);
+        historyData = [];
+      }
+    }
+    
+    if (!Array.isArray(historyData)) {
+      console.warn('履歴データが配列ではありません、新規作成します');
+      historyData = [];
+    }
+    
+    // 現在のデータに一意のIDを付与
+    const newEntry = {
+      id: Date.now().toString(),
+      timestamp: new Date().toISOString(),
+      data: currentData
+    };
+    
+    console.log('新規エントリーを作成しました:', newEntry);
+    
+    // 履歴の先頭に追加（新しいものが上に表示される）
+    historyData.unshift(newEntry);
+    
+    console.log('更新後の履歴データ数:', historyData.length);
+    
+    // 履歴の最大保存数を制限（例：20件）
+    if (historyData.length > 20) {
+      historyData = historyData.slice(0, 20);
+    }
+    
+    // 履歴を保存
+    const historyJson = JSON.stringify(historyData);
+    console.log('保存する履歴JSON:', historyJson);
+    localStorage.setItem('ankleEvalHistory', historyJson);
+    console.log('履歴データを保存しました');
+    
+    // 履歴タブが表示されている場合は更新
+    const historyTab = document.querySelector('.tab[data-tab="history"]');
+    if (historyTab && historyTab.classList.contains('active')) {
+      console.log('履歴タブがアクティブなのでリストを更新します');
+      displayHistoryList();
+    }
+  } catch (error) {
+    console.error('履歴データの保存中にエラーが発生しました:', error);
+  }
+}
+
+// 履歴リストを表示する関数
+function displayHistoryList() {
+  console.log('履歴リスト表示関数が呼び出されました');
+  const historyListElement = document.getElementById('historyList');
+  if (!historyListElement) {
+    console.error('historyList要素が見つかりません');
+    return;
+  }
+  
+  historyListElement.innerHTML = '';
+  
+  try {
+    // デバッグ出力
+    console.log('ローカルストレージから履歴データを取得します');
+    const historyDataString = localStorage.getItem('ankleEvalHistory');
+    console.log('取得したデータ:', historyDataString);
+    
+    const historyData = JSON.parse(historyDataString || '[]');
+    console.log('履歴データ数:', historyData.length);
+    
+    if (!historyData || historyData.length === 0) {
+      console.log('履歴データはありません');
+      historyListElement.innerHTML = '<div class="empty-history-message">保存されたデータがありません。評価を実施して保存してください。</div>';
+      return;
+    }
+    
+    console.log('履歴データを表示します:', historyData);
+    
+    // 履歴データを単純なリストとして表示（デバッグ用）
+    const debugList = document.createElement('div');
+    debugList.innerHTML = `<p>履歴データ数: ${historyData.length}</p>`;
+    historyListElement.appendChild(debugList);
+    
+    // テーブル要素を作成
+    const table = document.createElement('table');
+    table.style.width = '100%';
+    table.style.borderCollapse = 'collapse';
+    table.style.marginTop = '1rem';
+    
+    // テーブルヘッダー
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+      <tr>
+        <th style="padding: 0.75rem; border-bottom: 1px solid #dee2e6; text-align: left;">日時</th>
+        <th style="padding: 0.75rem; border-bottom: 1px solid #dee2e6; text-align: left;">アクション</th>
+      </tr>
+    `;
+    table.appendChild(thead);
+    
+    // テーブルボディ
+    const tbody = document.createElement('tbody');
+    
+    historyData.forEach(entry => {
+      const tr = document.createElement('tr');
+      tr.style.cursor = 'pointer';
+      tr.dataset.id = entry.id;
+      
+      // 日付フォーマット
+      const date = new Date(entry.timestamp);
+      const formattedDate = `${date.getFullYear()}/${(date.getMonth()+1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
+      
+      tr.innerHTML = `
+        <td style="padding: 0.75rem; border-bottom: 1px solid #dee2e6;">${formattedDate}</td>
+        <td style="padding: 0.75rem; border-bottom: 1px solid #dee2e6;">
+          <button class="view-details-btn" data-id="${entry.id}" style="background-color: #6a75eb; color: white; border: none; padding: 0.25rem 0.5rem; border-radius: 3px; cursor: pointer; margin-right: 0.5rem;">詳細</button>
+          <button class="load-data-btn" data-id="${entry.id}" style="background-color: #28a745; color: white; border: none; padding: 0.25rem 0.5rem; border-radius: 3px; cursor: pointer; margin-right: 0.5rem;">読込</button>
+          <button class="delete-entry-btn" data-id="${entry.id}" style="background-color: #dc3545; color: white; border: none; padding: 0.25rem 0.5rem; border-radius: 3px; cursor: pointer;">削除</button>
+        </td>
+      `;
+      
+      tbody.appendChild(tr);
+    });
+    
+    table.appendChild(tbody);
+    historyListElement.appendChild(table);
+    
+    // イベントリスナーを設定
+    document.querySelectorAll('.view-details-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const id = this.dataset.id;
+        showHistoryDetails(id);
+      });
+    });
+    
+    document.querySelectorAll('.load-data-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const id = this.dataset.id;
+        loadHistoryData(id);
+      });
+    });
+    
+    document.querySelectorAll('.delete-entry-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const id = this.dataset.id;
+        deleteHistoryEntry(id);
+      });
+    });
+    
+  } catch (error) {
+    console.error('履歴リストの表示中にエラーが発生しました:', error);
+    historyListElement.innerHTML = '<div class="error-message">データの読み込み中にエラーが発生しました。</div>';
+  }
+}
+
+// 履歴の詳細を表示する関数
+function showHistoryDetails(id) {
+  const historyDetailElement = document.getElementById('historyDetail');
+  const historyDetailContent = document.getElementById('historyDetailContent');
+  
+  try {
+    const historyData = JSON.parse(localStorage.getItem('ankleEvalHistory') || '[]');
+    const entry = historyData.find(item => item.id === id);
+    
+    if (!entry) {
+      historyDetailContent.innerHTML = '<p>指定されたデータが見つかりません。</p>';
+      historyDetailElement.style.display = 'block';
+      return;
+    }
+    
+    // タイムスタンプのフォーマット
+    const date = new Date(entry.timestamp);
+    const formattedDate = `${date.getFullYear()}年${(date.getMonth()+1)}月${date.getDate()}日 ${date.getHours()}:${date.getMinutes().toString().padStart(2, '0')}`;
+    
+    // 詳細内容の生成
+    let detailsHTML = `<p><strong>評価日時:</strong> ${formattedDate}</p>`;
+    
+    // 主要な評価結果をまとめる
+    detailsHTML += '<div style="margin-top: 1rem;"><h4>主要な評価結果</h4>';
+    
+    // Ottawa Ankle Rules
+    const ottawaChecks = ['ottawa_lateral_malleolus', 'ottawa_medial_malleolus', 'ottawa_walk4', 'ottawa_navicular', 'ottawa_5thmeta'].filter(
+      key => entry.data.formData && entry.data.formData[key]
+    ).length;
+    
+    detailsHTML += `<p><strong>Ottawa Ankle Rules:</strong> ${ottawaChecks}個の陽性所見</p>`;
+    
+    // CAI機能テスト（競技復帰評価）のスコア表示
+    if (entry.data.radioData) {
+      const caiScores = [
+        entry.data.radioData.cai_sls, 
+        entry.data.radioData.cai_msebt, 
+        entry.data.radioData.cai_sht, 
+        entry.data.radioData.cai_f8t, 
+        entry.data.radioData.cai_alr_rsi, 
+        entry.data.radioData.cai_faam_adl, 
+        entry.data.radioData.cai_faam_sports
+      ].filter(score => score !== undefined).map(score => parseInt(score));
+      
+      if (caiScores.length > 0) {
+        const totalScore = caiScores.reduce((sum, score) => sum + score, 0);
+        let status = '';
+        if (totalScore < 8) {
+          status = '競技復帰可能';
+        } else {
+          status = '要リハビリ継続';
+        }
+        detailsHTML += `<p><strong>競技復帰評価スコア:</strong> ${totalScore}点 (${status})</p>`;
+      }
+    }
+    
+    detailsHTML += '</div>';
+    
+    historyDetailContent.innerHTML = detailsHTML;
+    historyDetailElement.style.display = 'block';
+    
+  } catch (error) {
+    console.error('履歴詳細の表示中にエラーが発生しました:', error);
+    historyDetailContent.innerHTML = '<p>データの読み込み中にエラーが発生しました。</p>';
+    historyDetailElement.style.display = 'block';
+  }
+}
+
+// 履歴データを読み込む関数
+function loadHistoryData(id) {
+  try {
+    const historyData = JSON.parse(localStorage.getItem('ankleEvalHistory') || '[]');
+    const entry = historyData.find(item => item.id === id);
+    
+    if (!entry) {
+      alert('指定されたデータが見つかりません。');
+      return;
+    }
+    
+    // 現在のデータを保存
+    localStorage.setItem('ankleEvalData', JSON.stringify(entry.data));
+    
+    // リロードしてデータを反映
+    alert('選択したデータを読み込みます。ページをリロードします。');
+    window.location.reload();
+    
+  } catch (error) {
+    console.error('履歴データの読み込み中にエラーが発生しました:', error);
+    alert('データの読み込み中にエラーが発生しました。');
+  }
+}
+
+// 履歴エントリーを削除する関数
+function deleteHistoryEntry(id) {
+  if (!confirm('このデータを削除してもよろしいですか？')) {
+    return;
+  }
+  
+  try {
+    let historyData = JSON.parse(localStorage.getItem('ankleEvalHistory') || '[]');
+    historyData = historyData.filter(item => item.id !== id);
+    localStorage.setItem('ankleEvalHistory', JSON.stringify(historyData));
+    
+    // 履歴リストを更新
+    displayHistoryList();
+    
+    // 詳細表示をクリア
+    document.getElementById('historyDetail').style.display = 'none';
+    
+  } catch (error) {
+    console.error('履歴エントリーの削除中にエラーが発生しました:', error);
+    alert('データの削除中にエラーが発生しました。');
+  }
+}
+
+// すべての履歴を削除する関数
+function clearAllHistory() {
+  if (!confirm('すべての履歴データを削除してもよろしいですか？この操作は元に戻せません。')) {
+    return;
+  }
+  
+  try {
+    localStorage.removeItem('ankleEvalHistory');
+    displayHistoryList();
+    document.getElementById('historyDetail').style.display = 'none';
+    alert('すべての履歴データが削除されました。');
+  } catch (error) {
+    console.error('履歴データの一括削除中にエラーが発生しました:', error);
+    alert('データの削除中にエラーが発生しました。');
+  }
+}
+
+// ページ初期化時の処理
+document.addEventListener('DOMContentLoaded', function() {
+  // 既存の初期化処理
+  loadCompetitionData();
+  loadAllData();
+  
+  // ALR-RSIスライダーの変更時にデータを保存
+  document.querySelectorAll('.slider').forEach(slider => {
+    slider.addEventListener('change', function() {
+      saveAlrRsiSliders();
+    });
+  });
+  
+  // FAAMセレクトボックスの変更時にデータを保存
+  document.querySelectorAll('[id^="faamAdl"], [id^="faamSport"]').forEach(select => {
+    select.addEventListener('change', function() {
+      saveCompetitionData();
+    });
+  });
+  
+  // 履歴タブのイベントリスナー
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+      if (this.dataset.tab === 'history') {
+        displayHistoryList();
+      }
+    });
+  });
+  
+  // 履歴更新ボタン
+  document.getElementById('refreshHistoryBtn').addEventListener('click', function() {
+    displayHistoryList();
+  });
+  
+  // 履歴一括削除ボタン
+  document.getElementById('clearHistoryBtn').addEventListener('click', function() {
+    clearAllHistory();
+  });
+});
+
+// フォーム送信時にデータを保存
+document.getElementById('evalForm').addEventListener('submit', function(e) {
+  e.preventDefault(); // ページのリロードを防止
+  saveAllData();
+});
+</script>
+</body>
+</html>
+
+[build]
+  publish = "."
+
+[dev]
+  framework = "#static"
+
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Wikimedia Error</title>
+<style>
+* { margin: 0; padding: 0; }
+body { background: #fff; font: 15px/1.6 sans-serif; color: #333; }
+.content { margin: 7% auto 0; padding: 2em 1em 1em; max-width: 640px; }
+.footer { clear: both; margin-top: 14%; border-top: 1px solid #e5e5e5; background: #f9f9f9; padding: 2em 0; font-size: 0.8em; text-align: center; }
+img { float: left; margin: 0 2em 2em 0; }
+a img { border: 0; }
+h1 { margin-top: 1em; font-size: 1.2em; }
+.content-text { overflow: hidden; overflow-wrap: break-word; word-wrap: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; -ms-hyphens: auto; hyphens: auto; }
+p { margin: 0.7em 0 1em 0; }
+a { color: #0645ad; text-decoration: none; }
+a:hover { text-decoration: underline; }
+code { font-family: sans-serif; }
+summary { font-weight: bold; cursor: pointer; }
+details[open] { background: #970302; color: #dfdedd; }
+.text-muted { color: #777; }
+@media (prefers-color-scheme: dark) {
+  a { color: #9e9eff; }
+  body { background: transparent; color: #ddd; }
+  .footer { border-top: 1px solid #444; background: #060606; }
+  #logo { filter: invert(1) hue-rotate(180deg); }
+  .text-muted { color: #888; }
+}
+</style>
+<meta name="color-scheme" content="light dark">
+<div class="content" role="main">
+<a href="https://www.wikimedia.org"><img id="logo" src="https://www.wikimedia.org/static/images/wmf-logo.png" srcset="https://www.wikimedia.org/static/images/wmf-logo-2x.png 2x" alt="Wikimedia" width="135" height="101">
+</a>
+<h1>Error</h1>
+<div class="content-text">
+
+<p>Our servers are currently under maintenance or experiencing a technical issue</p>
+</div>
+</div>
+<div class="footer"><p>If you report this error to the Wikimedia System Administrators, please include the details below.</p><p class="text-muted"><code>Request served via cp5032 cp5032, Varnish XID 69352733<br>Upstream caches: cp5032 int<br>Error: 404, Not Found at Sun, 01 Jun 2025 05:56:14 GMT<br><details><summary>Sensitive client information</summary>IP address: 219.113.61.14</details></code></p>
+</div>
+</html>
+
+# 足関節捻挫評価アプリ
+
+このアプリケーションは、足関節内反捻挫の評価を支援するためのウェブアプリケーションです。
+
+## 機能
+
+- 現場評価、急性期、亜急性期、回復期、スポーツ復帰期までの各段階での評価項目の入力
+- Ottawa Ankle Rulesによる骨折の可能性の判定
+- 背屈可動域（WBLT）の自動分類
+- データのローカルストレージへの保存
+
+## 使用方法
+
+1. 各ステップのヘッダーをクリックして評価項目を展開
+2. 必要な項目を入力
+3. 「保存」ボタンをクリックしてデータを保存
+
+保存されたデータはブラウザのローカルストレージに保存され、次回アクセス時に自動的に復元されます。
+
+## 技術仕様
+
+- HTML5, CSS3, JavaScript
+- レスポンシブデザイン対応
+- ローカルストレージを使用したデータ保存
+
+# Windsurf Deploys Configuration (Beta)
+# This is an auto-generated file used to store your app deployment configuration. Do not modify.
+# The ID of the project (different from project name) on the provider's system. This is populated as a way to update existing deployments.
+project_id: d4fc31d7-db63-4cd5-b033-cc4700d9a0da
+# The framework of the web application (examples: nextjs, react, vue, etc.)
+framework: eleventy
